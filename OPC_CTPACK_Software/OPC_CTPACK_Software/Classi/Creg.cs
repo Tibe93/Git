@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace OPC_CTPACK_Software
 {
@@ -20,7 +21,6 @@ namespace OPC_CTPACK_Software
 
         public Creg(Formato Formato, string Path)
         {
-            this.Formato = Formato;
-        }
+            this.Formato = Formato;        }
     }
 }
