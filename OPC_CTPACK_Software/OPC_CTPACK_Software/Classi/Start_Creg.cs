@@ -8,15 +8,15 @@ namespace OPC_CTPACK_Software
 {
     public class Start_Creg
     {
-        Creg[] Creg;
+        Creg[] CregTot;
         double Bs;
         double Bv;
         int OffsetPos;
         int OffsetNeg;
 
-        public Start_Creg(double[] Creg, double Bs, double Bv, int OffsetPos, int OffsetNeg)
+        public Start_Creg(Creg[] CregTot, double Bs, double Bv, int OffsetPos, int OffsetNeg)
         {
-            this.Creg = Creg;
+            this.CregTot = CregTot;
             this.Bs = Bs;
             this.Bv = Bv;
             this.OffsetPos = OffsetPos;
@@ -24,9 +24,7 @@ namespace OPC_CTPACK_Software
         }
 
 
-        public static double[][] PseudoInverse
-        (
-            this double[][] matrix
-        )
+        //PseudoInverse[Creg.]
+        
     }
 }
