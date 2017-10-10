@@ -23,8 +23,19 @@ namespace OPC_CTPACK_Software
             this.OffsetNeg = OffsetNeg;
         }
 
+        /*public double PseudoInversa()
+        {
+            double[] VelocitaMediaTot;
+            double[] Velocita2RMSTot;
+            double[] Attriti= { Bs, Bv };
 
-        FiMotore = PseudoInverse[Creg,]
-        
+            for (int i=0; i < (CregTot.Length); i++)
+            {
+                VelocitaMediaTot[i] = CregTot[i].VelocitaMedia;
+                Velocita2RMSTot[i] = CregTot[i].Velocita2RMS;
+            }
+            FiMotore = PseudoInverse[VelocitaMediaTot, Velocita2RMSTot];
+        }   
+        */
     }
 }
