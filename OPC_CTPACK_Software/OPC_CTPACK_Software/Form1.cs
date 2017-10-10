@@ -17,16 +17,12 @@ namespace OPC_CTPACK_Software
             InitializeComponent();
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            Motore m1 = new Motore("VPL-B1153F-C", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c","c");
-            Formato f1 = new Formato("ChocoRolles", m1, 100, 100, 100);
-            richTextBox1.Text = f1.ToString();
+            Motore M1 = new Motore("VPL-B1153F-C", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c","c");
+            Formato F1 = new Formato("ChocoRolles", M1, 100, 100, 100);
+            //richTextBox1.Text = f1.ToString();
+            Creg C1 = new Creg(F1, $@"C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\1\");
         }
     }
 }

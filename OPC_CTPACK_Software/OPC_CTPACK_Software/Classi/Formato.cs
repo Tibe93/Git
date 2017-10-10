@@ -10,10 +10,10 @@ namespace OPC_CTPACK_Software
     {
         string Nome;
         Motore Motore;
-        int Ppm;
-        double Kp;
-        double Kv;
-        double Kc;
+        public int Ppm;
+        public double Kp;
+        public double Kv;
+        public double Kc;
 
         public Formato(string Nome, Motore Motore, double Kc, double Kv, double Kp)
         {

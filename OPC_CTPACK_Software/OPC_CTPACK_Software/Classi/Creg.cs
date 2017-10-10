@@ -15,6 +15,7 @@ namespace OPC_CTPACK_Software
         double[] CorrConv;
         double[] Time;
         int Periodi;
+        public double PotenzaMedia;
         public double VelocitaMedia;
         public double Velocita2RMS;
         public double CregAttuale;
@@ -22,7 +23,9 @@ namespace OPC_CTPACK_Software
         public Creg(Formato Formato, string Path)
         {
             this.Formato = Formato;
-            File.OpenRead("C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\1");
+            //dovrei usare il Path che mi da il form, ma per adesso uso questo
+            Path = $@"{Path}_{Formato.Ppm}_Fossalta_Temperature.CSV";
+            File.OpenRead(Path);
         }
     }
 }
