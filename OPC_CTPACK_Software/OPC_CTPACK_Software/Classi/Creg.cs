@@ -15,12 +15,14 @@ namespace OPC_CTPACK_Software
         double[] CorrConv;
         double[] Time;
         int Periodi;
-        double VelocitaMedia;
-        double Velocita2RMS;
-        double CregAttuale;
+        public double VelocitaMedia;
+        public double Velocita2RMS;
+        public double CregAttuale;
 
         public Creg(Formato Formato, string Path)
         {
-            this.Formato = Formato;        }
+            this.Formato = Formato;
+            File.OpenRead("C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\1");
+        }
     }
 }
