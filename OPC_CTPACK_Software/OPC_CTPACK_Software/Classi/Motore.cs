@@ -8,38 +8,54 @@ namespace OPC_CTPACK_Software
 {
     public class Motore
     {
-        string Motor_Model;
-        string Rated_Power;
-        string Rated_Voltage;
-        string Rated_Speed;
-        string Rated_Current;
-        string Rated_Torque;
-        string Pole_Count;
-        string Peak_Current;
-        string Torque_Costant;
-        string Voltage_Costant;
+        string MotorModel;
+        string RatedPower;
+        string RatedVoltage;
+        string RatedSpeed;
+        string RatedCurrent;
+        string RatedTorque;
+        string PoleCount;
+        string PeakCurrent;
+        string TorqueCostant;
+        string VoltageCostant;
         string Resistance;
         string Inductance;
 
-        public Motore(string Motor_Model, string Rated_Power, string Rated_Voltage, string Rated_Speed, string Rated_Current, string Rated_Torque, string Pole_Count, string Peak_Current, string Torque_Costant, string Voltage_Costant, string Resistance, string Inductance)
+        public Motore(string MotorModel, string RatedPower, string RatedVoltage, string RatedSpeed, string RatedCurrent, string RatedTorque, string PoleCount, string PeakCurrent, string TorqueCostant, string VoltageCostant, string Resistance, string Inductance)
         {
-            this.Motor_Model = Motor_Model;
-            this.Rated_Power = Rated_Power;
-            this.Rated_Voltage = Rated_Voltage;
-            this.Rated_Speed = Rated_Speed;
-            this.Rated_Current = Rated_Current;
-            this.Rated_Torque = Rated_Torque;
-            this.Pole_Count = Pole_Count;
-            this.Peak_Current = Peak_Current;
-            this.Torque_Costant = Torque_Costant;
-            this.Voltage_Costant = Voltage_Costant;
+            this.MotorModel = MotorModel;
+            this.RatedPower = RatedPower;
+            this.RatedVoltage = RatedVoltage;
+            this.RatedSpeed = RatedSpeed;
+            this.RatedCurrent = RatedCurrent;
+            this.RatedTorque = RatedTorque;
+            this.PoleCount = PoleCount;
+            this.PeakCurrent = PeakCurrent;
+            this.TorqueCostant = TorqueCostant;
+            this.VoltageCostant = VoltageCostant;
             this.Resistance = Resistance;
             this.Inductance = Inductance;
         }
 
+        public override string ToString()
+        {
+            return $"Motor Model: {this.MotorModel}\n" +
+                   $"Rated Power: {this.RatedPower}\n" +
+                   $"Rated Voltage: {RatedVoltage}\n" +
+                   $"Rated Speed: {RatedSpeed}\n" +
+                   $"Rated Current: {RatedCurrent}\n" +
+                   $"Rated Torque: {RatedTorque}\n" +
+                   $"Pole Count: {PoleCount}\n" +
+                   $"Peak Current: {PeakCurrent}\n" +
+                   $"Torque Costant: {TorqueCostant}\n" +
+                   $"Voltage Costant: {VoltageCostant}\n" +
+                   $"Resistance: {Resistance}\n" +
+                   $"Inductance: {Inductance}";
+        }
+
         public string GetModel()
         {
-            return this.Motor_Model;
+            return this.MotorModel;
         }
     }
 }

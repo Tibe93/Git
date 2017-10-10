@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Classi\Creg.cs" />
     <Compile Include="Classi\Formato.cs" />
+    <Compile Include="Classi\Motore.cs" />
     <Compile Include="Classi\Start_Creg.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -57,7 +58,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classi\Motore.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
