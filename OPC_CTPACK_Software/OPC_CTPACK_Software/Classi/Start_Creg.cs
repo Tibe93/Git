@@ -22,9 +22,6 @@ namespace OPC_CTPACK_Software
             this.OffsetPos = OffsetPos;
             this.OffsetNeg = OffsetNeg;
         }
-
-
-        FiMotore = PseudoInverse[Creg,]
         
     }
 }
