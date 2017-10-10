@@ -20,9 +20,11 @@ namespace OPC_CTPACK_Software
         private void Form1_Load(object sender, EventArgs e)
         {
             Motore M1 = new Motore("VPL-B1153F-C", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c","c");
-            Formato F1 = new Formato("ChocoRolles", M1, 100, 100, 100);
+            Formato F1 = new Formato("ChocoRolles", M1, 0, 100, 100, 100);
             //richTextBox1.Text = f1.ToString();
-            Creg C1 = new Creg(F1, $@"C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\1\");
+            Creg C1 = new Creg(F1, $@"C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\");
+
+
         }
     }
 }

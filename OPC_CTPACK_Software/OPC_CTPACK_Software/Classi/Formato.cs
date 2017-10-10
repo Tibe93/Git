@@ -15,13 +15,14 @@ namespace OPC_CTPACK_Software
         public double Kv;
         public double Kc;
 
-        public Formato(string Nome, Motore Motore, double Kc, double Kv, double Kp)
+        public Formato(string Nome, Motore Motore,int Ppm, double Kc, double Kv, double Kp)
         {
             this.Nome = Nome;
             this.Motore = Motore;
             this.Kc = Kc;
             this.Kv = Kv;
             this.Kp = Kp;
+            this.Ppm = Ppm;
         }
 
         public override string ToString()
