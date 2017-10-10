@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Accord.Math;
+using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,19 +25,23 @@ namespace OPC_CTPACK_Software
             this.OffsetNeg = OffsetNeg;
         }
 
-        /*public double PseudoInversa()
+        /*public double[] PseudoInversa()
         {
-            double[] VelocitaMediaTot;
-            double[] Velocita2RMSTot;
-            double[] Attriti= { Bs, Bv };
+            double[,] FiMotore = new double[,];
+            double[,] VelocitaMediaTot = new ArrayList();
+            double[,] Velocita2RMSTot = new ArrayList();
+            double[,] PotenzaMediaTot = new ArrayList();
+            double[] Attriti = { Bs, Bv };
 
             for (int i=0; i < (CregTot.Length); i++)
             {
-                VelocitaMediaTot[i] = CregTot[i].VelocitaMedia;
-                Velocita2RMSTot[i] = CregTot[i].Velocita2RMS;
+                VelocitaMediaTot.Add(CregTot[i].VelocitaMedia);
+                Velocita2RMSTot.Add(CregTot[i].Velocita2RMS);
+                PotenzaMediaTot.Add(CregTot[i].PotenzaMedia);
             }
-            FiMotore = PseudoInverse[VelocitaMediaTot, Velocita2RMSTot];
-        }   
-        */
+            FiMotore = Matrix.PseudoInverse(VelocitaMediaTot, Velocita2RMSTot);
+            return Attriti = FiMotore * PotenzaMediaTot;
+        } */  
+        
     }
 }
