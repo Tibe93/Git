@@ -24,7 +24,7 @@ namespace OPC_CTPACK_Software
         }
 
 
-        //PseudoInverse[Creg.]
+        FiMotore = PseudoInverse[Creg,]
         
     }
 }
