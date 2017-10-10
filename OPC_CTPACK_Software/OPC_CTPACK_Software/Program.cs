@@ -19,6 +19,7 @@ namespace OPC_CTPACK_Software
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+        //provaaaa
         //ciao da sanx
     }
 }
