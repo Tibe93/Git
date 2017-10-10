@@ -7,7 +7,7 @@ using System.IO;
 
 namespace OPC_CTPACK_Software
 {
-    class Creg
+    public class Creg
     {
         Formato Formato;
         double[] PosConv;
