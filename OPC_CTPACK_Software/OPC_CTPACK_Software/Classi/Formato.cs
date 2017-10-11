@@ -13,15 +13,15 @@ namespace OPC_CTPACK_Software
         public int Ppm;
         public double Kp;
         public double Kv;
-        public double Kc;
+        public double Kt;
 
-        public Formato(string Nome, Motore Motore,int Ppm, double Kc, double Kv, double Kp)
+        public Formato(string Nome, Motore Motore,int Ppm, double Kp, double Kv, double Kt)
         {
             this.Nome = Nome;
             this.Motore = Motore;
-            this.Kc = Kc;
-            this.Kv = Kv;
             this.Kp = Kp;
+            this.Kv = Kv;
+            this.Kt = Kt;
             this.Ppm = Ppm;
         }
 
@@ -31,7 +31,7 @@ namespace OPC_CTPACK_Software
                     $"Motore: {this.Motore.GetModel()}\n" +
                     $"Kp = {this.Kp}\n" +
                     $"Kv = {this.Kv}\n" +
-                    $"Kc = {this.Kc}";
+                    $"Kc = {this.Kt}";
         }
     }
 }
