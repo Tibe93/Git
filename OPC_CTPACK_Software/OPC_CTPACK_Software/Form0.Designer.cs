@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.butAnalisi = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxPath = new System.Windows.Forms.TextBox();
             this.comboBoxFormato = new System.Windows.Forms.ComboBox();
             this.butPath = new System.Windows.Forms.Button();
             this.butAvanti = new System.Windows.Forms.Button();
@@ -45,12 +45,12 @@
             this.butAnalisi.Text = "Start Analisi";
             this.butAnalisi.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBoxPath
             // 
-            this.textBox1.Location = new System.Drawing.Point(359, 158);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(321, 31);
-            this.textBox1.TabIndex = 1;
+            this.textBoxPath.Location = new System.Drawing.Point(359, 158);
+            this.textBoxPath.Name = "textBoxPath";
+            this.textBoxPath.Size = new System.Drawing.Size(321, 31);
+            this.textBoxPath.TabIndex = 1;
             // 
             // comboBoxFormato
             // 
@@ -92,7 +92,7 @@
             this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.butAnalisi);
             this.Name = "Form0";
             this.Text = "OPC";
@@ -105,10 +105,10 @@
         #endregion
 
         private System.Windows.Forms.Button butAnalisi;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.ComboBox comboBoxFormato;
         private System.Windows.Forms.Button butPath;
         private System.Windows.Forms.Button butAvanti;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        public System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

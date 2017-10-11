@@ -12,7 +12,10 @@ namespace OPC_CTPACK_Software
 {
     public partial class Form0 : Form
     {
-        public static string Percorso;
+        int PpmIniziali;
+        int PpmFinali;
+        int PpmPasso;
+
         Form1 FormFiglio;
 
         public Form0()
@@ -28,12 +31,12 @@ namespace OPC_CTPACK_Software
 
         private void butPath_Click(object sender, EventArgs e)
         {
-            
+            folderBrowserDialog1.ShowDialog();
+            textBoxPath.Text = folderBrowserDialog1.SelectedPath;
         }
 
         private void butAvanti_Click(object sender, EventArgs e)
         {
-
             FormFiglio.Visible = true;
             this.Visible = false;
         }
