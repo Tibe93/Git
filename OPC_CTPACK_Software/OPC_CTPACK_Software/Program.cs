@@ -18,7 +18,8 @@ namespace OPC_CTPACK_Software
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form0 Form_0 = new Form0();
+            Application.Run(Form_0);
         }
     }
 }

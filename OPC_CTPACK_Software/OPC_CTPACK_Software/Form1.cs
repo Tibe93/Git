@@ -23,13 +23,23 @@ namespace OPC_CTPACK_Software
             Formato F1 = new Formato("ChocoRolles", M1, 70, 1, 0.01, 0.075);
             Creg C1 = new Creg(F1, $@"C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\",2);
             */
-            string pat = Form0.Percorso;
         }
 
         private void butIndietro_Click(object sender, EventArgs e)
         {
             Form0 Form_0 = new Form0();
             Form_0.Show();
+            this.Visible = false;
+        }
+
+        private void butAvanti_Click(object sender, EventArgs e)
+        {
+            //Si aprira il Form2
+        }
+
+        private void butCalcolo_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
