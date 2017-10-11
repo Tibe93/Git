@@ -24,5 +24,16 @@ namespace OPC_CTPACK_Software
             }
             return C;
         }
+
+        public static double Integration(double[] Time, double[] A)
+        {
+            double Somma = 0;
+            for (int i = 0; i < A.Length-1; i++)
+            {
+                Somma += (A[i]+A[i+1])*((Time[i+1]-Time[i])/2);
+            }
+
+            return Somma;
+        }
     }
 }
