@@ -13,11 +13,13 @@ namespace OPC_CTPACK_Software
     public partial class Form1 : Form
     {
         Form0 FormPadre;
+        Form2 FormFiglio;
 
         public Form1(Form0 FormPadre)
         {
             InitializeComponent();
             this.FormPadre = FormPadre;
+            this.FormFiglio = new Form2(this);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,12 +38,26 @@ namespace OPC_CTPACK_Software
 
         private void butAvanti_Click(object sender, EventArgs e)
         {
-            //Si aprira il Form2
+            FormFiglio.Visible = true;
+            this.Visible = false;
         }
 
         private void butCalcolo_Click(object sender, EventArgs e)
         {
+
             
+            this.butAvanti.Enabled = true;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.FormPadre.Close();
+        }
+
+        private void butPath_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            textBoxPath.Text = folderBrowserDialog1.SelectedPath;
         }
     }
 }
