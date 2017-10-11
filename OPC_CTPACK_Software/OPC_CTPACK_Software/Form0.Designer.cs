@@ -40,7 +40,7 @@
             // butAnalisi
             // 
             this.butAnalisi.Location = new System.Drawing.Point(35, 29);
-            this.butAnalisi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butAnalisi.Margin = new System.Windows.Forms.Padding(2);
             this.butAnalisi.Name = "butAnalisi";
             this.butAnalisi.Size = new System.Drawing.Size(166, 92);
             this.butAnalisi.TabIndex = 0;
@@ -49,9 +49,9 @@
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(359, 158);
+            this.textBoxPath.Location = new System.Drawing.Point(239, 99);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(321, 31);
+            this.textBoxPath.Size = new System.Drawing.Size(221, 22);
             this.textBoxPath.TabIndex = 1;
             // 
             // comboBoxFormato
@@ -61,17 +61,17 @@
             "Catena Choco Rolles formato 1",
             "Masse Choco Rolles formato 1"});
             this.comboBoxFormato.Location = new System.Drawing.Point(239, 29);
-            this.comboBoxFormato.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxFormato.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxFormato.Name = "comboBoxFormato";
             this.comboBoxFormato.Size = new System.Drawing.Size(261, 24);
             this.comboBoxFormato.TabIndex = 2;
             // 
             // butPath
             // 
-            this.butPath.Location = new System.Drawing.Point(465, 101);
-            this.butPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butPath.Location = new System.Drawing.Point(465, 99);
+            this.butPath.Margin = new System.Windows.Forms.Padding(2);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(34, 22);
+            this.butPath.Size = new System.Drawing.Size(35, 22);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.Location = new System.Drawing.Point(424, 170);
+            this.butAvanti.Location = new System.Drawing.Point(425, 128);
             this.butAvanti.Name = "butAvanti";
             this.butAvanti.Size = new System.Drawing.Size(75, 23);
             this.butAvanti.TabIndex = 8;
@@ -91,14 +91,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 208);
+            this.ClientSize = new System.Drawing.Size(512, 163);
             this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.butAnalisi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form0";
             this.Text = "OPC";
             this.Load += new System.EventHandler(this.Form0_Load);
