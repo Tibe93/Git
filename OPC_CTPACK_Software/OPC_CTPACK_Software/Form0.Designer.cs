@@ -33,6 +33,7 @@
             this.comboBoxFormato = new System.Windows.Forms.ComboBox();
             this.butPath = new System.Windows.Forms.Button();
             this.butAvanti = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // butAnalisi
@@ -94,7 +95,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.butAnalisi);
             this.Name = "Form0";
-            this.Text = "Form0";
+            this.Text = "OPC";
             this.Load += new System.EventHandler(this.Form0_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -108,5 +109,6 @@
         private System.Windows.Forms.ComboBox comboBoxFormato;
         private System.Windows.Forms.Button butPath;
         private System.Windows.Forms.Button butAvanti;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
