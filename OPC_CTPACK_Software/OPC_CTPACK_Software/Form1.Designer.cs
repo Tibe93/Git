@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.butCalcolo = new System.Windows.Forms.Button();
             this.labelTolleranza = new System.Windows.Forms.Label();
             this.labelBs = new System.Windows.Forms.Label();
@@ -127,20 +127,20 @@
             // 
             // chartCreg
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartCreg.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.chartCreg.Legends.Add(legend3);
+            chartArea4.Name = "ChartArea1";
+            this.chartCreg.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.chartCreg.Legends.Add(legend4);
             this.chartCreg.Location = new System.Drawing.Point(13, 100);
             this.chartCreg.Name = "chartCreg";
-            series3.BorderWidth = 3;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartCreg.Series.Add(series3);
+            series4.BorderWidth = 3;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartCreg.Series.Add(series4);
             this.chartCreg.Size = new System.Drawing.Size(309, 228);
             this.chartCreg.TabIndex = 9;
             this.chartCreg.Text = "chart1";
@@ -161,7 +161,7 @@
             this.Controls.Add(this.labelTolleranza);
             this.Controls.Add(this.butCalcolo);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Creg Preliminare";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartCreg)).EndInit();
             this.ResumeLayout(false);
