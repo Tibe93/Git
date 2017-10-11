@@ -56,8 +56,16 @@ namespace OPC_CTPACK_Software
             Csv.Close();
 
             double DurataPeriodo = this.Time[this.Time.Length-1];
+            this.PotenzaMedia = (1/DurataPeriodo) * Functions.Integration(this.Time, PotI);
+            this.Velocita2RMS = (1 / DurataPeriodo) * Functions.Integration(this.Time, Vel_2);
+            this.CregAttuale = this.PotenzaMedia / this.Velocita2RMS;
 
-            Console.ReadLine();
+            foreach(double v in this.VelConv)
+            {
+                this.VelocitaMedia += v;
+            }
+            this.VelocitaMedia = this.VelocitaMedia / this.VelConv.Length;
+
             /* Questa porzione di codice è stata utilizzata per modificare un .CSV di quelli vecchi in modo da crearne uno attuale
             int i = 0;
             ArrayList y = new ArrayList();
