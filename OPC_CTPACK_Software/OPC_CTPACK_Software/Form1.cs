@@ -23,7 +23,7 @@ namespace OPC_CTPACK_Software
             Formato F1 = new Formato("ChocoRolles", M1, 70, 1, 0.01, 0.075);
             //richTextBox1.Text = f1.ToString();
             Creg C1 = new Creg(F1, $@"C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\",2);
-            //sanx
+            //tibe
         }
     }
 }
