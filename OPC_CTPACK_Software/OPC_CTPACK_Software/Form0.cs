@@ -12,7 +12,7 @@ namespace OPC_CTPACK_Software
 {
     public partial class Form0 : Form
     {
-        public string Percorso;
+        public static string Percorso;
         public Form0()
         {
             InitializeComponent();
