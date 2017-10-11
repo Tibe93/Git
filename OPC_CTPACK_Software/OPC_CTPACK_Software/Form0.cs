@@ -13,11 +13,12 @@ namespace OPC_CTPACK_Software
     public partial class Form0 : Form
     {
         public static string Percorso;
+        Form1 FormFiglio;
+
         public Form0()
         {
+            this.FormFiglio = new Form1(this);
             InitializeComponent();
-
-
         }
 
         private void Form0_Load(object sender, EventArgs e)
@@ -32,8 +33,9 @@ namespace OPC_CTPACK_Software
 
         private void butAvanti_Click(object sender, EventArgs e)
         {
-            Form1 Form_1 = new Form1();
-            Form_1.Show();
+
+            FormFiglio.Visible = true;
+            this.Visible = false;
         }
     }
 }

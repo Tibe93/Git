@@ -12,9 +12,12 @@ namespace OPC_CTPACK_Software
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        Form0 FormPadre;
+
+        public Form1(Form0 FormPadre)
         {
             InitializeComponent();
+            this.FormPadre = FormPadre;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,8 +30,7 @@ namespace OPC_CTPACK_Software
 
         private void butIndietro_Click(object sender, EventArgs e)
         {
-            Form0 Form_0 = new Form0();
-            Form_0.Show();
+            this.FormPadre.Visible = true;
             this.Visible = false;
         }
 
