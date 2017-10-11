@@ -32,6 +32,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBoxFormato = new System.Windows.Forms.ComboBox();
             this.butPath = new System.Windows.Forms.Button();
+            this.butAvanti = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butAnalisi
@@ -69,12 +70,26 @@
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
+            this.butPath.Click += new System.EventHandler(this.butPath_Click);
+            // 
+            // butAvanti
+            // 
+            this.butAvanti.Enabled = false;
+            this.butAvanti.Location = new System.Drawing.Point(636, 265);
+            this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.butAvanti.Name = "butAvanti";
+            this.butAvanti.Size = new System.Drawing.Size(112, 36);
+            this.butAvanti.TabIndex = 8;
+            this.butAvanti.Text = "Avanti >";
+            this.butAvanti.UseVisualStyleBackColor = true;
+            this.butAvanti.Click += new System.EventHandler(this.butAvanti_Click);
             // 
             // Form0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 259);
+            this.ClientSize = new System.Drawing.Size(822, 325);
+            this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
             this.Controls.Add(this.textBox1);
@@ -93,5 +108,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBoxFormato;
         private System.Windows.Forms.Button butPath;
+        private System.Windows.Forms.Button butAvanti;
     }
 }

@@ -24,5 +24,16 @@ namespace OPC_CTPACK_Software
         {
 
         }
+
+        private void butPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butAvanti_Click(object sender, EventArgs e)
+        {
+            Form1 Form_1 = new Form1();
+            Form_1.Show();
+        }
     }
 }
