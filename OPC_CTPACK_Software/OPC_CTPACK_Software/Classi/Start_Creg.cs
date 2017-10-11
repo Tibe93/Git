@@ -25,9 +25,8 @@ namespace OPC_CTPACK_Software
             this.OffsetNeg = OffsetNeg;
         }
 
-        public double[,] PseudoInversa()
+        public double[,] CalcoloAttriti()
         {
-            double[,] CregAttualeTot = new double[CregTot.Length, 1];
             double[,] VelocitaMediaTot = new double[CregTot.Length, 1];
             double[,] Velocita2RMSTot = new double[CregTot.Length, 1];
             double[,] PotenzaMediaTot = new double[CregTot.Length, 1];
@@ -37,13 +36,15 @@ namespace OPC_CTPACK_Software
 
             for (int i=0; i < (CregTot.Length); i++)
             {
-                CregAttualeTot.Add(CregTot[i].CregAttuale);
                 VelocitaMediaTot.Add(CregTot[i].VelocitaMedia);
                 Velocita2RMSTot.Add(CregTot[i].Velocita2RMS);
                 PotenzaMediaTot.Add(CregTot[i].PotenzaMedia);
             }
 
+            A = VelocitaMediaTot.Concatenate(Velocita2RMSTot);
+            FiMotore = Matrix.PseudoInverse(A);
             Attriti = Functions.MultiplyMatrix(FiMotore, PotenzaMediaTot, 2, CregTot.Length, 1);
+
             return Attriti;
         }  
         
