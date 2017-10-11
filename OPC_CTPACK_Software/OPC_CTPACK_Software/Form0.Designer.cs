@@ -74,7 +74,6 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.Enabled = false;
             this.butAvanti.Location = new System.Drawing.Point(636, 265);
             this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butAvanti.Name = "butAvanti";
