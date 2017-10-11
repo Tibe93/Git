@@ -11,43 +11,51 @@ namespace OPC_CTPACK_Software
     public class Creg
     {
         Formato Formato;
+        int Periodi;
         double[] PosConv;
         double[] VelConv;
-        double[] CorrConv;
+        double[] Coppia;
         double[] Time;
-        int Periodi;
         public double PotenzaMedia;
         public double VelocitaMedia;
         public double Velocita2RMS;
         public double CregAttuale;
 
-        public Creg(Formato Formato, string Path)
+        public Creg(Formato Formato, string Path, int Periodi)
         {
             this.Formato = Formato;
+            this.Periodi = Periodi;
+            int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.Ppm)/0.004);
+            this.PosConv = new double[Campioni];
+            this.VelConv = new double[Campioni];
+            this.Coppia = new double[Campioni];
+            this.Time = new double[Campioni];
+
             //dovrei usare il Path che mi da il form, ma per adesso uso questo
             string Pathh = $@"{Path}_{Formato.Ppm}_Fossalta_Temperature.CSV";
             StreamReader Csv = new StreamReader(Pathh);
             string a = Csv.ReadLine(); //riga 1
             string b = Csv.ReadLine(); //riga 2, i dati iniziano alla riga 3
             
-            ArrayList x = new ArrayList();
-            string[] y;
-            ArrayList Tempo = new ArrayList();
-            ArrayList Pos = new ArrayList(); 
-            ArrayList Vel = new ArrayList(); 
-            ArrayList Cor = new ArrayList();
-            int i = 0;
-            while (!Csv.EndOfStream)
+            string[] x = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
+            double[] PotI = new double[Campioni];
+            double[] Vel_2 = new double[Campioni];
+            for (int i = 0; i<Campioni; i++)
             {
-                x.Add(Csv.ReadLine());
-                y = x[i].ToString().Split(',');
-                Tempo.Add(double.Parse(y[0]));
-                Pos.Add(double.Parse(y[1].Trim('"').Replace('.',',')));
-                Vel.Add(double.Parse(y[2].Trim('"').Replace('.', ',')));
-                Cor.Add(double.Parse(y[3].Trim('"').Replace('.', ',')));
-                i++;
+                x[0] = Csv.ReadLine();
+                x = x[0].ToString().Split('\t');
+                this.Time[i] = (double.Parse(x[0]));
+                this.PosConv[i] = this.Formato.Kp * (double.Parse(x[1].Trim('"').Replace('.',',')));
+                this.VelConv[i] = this.Formato.Kv * (double.Parse(x[2].Trim('"').Replace('.', ',')));
+                this.Coppia[i] = this.Formato.Kt * (double.Parse(x[3].Trim('"').Replace('.', ',')));
+                PotI[i] = this.Coppia[i] * this.VelConv[i];
+                Vel_2[i] = this.VelConv[i] * this.VelConv[i];
             }
 
+            //Chiudo il .CSV
+            Csv.Close();
+
+            double DurataPeriodo = this.Time[this.Time.Length-1];
 
             Console.ReadLine();
             /* Questa porzione di codice è stata utilizzata per modificare un .CSV di quelli vecchi in modo da crearne uno attuale
