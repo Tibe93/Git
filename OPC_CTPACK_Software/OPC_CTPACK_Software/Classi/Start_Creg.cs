@@ -25,23 +25,27 @@ namespace OPC_CTPACK_Software
             this.OffsetNeg = OffsetNeg;
         }
 
-        /*public double[] PseudoInversa()
+        public double[,] PseudoInversa()
         {
-            double[,] FiMotore = new double[,];
-            double[,] VelocitaMediaTot = new ArrayList();
-            double[,] Velocita2RMSTot = new ArrayList();
-            double[,] PotenzaMediaTot = new ArrayList();
-            double[] Attriti = { Bs, Bv };
+            double[,] CregAttualeTot = new double[CregTot.Length, 1];
+            double[,] VelocitaMediaTot = new double[CregTot.Length, 1];
+            double[,] Velocita2RMSTot = new double[CregTot.Length, 1];
+            double[,] PotenzaMediaTot = new double[CregTot.Length, 1];
+            double[,] A = new double[CregTot.Length, 2];
+            double[,] FiMotore = new double[2, CregTot.Length];
+            double[,] Attriti = new double[2,1];
 
             for (int i=0; i < (CregTot.Length); i++)
             {
+                CregAttualeTot.Add(CregTot[i].CregAttuale);
                 VelocitaMediaTot.Add(CregTot[i].VelocitaMedia);
                 Velocita2RMSTot.Add(CregTot[i].Velocita2RMS);
                 PotenzaMediaTot.Add(CregTot[i].PotenzaMedia);
             }
-            FiMotore = Matrix.PseudoInverse(VelocitaMediaTot, Velocita2RMSTot);
-            return Attriti = FiMotore * PotenzaMediaTot;
-        } */  
+
+            Attriti = Functions.MultiplyMatrix(FiMotore, PotenzaMediaTot, 2, CregTot.Length, 1);
+            return Attriti;
+        }  
         
     }
 }
