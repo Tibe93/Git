@@ -32,24 +32,23 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBoxFormato = new System.Windows.Forms.ComboBox();
             this.butPath = new System.Windows.Forms.Button();
+            this.butAvanti = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butAnalisi
             // 
-            this.butAnalisi.Location = new System.Drawing.Point(35, 29);
-            this.butAnalisi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butAnalisi.Location = new System.Drawing.Point(53, 46);
             this.butAnalisi.Name = "butAnalisi";
-            this.butAnalisi.Size = new System.Drawing.Size(166, 92);
+            this.butAnalisi.Size = new System.Drawing.Size(249, 143);
             this.butAnalisi.TabIndex = 0;
             this.butAnalisi.Text = "Start Analisi";
             this.butAnalisi.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(239, 101);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Location = new System.Drawing.Point(359, 158);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(215, 22);
+            this.textBox1.Size = new System.Drawing.Size(321, 31);
             this.textBox1.TabIndex = 1;
             // 
             // comboBoxFormato
@@ -58,32 +57,43 @@
             this.comboBoxFormato.Items.AddRange(new object[] {
             "Catena Choco Rolles formato 1",
             "Masse Choco Rolles formato 1"});
-            this.comboBoxFormato.Location = new System.Drawing.Point(239, 29);
-            this.comboBoxFormato.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxFormato.Location = new System.Drawing.Point(359, 46);
             this.comboBoxFormato.Name = "comboBoxFormato";
-            this.comboBoxFormato.Size = new System.Drawing.Size(261, 24);
+            this.comboBoxFormato.Size = new System.Drawing.Size(389, 33);
             this.comboBoxFormato.TabIndex = 2;
             // 
             // butPath
             // 
-            this.butPath.Location = new System.Drawing.Point(465, 101);
-            this.butPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butPath.Location = new System.Drawing.Point(697, 158);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(34, 22);
+            this.butPath.Size = new System.Drawing.Size(51, 31);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
+            this.butPath.Click += new System.EventHandler(this.butPath_Click);
+            // 
+            // butAvanti
+            // 
+            this.butAvanti.Enabled = false;
+            this.butAvanti.Location = new System.Drawing.Point(636, 265);
+            this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.butAvanti.Name = "butAvanti";
+            this.butAvanti.Size = new System.Drawing.Size(112, 36);
+            this.butAvanti.TabIndex = 8;
+            this.butAvanti.Text = "Avanti >";
+            this.butAvanti.UseVisualStyleBackColor = true;
+            this.butAvanti.Click += new System.EventHandler(this.butAvanti_Click);
             // 
             // Form0
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 166);
+            this.ClientSize = new System.Drawing.Size(822, 325);
+            this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.butAnalisi);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form0";
             this.Text = "Form0";
             this.Load += new System.EventHandler(this.Form0_Load);
@@ -98,5 +108,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBoxFormato;
         private System.Windows.Forms.Button butPath;
+        private System.Windows.Forms.Button butAvanti;
     }
 }
