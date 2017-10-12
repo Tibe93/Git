@@ -15,12 +15,13 @@ namespace OPC_CTPACK_Software
         Form0 FormPadre;
         Form2 FormFiglio;
         Formato[] Formati;
+        Start_Creg CregInit;
 
         public Form1(Form0 FormPadre)
         {
             InitializeComponent();
             this.FormPadre = FormPadre;
-            this.FormFiglio = new Form2(this);
+            this.FormFiglio = new Form2(this,this.CregInit);
             this.Formati = Functions.LetturaFormati();
         }
 
@@ -67,7 +68,7 @@ namespace OPC_CTPACK_Software
             }
 
             int Tolleranza = Convert.ToInt32(textBoxTolleranza.Text);
-            Start_Creg CregInit = new Start_Creg(CregTot, Tolleranza, (-1 * Tolleranza));
+            this.CregInit = new Start_Creg(CregTot, Tolleranza, (-1 * Tolleranza));
             this.butAvanti.Enabled = true;
 
             //Disegno il grafico
