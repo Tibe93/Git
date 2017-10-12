@@ -12,9 +12,6 @@ namespace OPC_CTPACK_Software
 {
     public partial class Form0 : Form
     {
-        int PpmIniziali;
-        int PpmFinali;
-        int PpmPasso;
 
         Form1 FormFiglio;
 
