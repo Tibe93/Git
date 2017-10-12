@@ -31,7 +31,6 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 4D);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.butCalcolo = new System.Windows.Forms.Button();
             this.labelTolleranza = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             // 
             // butCalcolo
             // 
+            this.butCalcolo.Enabled = false;
             this.butCalcolo.Location = new System.Drawing.Point(12, 12);
             this.butCalcolo.Name = "butCalcolo";
             this.butCalcolo.Size = new System.Drawing.Size(121, 54);
@@ -89,12 +89,14 @@
             // 
             // textBoxTolleranza
             // 
+            this.textBoxTolleranza.Enabled = false;
             this.textBoxTolleranza.Location = new System.Drawing.Point(99, 75);
             this.textBoxTolleranza.Name = "textBoxTolleranza";
             this.textBoxTolleranza.Size = new System.Drawing.Size(106, 22);
             this.textBoxTolleranza.TabIndex = 4;
             this.textBoxTolleranza.Text = "Inserire un Intero";
             this.textBoxTolleranza.Click += new System.EventHandler(this.textBoxTolleranza_Click);
+            this.textBoxTolleranza.TextChanged += new System.EventHandler(this.textBoxTolleranza_TextChanged);
             // 
             // textBoxBs
             // 
@@ -148,7 +150,6 @@
             series1.IsVisibleInLegend = false;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            series1.Points.Add(dataPoint1);
             this.chartCreg.Series.Add(series1);
             this.chartCreg.Size = new System.Drawing.Size(483, 336);
             this.chartCreg.TabIndex = 9;
@@ -156,23 +157,28 @@
             // 
             // comboBoxFormato
             // 
+            this.comboBoxFormato.BackColor = System.Drawing.Color.LightGreen;
             this.comboBoxFormato.FormattingEnabled = true;
             this.comboBoxFormato.Location = new System.Drawing.Point(136, 12);
             this.comboBoxFormato.Name = "comboBoxFormato";
             this.comboBoxFormato.Size = new System.Drawing.Size(359, 24);
             this.comboBoxFormato.TabIndex = 10;
             this.comboBoxFormato.Text = "Selezionare Cinematismo/Formato";
+            this.comboBoxFormato.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormato_SelectedIndexChanged);
             // 
             // textBoxPath
             // 
+            this.textBoxPath.Enabled = false;
             this.textBoxPath.Location = new System.Drawing.Point(136, 44);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(324, 22);
             this.textBoxPath.TabIndex = 11;
             this.textBoxPath.Text = "Inserire Path Salvataggio .CSV";
+            this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
             // 
             // butPath
             // 
+            this.butPath.Enabled = false;
             this.butPath.Location = new System.Drawing.Point(466, 44);
             this.butPath.Name = "butPath";
             this.butPath.Size = new System.Drawing.Size(29, 22);
