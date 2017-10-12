@@ -30,27 +30,50 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.butIndietro = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.butAvanti = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butIndietro
             // 
-            this.butIndietro.Location = new System.Drawing.Point(18, 695);
-            this.butIndietro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.butIndietro.Location = new System.Drawing.Point(12, 445);
             this.butIndietro.Name = "butIndietro";
-            this.butIndietro.Size = new System.Drawing.Size(112, 36);
+            this.butIndietro.Size = new System.Drawing.Size(75, 23);
             this.butIndietro.TabIndex = 9;
             this.butIndietro.Text = "< Indietro";
             this.butIndietro.UseVisualStyleBackColor = true;
             this.butIndietro.Click += new System.EventHandler(this.butIndietro_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 52);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // butAvanti
+            // 
+            this.butAvanti.Enabled = false;
+            this.butAvanti.Location = new System.Drawing.Point(420, 445);
+            this.butAvanti.Name = "butAvanti";
+            this.butAvanti.Size = new System.Drawing.Size(75, 23);
+            this.butAvanti.TabIndex = 11;
+            this.butAvanti.Text = "Avanti >";
+            this.butAvanti.UseVisualStyleBackColor = true;
+            this.butAvanti.Click += new System.EventHandler(this.butAvanti_Click);
+            // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 750);
+            this.ClientSize = new System.Drawing.Size(507, 480);
+            this.Controls.Add(this.butAvanti);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.butIndietro);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form2";
             this.Text = "Form2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
@@ -62,5 +85,7 @@
         #endregion
 
         private System.Windows.Forms.Button butIndietro;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button butAvanti;
     }
 }
