@@ -10,7 +10,7 @@ namespace OPC_CTPACK_Software
 {
     public class Creg
     {
-        Formato Formato;
+        public Formato Formato;
         int Periodi;
         double[] PosConv;
         double[] VelConv;
