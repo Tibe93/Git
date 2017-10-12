@@ -18,7 +18,7 @@ namespace OPC_CTPACK_Software
         public int PpmF;
         public int Passo;
 
-        public Formato(string Nome, Motore Motore,int PpmA, double Kp, double Kv, double Kt, int PpmI, int PpmF, int Passo)
+        public Formato(string Nome, Motore Motore, double Kp, double Kv, double Kt, int PpmA, int PpmI, int PpmF, int Passo)
         {
             this.Nome = Nome;
             this.Motore = Motore;

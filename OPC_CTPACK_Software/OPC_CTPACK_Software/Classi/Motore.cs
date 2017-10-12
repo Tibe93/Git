@@ -16,7 +16,7 @@ namespace OPC_CTPACK_Software
         string RatedTorque;
         string PoleCount;
         string PeakCurrent;
-        string TorqueCostant;
+        double TorqueCostant;
         string VoltageCostant;
         string Resistance;
         string Inductance;
