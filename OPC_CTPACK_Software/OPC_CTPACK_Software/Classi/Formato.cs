@@ -39,5 +39,10 @@ namespace OPC_CTPACK_Software
                     $"Kv = {this.Kv}\n" +
                     $"Kc = {this.Kt}";
         }
+
+        public string GetNome()
+        {
+            return $"Formato: {this.Nome}, Motore: {this.Motore.GetModel()}";
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace OPC_CTPACK_Software
             this.Time = new double[Campioni];
 
             //dovrei usare il Path che mi da il form, ma per adesso uso questo
-            string Pathh = $@"{Path}_{Formato.PpmA}_Fossalta_Temperature.CSV";
+            string Pathh = $"{Path}/_{Formato.PpmA}_Fossalta_Temperature.CSV";
             StreamReader Csv = new StreamReader(Pathh);
             string a = Csv.ReadLine(); //riga 1
             string b = Csv.ReadLine(); //riga 2, i dati iniziano alla riga 3

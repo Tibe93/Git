@@ -14,20 +14,22 @@ namespace OPC_CTPACK_Software
     {
         Form0 FormPadre;
         Form2 FormFiglio;
+        Formato[] Formati;
 
         public Form1(Form0 FormPadre)
         {
             InitializeComponent();
             this.FormPadre = FormPadre;
             this.FormFiglio = new Form2(this);
+            this.Formati = Functions.LetturaFormati();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            /*Motore M1 = new Motore("VPL-B1153F-C", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c","c");
-            Formato F1 = new Formato("ChocoRolles", M1, 70, 1, 0.01, 0.075);
-            Creg C1 = new Creg(F1, $@"C:\Users\CtPack\Desktop\Tiberia\Trend_Tibe\_Fossalta_Temperature_Termoregolate\",2);
-            */
+            for(int i=0; i < this.Formati.Length; i++)
+            {
+                comboBoxFormato.Items.Add(this.Formati[i].GetNome());
+            }
         }
 
         private void butIndietro_Click(object sender, EventArgs e)
@@ -44,17 +46,27 @@ namespace OPC_CTPACK_Software
 
         private void butCalcolo_Click(object sender, EventArgs e)
         {
-            Formato FormatoA = new Formato();
-            int NumeroCreg = (FormatoA.PpmF-FormatoA.PpmI)/FormatoA.Passo;
+            int IndiceFormato;
+            for (int i = 0; i < this.Formati.Length; i++)
+            {
+                if(Formati[i].GetNome().Equals(comboBoxFormato.SelectedItem))
+                {
+                    IndiceFormato = i;
+                    break;
+                }
+            }
+
+            Formato FormatoA = this.Formati[0];
+            int NumeroCreg = ((FormatoA.PpmF-FormatoA.PpmI)/FormatoA.Passo)+1;
             Creg[] CregTot = new Creg[NumeroCreg];
-            for(int i = 0; i<= NumeroCreg; i++)
+            for(int i = 0; i< NumeroCreg; i++)
             {
                 FormatoA.PpmA = FormatoA.PpmI + (FormatoA.Passo * i);
                 CregTot[i] = new Creg(FormatoA, textBoxPath.Text, 2);
                 chartCreg.Series["Series1"].Points.AddXY(FormatoA.PpmA, CregTot[i].CregAttuale);
             }
 
-            int Tolleranza = Convert.ToInt32(labelTolleranza.Text);
+            int Tolleranza = Convert.ToInt32(textBoxTolleranza.Text);
             Start_Creg CregInit = new Start_Creg(CregTot, Tolleranza, (-1 * Tolleranza));
             this.butAvanti.Enabled = true;
 
@@ -76,7 +88,29 @@ namespace OPC_CTPACK_Software
 
         private void textBoxTolleranza_Click(object sender, EventArgs e)
         {
+            
             textBoxTolleranza.Text = "";
+        }
+
+        private void comboBoxFormato_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxFormato.BackColor = Color.White;
+            butPath.Enabled = true;
+            textBoxPath.Enabled = true;
+            textBoxPath.BackColor = Color.LightGreen;
+        }
+
+        private void textBoxPath_TextChanged(object sender, EventArgs e)
+        {
+            textBoxPath.BackColor = Color.White;
+            textBoxTolleranza.Enabled = true;
+            textBoxTolleranza.BackColor = Color.LightGreen;
+        }
+
+        private void textBoxTolleranza_TextChanged(object sender, EventArgs e)
+        {
+            textBoxTolleranza.BackColor = Color.White;
+            butCalcolo.Enabled = true;
         }
     }
 }

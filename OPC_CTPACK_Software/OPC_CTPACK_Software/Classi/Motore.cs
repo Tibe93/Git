@@ -21,7 +21,7 @@ namespace OPC_CTPACK_Software
         string Resistance;
         string Inductance;
 
-        public Motore(string MotorModel, string RatedPower, string RatedVoltage, string RatedSpeed, string RatedCurrent, string RatedTorque, string PoleCount, string PeakCurrent, string TorqueCostant, string VoltageCostant, string Resistance, string Inductance)
+        public Motore(string MotorModel, string RatedPower, string RatedVoltage, string RatedSpeed, string RatedCurrent, string RatedTorque, string PoleCount, string PeakCurrent, double TorqueCostant, string VoltageCostant, string Resistance, string Inductance)
         {
             this.MotorModel = MotorModel;
             this.RatedPower = RatedPower;
