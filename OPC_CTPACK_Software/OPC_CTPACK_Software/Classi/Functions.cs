@@ -41,30 +41,30 @@ namespace OPC_CTPACK_Software
         {
             Formato[] _Formato = new Formato[2];
 
-            string Pathh = $@"Formati.config";
+            string Pathh = $@"../Formati.config";
             StreamReader File = new StreamReader(Pathh);
             string M = File.ReadLine(); //riga 1, lettura riga con numero motori
             int NMotori = Convert.ToInt32(M[0]);
             Motore[] _Motore = new Motore[NMotori];
-            string[] x1 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
+            string[] x1 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x1 mi serve per lo split infatti
 
             for (int i = 0; i < (NMotori+1); i++)
             {
-                string a = File.ReadLine(); //riga 2, legenda, quindi la salto
+                string a = File.ReadLine(); //legenda, quindi la salto
                 x1[0] = File.ReadLine();
                 x1 = x1[0].ToString().Split('\t');
-                _Motore[i] = new Motore(x1[0], x1[1], x1[2], x1[3], x1[4], x1[5], x1[6], x1[7], x1[8], x1[9], x1[10], x1[11]); 
+                _Motore[i] = new Motore(x1[0], x1[1], x1[2], x1[3], x1[4], x1[5], x1[6], x1[7], Convert.ToDouble(x1[8]), x1[9], x1[10], x1[11]); 
             }
 
             string F = File.ReadLine(); // lettura riga con numero formati
             int NFormati = Convert.ToInt32(F[0]);
             Formato[] _Formati = new Formato[NFormati];
-            string[] x2 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
+            string[] x2 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x2 mi serve per lo split infatti
             int IndiceMotore = 0;
 
             for (int i = 0; i < (NFormati + 1); i++)
             {
-                string a = File.ReadLine(); //riga 2, legenda, quindi la salto
+                string a = File.ReadLine(); //legenda, quindi la salto
                 x2[0] = File.ReadLine();
                 x2 = x2[0].ToString().Split('\t');
                 for (int j = 0; j < NMotori; j++)

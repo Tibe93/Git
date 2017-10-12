@@ -23,7 +23,7 @@ namespace OPC_CTPACK_Software
 
         private void Form0_Load(object sender, EventArgs e)
         {
-
+            Formato[] F = Functions.LetturaFormati();
         }
 
         private void butPath_Click(object sender, EventArgs e)
