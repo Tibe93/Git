@@ -25,14 +25,14 @@ namespace OPC_CTPACK_Software
         {
             this.Formato = Formato;
             this.Periodi = Periodi;
-            int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.Ppm)/0.004);
+            int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/0.004);
             this.PosConv = new double[Campioni];
             this.VelConv = new double[Campioni];
             this.Coppia = new double[Campioni];
             this.Time = new double[Campioni];
 
             //dovrei usare il Path che mi da il form, ma per adesso uso questo
-            string Pathh = $@"{Path}_{Formato.Ppm}_Fossalta_Temperature.CSV";
+            string Pathh = $@"{Path}_{Formato.PpmA}_Fossalta_Temperature.CSV";
             StreamReader Csv = new StreamReader(Pathh);
             string a = Csv.ReadLine(); //riga 1
             string b = Csv.ReadLine(); //riga 2, i dati iniziano alla riga 3

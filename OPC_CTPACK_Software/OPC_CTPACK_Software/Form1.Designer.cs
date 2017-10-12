@@ -31,6 +31,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 4D);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.butCalcolo = new System.Windows.Forms.Button();
             this.labelTolleranza = new System.Windows.Forms.Label();
@@ -90,8 +91,10 @@
             // 
             this.textBoxTolleranza.Location = new System.Drawing.Point(99, 75);
             this.textBoxTolleranza.Name = "textBoxTolleranza";
-            this.textBoxTolleranza.Size = new System.Drawing.Size(100, 22);
+            this.textBoxTolleranza.Size = new System.Drawing.Size(106, 22);
             this.textBoxTolleranza.TabIndex = 4;
+            this.textBoxTolleranza.Text = "Inserire un Intero";
+            this.textBoxTolleranza.Click += new System.EventHandler(this.textBoxTolleranza_Click);
             // 
             // textBoxBs
             // 
@@ -145,6 +148,7 @@
             series1.IsVisibleInLegend = false;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
+            series1.Points.Add(dataPoint1);
             this.chartCreg.Series.Add(series1);
             this.chartCreg.Size = new System.Drawing.Size(483, 336);
             this.chartCreg.TabIndex = 9;
