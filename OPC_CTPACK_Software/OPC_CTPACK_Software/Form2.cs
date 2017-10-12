@@ -29,5 +29,11 @@ namespace OPC_CTPACK_Software
         {
             this.FormPadre.Close();
         }
+
+        private void butIndietro_Click(object sender, EventArgs e)
+        {
+            this.FormPadre.Visible = true;
+            this.Visible = false;
+        }
     }
 }
