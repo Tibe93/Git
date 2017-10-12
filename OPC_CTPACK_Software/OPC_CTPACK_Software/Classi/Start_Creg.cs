@@ -10,11 +10,11 @@ namespace OPC_CTPACK_Software
 {
     public class Start_Creg
     {
-        Creg[] CregTot;
+        public Creg[] CregTot;
         double Bs;
         double Bv;
-        int OffsetPos;
-        int OffsetNeg;
+        public int OffsetPos;
+        public int OffsetNeg;
 
         public Start_Creg(Creg[] CregTot, int OffsetPos, int OffsetNeg)
         {
