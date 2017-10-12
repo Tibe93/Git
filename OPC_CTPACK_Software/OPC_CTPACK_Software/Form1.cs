@@ -21,7 +21,6 @@ namespace OPC_CTPACK_Software
         {
             InitializeComponent();
             this.FormPadre = FormPadre;
-            this.FormFiglio = new Form2(this,this.CregInit);
             this.Formati = Functions.LetturaFormati();
         }
 
@@ -63,8 +62,8 @@ namespace OPC_CTPACK_Software
             for(int i = 0; i< NumeroCreg; i++)
             {
                 FormatoA.PpmA = FormatoA.PpmI + (FormatoA.Passo * i);
-                CregTot[i] = new Creg(FormatoA, textBoxPath.Text, 2);
-                chartCreg.Series["Series1"].Points.AddXY(FormatoA.PpmA, CregTot[i].CregAttuale);
+                CregTot[i] = new Creg( FormatoA, textBoxPath.Text, 2);
+                chartCreg.Series["Creg"].Points.AddXY(FormatoA.PpmA, CregTot[i].CregAttuale);
             }
 
             int Tolleranza = Convert.ToInt32(textBoxTolleranza.Text);
@@ -72,8 +71,11 @@ namespace OPC_CTPACK_Software
             this.butAvanti.Enabled = true;
 
             //Disegno il grafico
-            chartCreg.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chartCreg.Series["Series1"].ChartArea = "ChartArea1";
+            chartCreg.Series["Creg"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chartCreg.Series["Creg"].ChartArea = "ChartArea1";
+
+            //Aggiorno FormFiglio
+            this.FormFiglio = new Form2(this, this.CregInit);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

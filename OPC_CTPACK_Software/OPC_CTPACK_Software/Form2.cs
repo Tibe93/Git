@@ -26,7 +26,15 @@ namespace OPC_CTPACK_Software
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            Console.ReadLine();
+            for (int i = 0; i < this.CregInit.CregTot.Length; i++)
+            {
+                chartCreg.Series["Creg"].Points.AddXY(this.CregInit.CregTot[i].Formato.PpmA, this.CregInit.CregTot[i].CregAttuale);
+                chartCreg.Series["SogliaPiu"].Points.AddXY(this.CregInit.CregTot[i].Formato.PpmA, (this.CregInit.CregTot[i].CregAttuale+ this.CregInit.CregTot[i].CregAttuale*this.CregInit.OffsetPos/100));
+                chartCreg.Series["SogliaMeno"].Points.AddXY(this.CregInit.CregTot[i].Formato.PpmA, (this.CregInit.CregTot[i].CregAttuale + this.CregInit.CregTot[i].CregAttuale * this.CregInit.OffsetNeg/100));
+            }  
+            //chartCreg.Series["Creg"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            //chartCreg.Series["Creg"].ChartArea = "ChartArea1";
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,17 +48,17 @@ namespace OPC_CTPACK_Software
             this.Visible = false;
         }
 
-        private void butAvanti_Click(object sender, EventArgs e)
+        private void butStorico_Click(object sender, EventArgs e)
         {
-            FormFiglio.Visible = true;
-            this.Visible = false;
+            FormFiglio.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
 
 
-            butAvanti.Enabled = true;
+            butStorico.Enabled = true;
+            pictureBoxAllarme.Enabled = true;
         }
     }
 }
