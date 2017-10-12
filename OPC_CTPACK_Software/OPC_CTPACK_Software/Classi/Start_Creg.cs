@@ -16,16 +16,17 @@ namespace OPC_CTPACK_Software
         int OffsetPos;
         int OffsetNeg;
 
-        public Start_Creg(Creg[] CregTot, double Bs, double Bv, int OffsetPos, int OffsetNeg)
+        public Start_Creg(Creg[] CregTot, int OffsetPos, int OffsetNeg)
         {
             this.CregTot = CregTot;
-            this.Bs = Bs;
-            this.Bv = Bv;
             this.OffsetPos = OffsetPos;
             this.OffsetNeg = OffsetNeg;
+            double[,] Attriti = CalcoloAttriti(this.CregTot);
+            this.Bs = Attriti[0,0];
+            this.Bv = Attriti[1,0];
         }
 
-        public double[,] CalcoloAttriti()
+        public double[,] CalcoloAttriti(Creg[] CregTot)
         {
             double[,] VelocitaMediaTot = new double[CregTot.Length, 1];
             double[,] Velocita2RMSTot = new double[CregTot.Length, 1];

@@ -44,9 +44,23 @@ namespace OPC_CTPACK_Software
 
         private void butCalcolo_Click(object sender, EventArgs e)
         {
+            Formato FormatoA = new Formato();
+            int NumeroCreg = (FormatoA.PpmF-FormatoA.PpmI)/FormatoA.Passo;
+            Creg[] CregTot = new Creg[NumeroCreg];
+            for(int i = 0; i<= NumeroCreg; i++)
+            {
+                FormatoA.PpmA = FormatoA.PpmI + (FormatoA.Passo * i);
+                CregTot[i] = new Creg(FormatoA, textBoxPath.Text, 2);
+                chartCreg.Series["Series1"].Points.AddXY(FormatoA.PpmA, CregTot[i].CregAttuale);
+            }
 
-            
+            int Tolleranza = Convert.ToInt32(labelTolleranza.Text);
+            Start_Creg CregInit = new Start_Creg(CregTot, Tolleranza, (-1 * Tolleranza));
             this.butAvanti.Enabled = true;
+
+            //Disegno il grafico
+            chartCreg.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chartCreg.Series["Series1"].ChartArea = "ChartArea1";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -58,6 +72,11 @@ namespace OPC_CTPACK_Software
         {
             folderBrowserDialog1.ShowDialog();
             textBoxPath.Text = folderBrowserDialog1.SelectedPath;
+        }
+
+        private void textBoxTolleranza_Click(object sender, EventArgs e)
+        {
+            textBoxTolleranza.Text = "";
         }
     }
 }
