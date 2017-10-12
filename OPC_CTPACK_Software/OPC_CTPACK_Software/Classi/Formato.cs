@@ -10,19 +10,25 @@ namespace OPC_CTPACK_Software
     {
         string Nome;
         Motore Motore;
-        public int Ppm;
+        public int PpmA;
         public double Kp;
         public double Kv;
         public double Kt;
+        public int PpmI;
+        public int PpmF;
+        public int Passo;
 
-        public Formato(string Nome, Motore Motore,int Ppm, double Kp, double Kv, double Kt)
+        public Formato(string Nome, Motore Motore,int PpmA, double Kp, double Kv, double Kt, int PpmI, int PpmF, int Passo)
         {
             this.Nome = Nome;
             this.Motore = Motore;
             this.Kp = Kp;
             this.Kv = Kv;
             this.Kt = Kt;
-            this.Ppm = Ppm;
+            this.PpmA = PpmA;
+            this.PpmI = PpmI;
+            this.PpmF = PpmF;
+            this.Passo = Passo;
         }
 
         public override string ToString()

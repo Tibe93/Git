@@ -51,7 +51,7 @@
             // 
             // butCalcolo
             // 
-            this.butCalcolo.Location = new System.Drawing.Point(9, 12);
+            this.butCalcolo.Location = new System.Drawing.Point(12, 12);
             this.butCalcolo.Name = "butCalcolo";
             this.butCalcolo.Size = new System.Drawing.Size(121, 54);
             this.butCalcolo.TabIndex = 0;
@@ -112,7 +112,7 @@
             // butAvanti
             // 
             this.butAvanti.Enabled = false;
-            this.butAvanti.Location = new System.Drawing.Point(420, 343);
+            this.butAvanti.Location = new System.Drawing.Point(420, 445);
             this.butAvanti.Name = "butAvanti";
             this.butAvanti.Size = new System.Drawing.Size(75, 23);
             this.butAvanti.TabIndex = 7;
@@ -122,7 +122,7 @@
             // 
             // butIndietro
             // 
-            this.butIndietro.Location = new System.Drawing.Point(9, 343);
+            this.butIndietro.Location = new System.Drawing.Point(12, 445);
             this.butIndietro.Name = "butIndietro";
             this.butIndietro.Size = new System.Drawing.Size(75, 23);
             this.butIndietro.TabIndex = 8;
@@ -146,7 +146,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartCreg.Series.Add(series1);
-            this.chartCreg.Size = new System.Drawing.Size(483, 234);
+            this.chartCreg.Size = new System.Drawing.Size(483, 336);
             this.chartCreg.TabIndex = 9;
             this.chartCreg.Text = "chart1";
             // 
@@ -161,7 +161,7 @@
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(136, 43);
+            this.textBoxPath.Location = new System.Drawing.Point(136, 44);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(324, 22);
             this.textBoxPath.TabIndex = 11;
@@ -169,7 +169,7 @@
             // 
             // butPath
             // 
-            this.butPath.Location = new System.Drawing.Point(466, 43);
+            this.butPath.Location = new System.Drawing.Point(466, 44);
             this.butPath.Name = "butPath";
             this.butPath.Size = new System.Drawing.Size(29, 22);
             this.butPath.TabIndex = 12;
