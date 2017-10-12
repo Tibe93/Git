@@ -14,10 +14,12 @@ namespace OPC_CTPACK_Software
     {
 
         Form1 FormFiglio;
+        Formato[] Formati;
 
         public Form0()
         {
             this.FormFiglio = new Form1(this);
+            this.Formati = Functions.LetturaFormati();
             InitializeComponent();
         }
 
@@ -36,6 +38,20 @@ namespace OPC_CTPACK_Software
         {
             FormFiglio.Visible = true;
             this.Visible = false;
+        }
+
+        private void comboBoxFormato_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxFormato.BackColor = Color.White;
+            butPath.Enabled = true;
+            textBoxPath.Enabled = true;
+            textBoxPath.BackColor = Color.LightGreen;
+        }
+
+        private void textBoxPath_TextChanged(object sender, EventArgs e)
+        {
+            textBoxPath.BackColor = Color.White;
+            butAnalisi.Enabled = true;
         }
     }
 }
