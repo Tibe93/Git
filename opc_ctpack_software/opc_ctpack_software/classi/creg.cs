@@ -23,7 +23,7 @@ namespace OPC_CTPACK_Software
 
         public Creg(Formato Formato, string Path, int Periodi)
         {
-            this.Formato = Formato;
+            this.Formato = new Formato(Formato.GetNome(), Formato.Motore, Formato.Kp, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
             this.Periodi = Periodi;
             int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/0.004);
             this.PosConv = new double[Campioni];
@@ -32,7 +32,7 @@ namespace OPC_CTPACK_Software
             this.Time = new double[Campioni];
 
             //dovrei usare il Path che mi da il form, ma per adesso uso questo
-            string Pathh = $"{Path}/_{Formato.PpmA}_Fossalta_Temperature.CSV";
+            string Pathh = $"{Path}/{Formato.PpmA}_Fossalta_Temperature.CSV";
             StreamReader Csv = new StreamReader(Pathh);
             string a = Csv.ReadLine(); //riga 1
             string b = Csv.ReadLine(); //riga 2, i dati iniziano alla riga 3
@@ -66,25 +66,6 @@ namespace OPC_CTPACK_Software
             }
             this.VelocitaMedia = this.VelocitaMedia / this.VelConv.Length;
 
-            /* Questa porzione di codice è stata utilizzata per modificare un .CSV di quelli vecchi in modo da crearne uno attuale
-            int i = 0;
-            ArrayList y = new ArrayList();
-            StreamWriter Css = new StreamWriter($"{Path}test.CSV");
-            string[] appoggio;
-            for(i = 0; i <3000; i++)
-            {
-                appoggio = x[i].ToString().Split(',');
-                y.Add($"{4 * i}\t{appoggio[1].Trim('"').Replace('.',',')}\t{appoggio[2].Trim('"').Replace('.', ',')}\t{appoggio[3].Trim('"').Replace('.', ',')}");//ToString().Substring(29,35)}");
-            }
-            Console.ReadLine();
-            Css.WriteLine(a);
-            Css.WriteLine(b);
-            foreach (string s in y)
-            {
-                Css.WriteLine(s);
-            }
-            Css.Close();
-            */
         }
     }
 }
