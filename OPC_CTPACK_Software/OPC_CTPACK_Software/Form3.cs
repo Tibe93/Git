@@ -21,7 +21,7 @@ namespace OPC_CTPACK_Software
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo($"../");
+            DirectoryInfo dir = new DirectoryInfo($"../Dati/");
             comboBoxStorico.DataSource = dir.GetFileSystemInfos("*_Storico_Creg.txt");
             comboBoxStorico.DisplayMember = "Name";
             comboBoxStorico.ValueMember = "FullName";
