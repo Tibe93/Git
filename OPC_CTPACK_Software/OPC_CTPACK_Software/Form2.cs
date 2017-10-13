@@ -65,6 +65,7 @@ namespace OPC_CTPACK_Software
             Creg CregAttuale = new Creg(this.CregInit.CregTot[0].Formato, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
 
             chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
+            textBoxCreg.Text = CregAttuale.CregAttuale.ToString();
             pictureBoxAllarme.Enabled = false;
             for (int i = 0; i < chartCreg.Series["SogliaPiu"].Points.Count; i++)
             {
