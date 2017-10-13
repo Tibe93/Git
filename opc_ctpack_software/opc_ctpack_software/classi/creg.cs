@@ -11,7 +11,7 @@ namespace OPC_CTPACK_Software
     public class Creg
     {
         public Formato Formato;
-        int Periodi;
+        public int Periodi;
         double[] PosConv;
         double[] VelConv;
         double[] Coppia;
@@ -23,7 +23,7 @@ namespace OPC_CTPACK_Software
 
         public Creg(Formato Formato, string Path, int Periodi)
         {
-            this.Formato = new Formato(Formato.GetNome(), Formato.Motore, Formato.Kp, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
+            this.Formato = new Formato(Formato.Nome, Formato.Motore, Formato.Kp, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
             this.Periodi = Periodi;
             int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/0.004);
             this.PosConv = new double[Campioni];

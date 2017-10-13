@@ -39,7 +39,6 @@ namespace OPC_CTPACK_Software
 
         public static Formato[] LetturaFormati()
         {
-            Formato[] _Formato = new Formato[2];
 
             string Pathh = $"../Dati/Formati.config";
             StreamReader File = new StreamReader(Pathh);
