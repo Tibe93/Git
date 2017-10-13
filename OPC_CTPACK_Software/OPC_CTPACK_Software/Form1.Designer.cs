@@ -72,7 +72,7 @@
             // labelBs
             // 
             this.labelBs.AutoSize = true;
-            this.labelBs.Location = new System.Drawing.Point(211, 78);
+            this.labelBs.Location = new System.Drawing.Point(207, 78);
             this.labelBs.Name = "labelBs";
             this.labelBs.Size = new System.Drawing.Size(24, 17);
             this.labelBs.TabIndex = 2;
@@ -81,7 +81,7 @@
             // labelBv
             // 
             this.labelBv.AutoSize = true;
-            this.labelBv.Location = new System.Drawing.Point(359, 78);
+            this.labelBv.Location = new System.Drawing.Point(352, 78);
             this.labelBv.Name = "labelBv";
             this.labelBv.Size = new System.Drawing.Size(24, 17);
             this.labelBv.TabIndex = 3;
@@ -90,9 +90,9 @@
             // textBoxTolleranza
             // 
             this.textBoxTolleranza.Enabled = false;
-            this.textBoxTolleranza.Location = new System.Drawing.Point(99, 75);
+            this.textBoxTolleranza.Location = new System.Drawing.Point(93, 75);
             this.textBoxTolleranza.Name = "textBoxTolleranza";
-            this.textBoxTolleranza.Size = new System.Drawing.Size(106, 22);
+            this.textBoxTolleranza.Size = new System.Drawing.Size(112, 22);
             this.textBoxTolleranza.TabIndex = 4;
             this.textBoxTolleranza.Text = "Inserire un Intero";
             this.textBoxTolleranza.Click += new System.EventHandler(this.textBoxTolleranza_Click);
@@ -100,18 +100,18 @@
             // 
             // textBoxBs
             // 
-            this.textBoxBs.Location = new System.Drawing.Point(247, 75);
+            this.textBoxBs.Location = new System.Drawing.Point(237, 75);
             this.textBoxBs.Name = "textBoxBs";
             this.textBoxBs.ReadOnly = true;
-            this.textBoxBs.Size = new System.Drawing.Size(100, 22);
+            this.textBoxBs.Size = new System.Drawing.Size(115, 22);
             this.textBoxBs.TabIndex = 5;
             // 
             // textBoxBv
             // 
-            this.textBoxBv.Location = new System.Drawing.Point(395, 75);
+            this.textBoxBv.Location = new System.Drawing.Point(380, 75);
             this.textBoxBv.Name = "textBoxBv";
             this.textBoxBv.ReadOnly = true;
-            this.textBoxBv.Size = new System.Drawing.Size(100, 22);
+            this.textBoxBv.Size = new System.Drawing.Size(115, 22);
             this.textBoxBv.TabIndex = 6;
             // 
             // butAvanti
@@ -137,6 +137,7 @@
             // 
             // chartCreg
             // 
+            this.chartCreg.BackColor = System.Drawing.SystemColors.Control;
             chartArea1.Name = "ChartArea1";
             this.chartCreg.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;

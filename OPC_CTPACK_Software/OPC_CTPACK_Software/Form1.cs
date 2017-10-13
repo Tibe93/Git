@@ -30,6 +30,7 @@ namespace OPC_CTPACK_Software
             {
                 comboBoxFormato.Items.Add(this.Formati[i].GetNome());
             }
+            ////FARE CONTROLLO CHE CI SIA ALMENO UN DATO PER LO STORICO E ABILITARE IL RELATIVO TASTO
         }
 
         private void butIndietro_Click(object sender, EventArgs e)
@@ -68,6 +69,8 @@ namespace OPC_CTPACK_Software
 
             int Tolleranza = Convert.ToInt32(textBoxTolleranza.Text);
             this.CregInit = new Start_Creg(CregTot, Tolleranza, (-1 * Tolleranza));
+            textBoxBs.Text = CregInit.Bs.ToString();
+            textBoxBv.Text = CregInit.Bv.ToString();
             this.butAvanti.Enabled = true;
 
             //Disegno il grafico
