@@ -63,6 +63,7 @@ namespace OPC_CTPACK_Software
             //Seconda parte
             //Apro il CSV appena salvato, calcolo il Creg e lo grafico
             //ciao
+            //c
         }
     }
 }
