@@ -21,44 +21,51 @@ namespace OPC_CTPACK_Software
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            DirectoryInfo dir = new DirectoryInfo($"../");
+            comboBoxStorico.DataSource = dir.GetFileSystemInfos("*_Storico_Creg.txt");
+            comboBoxStorico.DisplayMember = "Name";
+            comboBoxStorico.ValueMember = "FullName";
+        }
+
+        private void comboBoxStorico_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxStorico.BackColor = Color.White;
+            buttonStart.Enabled = true;
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
             int NumeroCregMax = 100;
-            DateTime[] Tempo = new DateTime[NumeroCregMax];
+            //DateTime[] Tempo = new DateTime[NumeroCregMax];
+            int[] Tempo = new int[NumeroCregMax];
             double[] StoricoCreg = new double[NumeroCregMax];
             int Tolleranza;
             double CregTeo;
 
-            string Pathh = $"../70_Storico_Creg.txt";
+            string Pathh = $"../{ comboBoxStorico.SelectedItem }";
             StreamReader File = new StreamReader(Pathh);
-            CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]);
-            Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //Leggo la tolleranza dal file
+            CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]); // leggo il creg teorico dal file
+            Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
             string a = File.ReadLine(); //spazio, quindi lo salto
             a = File.ReadLine(); //legenda, quindi la salto
             string[] x = new string[10];
 
             int i = 0;
-            while (File.EndOfStream)
+            while (!(File.EndOfStream))
             {
                 x[0] = File.ReadLine();
                 x = x[0].ToString().Split('\t');
-                Tempo[i] = Convert.ToDateTime(x[0]);
+                //Tempo[i] = Convert.ToDateTime(x[0]);
+                Tempo[i] = Convert.ToInt32(x[0]);
                 StoricoCreg[i] = Convert.ToDouble(x[1]);
 
                 chartStorico.Series["GStorico"].Points.AddXY(Tempo[i], StoricoCreg[i]);
-                chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], (CregTeo - (CregTeo*Tolleranza)));
-                chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], (CregTeo + (CregTeo * Tolleranza)));
+                chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], (CregTeo - (CregTeo * (Tolleranza/100))));
+                chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], (CregTeo + (CregTeo * (Tolleranza/100))));
 
                 i++;
             }
-
-            //Disegno il grafico
-            chartStorico.Series["GStorico"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chartStorico.Series["GStorico"].ChartArea = "ChartArea1";
-
-            chartStorico.Series["GLimitNeg"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chartStorico.Series["GLimitNeg"].ChartArea = "ChartArea1";
-
-            chartStorico.Series["GLimitPos"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            chartStorico.Series["GLimitPos"].ChartArea = "ChartArea1";
+            //rimuovere vecchio grafico
 
             //Chiudo il File
             File.Close();
