@@ -65,6 +65,23 @@ namespace OPC_CTPACK_Software
             Creg CregAttuale = new Creg(this.CregInit.CregTot[0].Formato, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
 
             chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
+            pictureBoxAllarme.Enabled = false;
+            for (int i = 0; i < chartCreg.Series["SogliaPiu"].Points.Count; i++)
+            {
+                if (CregAttuale.Formato.PpmA == chartCreg.Series["SogliaPiu"].Points[i].XValue)
+                {
+                    if(CregAttuale.CregAttuale >= chartCreg.Series["SogliaPiu"].Points[i].YValues[0])
+                    {
+                        pictureBoxAllarme.Enabled = true;
+                    }
+                    if(CregAttuale.CregAttuale <= chartCreg.Series["SogliaMeno"].Points[i].YValues[0])
+                    {
+                        pictureBoxAllarme.Enabled = true;
+                    }
+                }
+
+            }
+
         }
     }
 }
