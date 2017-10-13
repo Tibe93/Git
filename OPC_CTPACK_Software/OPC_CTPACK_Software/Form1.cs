@@ -30,7 +30,8 @@ namespace OPC_CTPACK_Software
             {
                 comboBoxFormato.Items.Add(this.Formati[i].GetNome());
             }
-            ////FARE CONTROLLO CHE CI SIA ALMENO UN DATO PER LO STORICO E ABILITARE IL RELATIVO TASTO
+            
+            
         }
 
         private void butIndietro_Click(object sender, EventArgs e)

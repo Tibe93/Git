@@ -67,7 +67,7 @@
             this.butCalcola.TabIndex = 10;
             this.butCalcola.Text = "Calcola";
             this.butCalcola.UseVisualStyleBackColor = true;
-            this.butCalcola.Click += new System.EventHandler(this.button1_Click);
+            this.butCalcola.Click += new System.EventHandler(this.butCalcola_Click);
             // 
             // butStorico
             // 

@@ -13,13 +13,9 @@ namespace OPC_CTPACK_Software
 {
     public partial class Form3 : Form
     {
-        Form2 FormPadre;
-        Start_Creg CregInit;
 
-        public Form3(Form2 FormPadre, Start_Creg CregInit)
+        public Form3()
         {
-            this.FormPadre = FormPadre;
-            this.CregInit = CregInit;
             InitializeComponent();
         }
 
