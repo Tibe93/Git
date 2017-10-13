@@ -51,6 +51,7 @@
             // 
             // butIndietro
             // 
+            this.butIndietro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.butIndietro.Location = new System.Drawing.Point(18, 695);
             this.butIndietro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butIndietro.Name = "butIndietro";
@@ -73,6 +74,7 @@
             // 
             // butStorico
             // 
+            this.butStorico.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butStorico.Location = new System.Drawing.Point(630, 695);
             this.butStorico.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butStorico.Name = "butStorico";
@@ -142,6 +144,9 @@
             // 
             // chartCreg
             // 
+            this.chartCreg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chartCreg.BackColor = System.Drawing.SystemColors.Control;
             chartArea1.Name = "ChartArea1";
             this.chartCreg.ChartAreas.Add(chartArea1);
@@ -150,6 +155,7 @@
             this.chartCreg.Legends.Add(legend1);
             this.chartCreg.Location = new System.Drawing.Point(18, 138);
             this.chartCreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chartCreg.MaximumSize = new System.Drawing.Size(3724, 3548);
             this.chartCreg.Name = "chartCreg";
             series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
             series1.BorderWidth = 3;
