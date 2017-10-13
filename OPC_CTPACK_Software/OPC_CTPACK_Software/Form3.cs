@@ -28,12 +28,16 @@ namespace OPC_CTPACK_Software
             int NumeroCregMax = 100;
             DateTime[] Tempo = new DateTime[NumeroCregMax];
             double[] StoricoCreg = new double[NumeroCregMax];
+            int Tolleranza;
+            double CregTeo;
 
-            string Pathh = $"../Storico_Creg.txt";
+            string Pathh = $"../70_Storico_Creg.txt";
             StreamReader File = new StreamReader(Pathh);
-            string a = File.ReadLine(); //legenda, quindi la salto
+            CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]);
+            Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //Leggo la tolleranza dal file
+            string a = File.ReadLine(); //spazio, quindi lo salto
+            a = File.ReadLine(); //legenda, quindi la salto
             string[] x = new string[10];
-
 
             int i = 0;
             while (File.EndOfStream)
@@ -44,8 +48,8 @@ namespace OPC_CTPACK_Software
                 StoricoCreg[i] = Convert.ToDouble(x[1]);
 
                 chartStorico.Series["GStorico"].Points.AddXY(Tempo[i], StoricoCreg[i]);
-                chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], this.CregInit.OffsetNeg);
-                chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], this.CregInit.OffsetPos);
+                chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], (CregTeo - (CregTeo*Tolleranza)));
+                chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], (CregTeo + (CregTeo * Tolleranza)));
 
                 i++;
             }
