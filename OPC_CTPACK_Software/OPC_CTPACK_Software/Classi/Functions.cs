@@ -41,7 +41,7 @@ namespace OPC_CTPACK_Software
         {
             Formato[] _Formato = new Formato[2];
 
-            string Pathh = $"../Formati.config";
+            string Pathh = $"../Dati/Formati.config";
             StreamReader File = new StreamReader(Pathh);
             string M = File.ReadLine().Split('\t')[0]; //riga 1, lettura riga con numero motori
             int NMotori = Convert.ToInt32(M);
