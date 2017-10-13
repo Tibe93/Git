@@ -77,7 +77,7 @@
             this.comboBoxStorico.FormattingEnabled = true;
             this.comboBoxStorico.Location = new System.Drawing.Point(80, 60);
             this.comboBoxStorico.Name = "comboBoxStorico";
-            this.comboBoxStorico.Size = new System.Drawing.Size(515, 33);
+            this.comboBoxStorico.Size = new System.Drawing.Size(487, 33);
             this.comboBoxStorico.TabIndex = 1;
             this.comboBoxStorico.Text = "Selezionare lo storico che si vuole visualizzare";
             this.comboBoxStorico.Click += new System.EventHandler(this.comboBoxStorico_Click);
