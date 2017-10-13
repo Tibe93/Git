@@ -34,6 +34,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.chartStorico = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.comboBoxStorico = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartStorico)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,11 +64,22 @@
             this.chartStorico.TabIndex = 0;
             this.chartStorico.Text = "chart1";
             // 
+            // comboBoxStorico
+            // 
+            this.comboBoxStorico.FormattingEnabled = true;
+            this.comboBoxStorico.Location = new System.Drawing.Point(80, 60);
+            this.comboBoxStorico.Name = "comboBoxStorico";
+            this.comboBoxStorico.Size = new System.Drawing.Size(515, 33);
+            this.comboBoxStorico.TabIndex = 1;
+            this.comboBoxStorico.Text = "Selezionare lo storico che si vuole visualizzare";
+            this.comboBoxStorico.SelectedIndexChanged += new System.EventHandler(this.comboBoxStorico_SelectedIndexChanged);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(760, 750);
+            this.Controls.Add(this.comboBoxStorico);
             this.Controls.Add(this.chartStorico);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
@@ -81,5 +93,6 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chartStorico;
+        private System.Windows.Forms.ComboBox comboBoxStorico;
     }
 }
