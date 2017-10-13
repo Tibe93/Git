@@ -89,6 +89,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(219, 60);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
@@ -133,6 +134,7 @@
             // 
             // chartCreg
             // 
+            this.chartCreg.BackColor = System.Drawing.SystemColors.Control;
             chartArea1.Name = "ChartArea1";
             this.chartCreg.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;

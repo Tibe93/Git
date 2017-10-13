@@ -11,8 +11,8 @@ namespace OPC_CTPACK_Software
     public class Start_Creg
     {
         public Creg[] CregTot;
-        double Bs;
-        double Bv;
+        public double Bs;
+        public double Bv;
         public int OffsetPos;
         public int OffsetNeg;
 
@@ -37,9 +37,9 @@ namespace OPC_CTPACK_Software
 
             for (int i=0; i < (CregTot.Length); i++)
             {
-                VelocitaMediaTot.Add(CregTot[i].VelocitaMedia);
-                Velocita2RMSTot.Add(CregTot[i].Velocita2RMS);
-                PotenzaMediaTot.Add(CregTot[i].PotenzaMedia);
+                VelocitaMediaTot[i,0] = (CregTot[i].VelocitaMedia);
+                Velocita2RMSTot[i,0] = (CregTot[i].Velocita2RMS);
+                PotenzaMediaTot[i,0] = (CregTot[i].PotenzaMedia);
             }
 
             A = VelocitaMediaTot.Concatenate(Velocita2RMSTot);
