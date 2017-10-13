@@ -41,10 +41,14 @@
             // 
             // chartStorico
             // 
+            this.chartStorico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chartStorico.BackColor = System.Drawing.SystemColors.Control;
             chartArea1.Name = "ChartArea1";
             this.chartStorico.ChartAreas.Add(chartArea1);
-            this.chartStorico.Location = new System.Drawing.Point(-20, 126);
+            this.chartStorico.Location = new System.Drawing.Point(2, 126);
+            this.chartStorico.MaximumSize = new System.Drawing.Size(3746, 3612);
             this.chartStorico.Name = "chartStorico";
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
@@ -66,7 +70,7 @@
             this.chartStorico.Series.Add(series1);
             this.chartStorico.Series.Add(series2);
             this.chartStorico.Series.Add(series3);
-            this.chartStorico.Size = new System.Drawing.Size(768, 612);
+            this.chartStorico.Size = new System.Drawing.Size(746, 612);
             this.chartStorico.TabIndex = 0;
             this.chartStorico.Text = "chart1";
             this.chartStorico.Visible = false;

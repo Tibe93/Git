@@ -48,6 +48,7 @@ namespace OPC_CTPACK_Software
 
         private void butCalcolo_Click(object sender, EventArgs e)
         {
+            chartCreg.Visible = true;
             int IndiceFormato;
             for (int i = 0; i < this.Formati.Length; i++)
             {

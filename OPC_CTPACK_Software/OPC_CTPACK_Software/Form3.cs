@@ -21,11 +21,12 @@ namespace OPC_CTPACK_Software
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            //this.WindowState = FormWindowState.Maximized;
+            
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             chartStorico.Visible = true;
 
             //rimuovo vecchio grafico
