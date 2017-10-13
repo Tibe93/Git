@@ -57,13 +57,14 @@ namespace OPC_CTPACK_Software
             //Prima parte
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
             //Path di salvataggio
-            string Filename = $"{this.CregInit.CregTot[0].Formato.PpmA}_{this.CregInit.CregTot[0].Formato.GetNome()}";
+            string Filename = $"{this.CregInit.CregTot[0].Formato.PpmA}_{this.CregInit.CregTot[0].Formato.Nome}";
             string Path = $"../Dati/{Filename}";//così lo salva in bin, sennò devo mettere il percorso al posto dei ..
 
             //Seconda parte
             //Apro il CSV appena salvato, calcolo il Creg e lo grafico
-            //ciao
-            //c
+            Creg CregAttuale = new Creg(this.CregInit.CregTot[0].Formato, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
+
+            chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
         }
     }
 }
