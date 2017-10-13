@@ -39,9 +39,10 @@
             // 
             // chartStorico
             // 
+            this.chartStorico.BackColor = System.Drawing.SystemColors.Control;
             chartArea1.Name = "ChartArea1";
             this.chartStorico.ChartAreas.Add(chartArea1);
-            this.chartStorico.Location = new System.Drawing.Point(12, 42);
+            this.chartStorico.Location = new System.Drawing.Point(-20, 42);
             this.chartStorico.Name = "chartStorico";
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
@@ -58,7 +59,7 @@
             this.chartStorico.Series.Add(series1);
             this.chartStorico.Series.Add(series2);
             this.chartStorico.Series.Add(series3);
-            this.chartStorico.Size = new System.Drawing.Size(736, 668);
+            this.chartStorico.Size = new System.Drawing.Size(768, 696);
             this.chartStorico.TabIndex = 0;
             this.chartStorico.Text = "chart1";
             // 
