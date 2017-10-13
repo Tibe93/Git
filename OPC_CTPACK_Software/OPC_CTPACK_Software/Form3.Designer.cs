@@ -49,14 +49,19 @@
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series1.Color = System.Drawing.Color.Lime;
             series1.Name = "GStorico";
+            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
             series2.BorderWidth = 3;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Red;
             series2.Name = "GLimitNeg";
+            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
             series3.BorderWidth = 3;
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Red;
             series3.Name = "GLimitPos";
             this.chartStorico.Series.Add(series1);
             this.chartStorico.Series.Add(series2);
@@ -64,6 +69,7 @@
             this.chartStorico.Size = new System.Drawing.Size(768, 612);
             this.chartStorico.TabIndex = 0;
             this.chartStorico.Text = "chart1";
+            this.chartStorico.Visible = false;
             // 
             // comboBoxStorico
             // 
@@ -74,7 +80,7 @@
             this.comboBoxStorico.Size = new System.Drawing.Size(515, 33);
             this.comboBoxStorico.TabIndex = 1;
             this.comboBoxStorico.Text = "Selezionare lo storico che si vuole visualizzare";
-            this.comboBoxStorico.SelectedIndexChanged += new System.EventHandler(this.comboBoxStorico_SelectedIndexChanged);
+            this.comboBoxStorico.Click += new System.EventHandler(this.comboBoxStorico_Click);
             // 
             // buttonStart
             // 

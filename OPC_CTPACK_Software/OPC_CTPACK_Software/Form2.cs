@@ -20,7 +20,6 @@ namespace OPC_CTPACK_Software
         public Form2(Form1 FormPadre,Start_Creg CregInit)
         {
             this.FormPadre = FormPadre;
-            this.FormFiglio = new Form3();
             this.CregInit = CregInit;
             InitializeComponent();
         }
@@ -49,6 +48,7 @@ namespace OPC_CTPACK_Software
 
         private void butStorico_Click(object sender, EventArgs e)
         {
+            this.FormFiglio = new Form3();
             FormFiglio.Show();
         }
 
