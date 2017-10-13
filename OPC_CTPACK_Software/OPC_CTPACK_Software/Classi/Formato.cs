@@ -9,7 +9,7 @@ namespace OPC_CTPACK_Software
     public class Formato
     {
         string Nome;
-        Motore Motore;
+        public Motore Motore;
         public int PpmA;
         public double Kp;
         public double Kv;
