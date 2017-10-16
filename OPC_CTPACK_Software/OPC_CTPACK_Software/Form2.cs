@@ -62,18 +62,16 @@ namespace OPC_CTPACK_Software
             //Prima parte
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
             //Path di salvataggio
-            int PpmNow = 400; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
-            string Filename = $"{PpmNow}_{this.CregInit.CregTot[0].Formato.Nome}";
-            string Path = $"../Dati/{Filename}";//così lo salva in bin, sennò devo mettere il percorso al posto dei ..
+            int PpmNow = 390; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
+            Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
 
             //Seconda parte
             //Apro il CSV appena salvato, calcolo il Creg e lo grafico
-            Creg CregAttuale = new Creg(this.CregInit.CregTot[0].Formato, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
-            CregAttuale.Formato.PpmA = PpmNow;
+            Creg CregAttuale = new Creg(FormatoAttuale, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
             chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
             textBoxCreg.Text = CregAttuale.CregAttuale.ToString();
             pictureBoxAllarme.Enabled = false;
-
+            
             double CregTeo = 0;
             if(CregAttuale.Formato.PpmA == CregInit.CregTot[0].Formato.PpmA)
             {
@@ -86,26 +84,23 @@ namespace OPC_CTPACK_Software
                     if (CregAttuale.Formato.PpmA == CregInit.CregTot[i].Formato.PpmA)
                     {
                         CregTeo = CregInit.CregTot[i].CregAttuale;
+                        break;
                     }
                     else if ((CregAttuale.Formato.PpmA > CregInit.CregTot[i-1].Formato.PpmA) && (CregAttuale.Formato.PpmA < CregInit.CregTot[i].Formato.PpmA))
                     {
                         CregTeo = ((CregInit.CregTot[i - 1].CregAttuale * (CregInit.CregTot[i].Formato.PpmA - CregAttuale.Formato.PpmA)) + (CregInit.CregTot[i].CregAttuale * (CregAttuale.Formato.PpmA - CregInit.CregTot[i-1].Formato.PpmA)))/CregInit.CregTot[i].Formato.Passo;
+                        break;
                     }
                 }
             }
             
-
-            for (int i = 0; i < chartCreg.Series["SogliaPiu"].Points.Count; i++)
+            if(CregAttuale.CregAttuale >= (CregTeo + (CregTeo*CregInit.OffsetPos)/100))
             {
-
-                if(CregAttuale.CregAttuale >= (CregTeo + CregTeo*CregInit.OffsetPos))
-                {
-                    pictureBoxAllarme.Enabled = true;
-                }
-                if(CregAttuale.CregAttuale <= (CregTeo + CregTeo * CregInit.OffsetNeg))
-                {
-                    pictureBoxAllarme.Enabled = true;
-                }
+                pictureBoxAllarme.Enabled = true;
+            }
+            if(CregAttuale.CregAttuale <= (CregTeo + (CregTeo * CregInit.OffsetNeg)/100))
+            {
+                pictureBoxAllarme.Enabled = true;
             }
             
             /*
