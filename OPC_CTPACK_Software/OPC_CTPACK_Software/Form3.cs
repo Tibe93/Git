@@ -26,7 +26,7 @@ namespace OPC_CTPACK_Software
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             chartStorico.Visible = true;
 
             //rimuovo vecchio grafico

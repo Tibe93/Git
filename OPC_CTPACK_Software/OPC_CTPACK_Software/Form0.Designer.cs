@@ -50,7 +50,7 @@
             // textBoxPath
             // 
             this.textBoxPath.Enabled = false;
-            this.textBoxPath.Location = new System.Drawing.Point(358, 155);
+            this.textBoxPath.Location = new System.Drawing.Point(358, 158);
             this.textBoxPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(330, 31);
@@ -75,9 +75,9 @@
             // butPath
             // 
             this.butPath.Enabled = false;
-            this.butPath.Location = new System.Drawing.Point(698, 155);
+            this.butPath.Location = new System.Drawing.Point(696, 158);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(52, 34);
+            this.butPath.Size = new System.Drawing.Size(52, 37);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.Location = new System.Drawing.Point(638, 200);
+            this.butAvanti.Location = new System.Drawing.Point(636, 244);
             this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butAvanti.Name = "butAvanti";
             this.butAvanti.Size = new System.Drawing.Size(112, 36);
@@ -98,13 +98,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 750);
+            this.ClientSize = new System.Drawing.Size(770, 300);
             this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.butAnalisi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(796, 371);
+            this.MinimumSize = new System.Drawing.Size(796, 371);
             this.Name = "Form0";
             this.Text = "OPC";
             this.Load += new System.EventHandler(this.Form0_Load);
