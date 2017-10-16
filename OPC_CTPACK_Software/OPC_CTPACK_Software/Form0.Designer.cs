@@ -40,9 +40,10 @@
             // butAnalisi
             // 
             this.butAnalisi.Enabled = false;
-            this.butAnalisi.Location = new System.Drawing.Point(52, 45);
+            this.butAnalisi.Location = new System.Drawing.Point(11, 11);
+            this.butAnalisi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.butAnalisi.Name = "butAnalisi";
-            this.butAnalisi.Size = new System.Drawing.Size(249, 144);
+            this.butAnalisi.Size = new System.Drawing.Size(124, 52);
             this.butAnalisi.TabIndex = 0;
             this.butAnalisi.Text = "Start Analisi";
             this.butAnalisi.UseVisualStyleBackColor = true;
@@ -50,10 +51,9 @@
             // textBoxPath
             // 
             this.textBoxPath.Enabled = false;
-            this.textBoxPath.Location = new System.Drawing.Point(358, 158);
-            this.textBoxPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxPath.Location = new System.Drawing.Point(140, 41);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(330, 31);
+            this.textBoxPath.Size = new System.Drawing.Size(327, 22);
             this.textBoxPath.TabIndex = 1;
             this.textBoxPath.Text = "Inserire dove salvare il file .CSV";
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
@@ -65,9 +65,10 @@
             this.comboBoxFormato.Items.AddRange(new object[] {
             "Catena Choco Rolles formato 1",
             "Masse Choco Rolles formato 1"});
-            this.comboBoxFormato.Location = new System.Drawing.Point(358, 45);
+            this.comboBoxFormato.Location = new System.Drawing.Point(139, 11);
+            this.comboBoxFormato.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxFormato.Name = "comboBoxFormato";
-            this.comboBoxFormato.Size = new System.Drawing.Size(390, 33);
+            this.comboBoxFormato.Size = new System.Drawing.Size(369, 24);
             this.comboBoxFormato.TabIndex = 2;
             this.comboBoxFormato.Text = "Selezionare Cinematismo/Formato";
             this.comboBoxFormato.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormato_SelectedIndexChanged);
@@ -75,9 +76,10 @@
             // butPath
             // 
             this.butPath.Enabled = false;
-            this.butPath.Location = new System.Drawing.Point(696, 158);
+            this.butPath.Location = new System.Drawing.Point(473, 41);
+            this.butPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(52, 37);
+            this.butPath.Size = new System.Drawing.Size(35, 24);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
@@ -85,10 +87,9 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.Location = new System.Drawing.Point(636, 244);
-            this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.butAvanti.Location = new System.Drawing.Point(433, 74);
             this.butAvanti.Name = "butAvanti";
-            this.butAvanti.Size = new System.Drawing.Size(112, 36);
+            this.butAvanti.Size = new System.Drawing.Size(75, 23);
             this.butAvanti.TabIndex = 8;
             this.butAvanti.Text = "Avanti >";
             this.butAvanti.UseVisualStyleBackColor = true;
@@ -96,17 +97,18 @@
             // 
             // Form0
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 300);
+            this.ClientSize = new System.Drawing.Size(519, 109);
             this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.butAnalisi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(796, 371);
-            this.MinimumSize = new System.Drawing.Size(796, 371);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximumSize = new System.Drawing.Size(537, 154);
+            this.MinimumSize = new System.Drawing.Size(537, 154);
             this.Name = "Form0";
             this.Text = "OPC";
             this.Load += new System.EventHandler(this.Form0_Load);
