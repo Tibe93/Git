@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +22,14 @@ namespace OPC_CTPACK_Software
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            
+            DirectoryInfo dir = new DirectoryInfo($"../Dati/");
+            //comboBoxStorico.DataSource 
+            ArrayList Item = new ArrayList();
+            Item.AddRange(dir.GetFileSystemInfos("*_Storico_Creg.txt"));
+            foreach (System.IO.FileInfo s in Item)
+            {
+                comboBoxStorico.Items.Add(s);
+            }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -70,12 +78,8 @@ namespace OPC_CTPACK_Software
             File.Close();
         }
 
-        private void comboBoxStorico_Click(object sender, EventArgs e)
+        private void comboBoxStorico_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo($"../Dati/");
-            comboBoxStorico.DataSource = dir.GetFileSystemInfos("*_Storico_Creg.txt");
-            comboBoxStorico.DisplayMember = "Name";
-            //comboBoxStorico.ValueMember = "FullName";
             comboBoxStorico.BackColor = Color.White;
             buttonStart.Enabled = true;
         }
