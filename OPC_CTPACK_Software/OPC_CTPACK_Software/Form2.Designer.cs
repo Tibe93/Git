@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -44,7 +45,8 @@
             this.pictureBoxAllarme = new System.Windows.Forms.PictureBox();
             this.chartCreg = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.butStop = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboxTime = new System.Windows.Forms.ComboBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAllarme)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCreg)).BeginInit();
             this.SuspendLayout();
@@ -179,25 +181,29 @@
             this.butStop.UseVisualStyleBackColor = true;
             this.butStop.Click += new System.EventHandler(this.butStop_Click);
             // 
-            // comboBox1
+            // comboxTime
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboxTime.FormattingEnabled = true;
+            this.comboxTime.Items.AddRange(new object[] {
             "10 minuti",
             "1 ora",
             "4 ore"});
-            this.comboBox1.Location = new System.Drawing.Point(219, 15);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 24);
-            this.comboBox1.TabIndex = 20;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboxTime.Location = new System.Drawing.Point(219, 15);
+            this.comboxTime.Name = "comboxTime";
+            this.comboxTime.Size = new System.Drawing.Size(100, 24);
+            this.comboxTime.TabIndex = 20;
+            this.comboxTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxTime_SelectedIndexChanged);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 480);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboxTime);
             this.Controls.Add(this.butStop);
             this.Controls.Add(this.chartCreg);
             this.Controls.Add(this.pictureBoxAllarme);
@@ -230,6 +236,7 @@
         private System.Windows.Forms.PictureBox pictureBoxAllarme;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCreg;
         private System.Windows.Forms.Button butStop;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboxTime;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -56,91 +56,107 @@ namespace OPC_CTPACK_Software
 
         private void butCalcola_Click(object sender, EventArgs e)
         {
-            
-            while (true)
+            if(Timer && !timer1.Enabled)
             {
-                //Cancello i punti del grafico precedente
-                chartCreg.Series["CregAttuale"].Points.Clear();
+                timer1.Start();
+            }
 
-                ///////////////TODO: timer e prima parte con l'opc
+            //Cancello i punti del grafico precedente
+            chartCreg.Series["CregAttuale"].Points.Clear();
 
-                //Prima parte
-                //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
-                //Path di salvataggio
-                int PpmNow = 390; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
-                Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
+            ///////////////TODO: timer e prima parte con l'opc
 
-                //Seconda parte
-                //Apro il CSV appena salvato, calcolo il Creg e lo grafico
-                Creg CregAttuale = new Creg(FormatoAttuale, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
-                chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
-                textBoxCreg.Text = CregAttuale.CregAttuale.ToString();
-                pictureBoxAllarme.Enabled = false;
+            //Prima parte
+            //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
+            //Path di salvataggio
+            int PpmNow = 310; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
+            Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
 
-                double CregTeo = 0;
-                if (CregAttuale.Formato.PpmA == CregInit.CregTot[0].Formato.PpmA)
+            //Seconda parte
+            //Apro il CSV appena salvato, calcolo il Creg e lo grafico
+            Creg CregAttuale = new Creg(FormatoAttuale, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
+            chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
+            textBoxCreg.Text = CregAttuale.CregAttuale.ToString();
+            pictureBoxAllarme.Enabled = false;
+
+            double CregTeo = 0;
+            if (CregAttuale.Formato.PpmA == CregInit.CregTot[0].Formato.PpmA)
+            {
+                CregTeo = CregInit.CregTot[0].CregAttuale;
+            }
+            else
+            {
+                for (int i = 1; i < CregInit.CregTot.Length; i++)
                 {
-                    CregTeo = CregInit.CregTot[0].CregAttuale;
-                }
-                else
-                {
-                    for (int i = 1; i < CregInit.CregTot.Length; i++)
+                    if (CregAttuale.Formato.PpmA == CregInit.CregTot[i].Formato.PpmA)
                     {
-                        if (CregAttuale.Formato.PpmA == CregInit.CregTot[i].Formato.PpmA)
-                        {
-                            CregTeo = CregInit.CregTot[i].CregAttuale;
-                            break;
-                        }
-                        else if ((CregAttuale.Formato.PpmA > CregInit.CregTot[i - 1].Formato.PpmA) && (CregAttuale.Formato.PpmA < CregInit.CregTot[i].Formato.PpmA))
-                        {
-                            CregTeo = ((CregInit.CregTot[i - 1].CregAttuale * (CregInit.CregTot[i].Formato.PpmA - CregAttuale.Formato.PpmA)) + (CregInit.CregTot[i].CregAttuale * (CregAttuale.Formato.PpmA - CregInit.CregTot[i - 1].Formato.PpmA))) / CregInit.CregTot[i].Formato.Passo;
-                            break;
-                        }
+                        CregTeo = CregInit.CregTot[i].CregAttuale;
+                        break;
+                    }
+                    else if ((CregAttuale.Formato.PpmA > CregInit.CregTot[i - 1].Formato.PpmA) && (CregAttuale.Formato.PpmA < CregInit.CregTot[i].Formato.PpmA))
+                    {
+                        CregTeo = ((CregInit.CregTot[i - 1].CregAttuale * (CregInit.CregTot[i].Formato.PpmA - CregAttuale.Formato.PpmA)) + (CregInit.CregTot[i].CregAttuale * (CregAttuale.Formato.PpmA - CregInit.CregTot[i - 1].Formato.PpmA))) / CregInit.CregTot[i].Formato.Passo;
+                        break;
                     }
                 }
-
-                if (CregAttuale.CregAttuale >= (CregTeo + (CregTeo * CregInit.OffsetPos) / 100))
-                {
-                    pictureBoxAllarme.Enabled = true;
-                }
-                if (CregAttuale.CregAttuale <= (CregTeo + (CregTeo * CregInit.OffsetNeg) / 100))
-                {
-                    pictureBoxAllarme.Enabled = true;
-                }
-
-                /*
-                if(File.Exists("$../Dati/{ CregAttuale.Formato.PpmA}_Storico_Creg.txt"))
-                {
-                    StreamWriter Storico = File.AppendText($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt");
-                }
-                else
-                {
-                    StreamWriter Storico = new StreamWriter($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt");
-
-                    Storico.WriteLine($"CregTeo\t{}");
-                    Storico.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
-                    Storico.WriteLine("");
-                    Storico.WriteLine("DateTime Creg");
-                }
-                */
-
-                if(!this.Timer)
-                {
-                    break;
-                }
             }
+
+            if (CregAttuale.CregAttuale >= (CregTeo + (CregTeo * CregInit.OffsetPos) / 100))
+            {
+                pictureBoxAllarme.Enabled = true;
+            }
+            if (CregAttuale.CregAttuale <= (CregTeo + (CregTeo * CregInit.OffsetNeg) / 100))
+            {
+                pictureBoxAllarme.Enabled = true;
+            }
+
+            /*
+            if(File.Exists("$../Dati/{ CregAttuale.Formato.PpmA}_Storico_Creg.txt"))
+            {
+                StreamWriter Storico = File.AppendText($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt");
+            }
+            else
+            {
+                StreamWriter Storico = new StreamWriter($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt");
+
+                Storico.WriteLine($"CregTeo\t{}");
+                Storico.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
+                Storico.WriteLine("");
+                Storico.WriteLine("DateTime Creg");
+            }
+            */
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.Timer = true;
-            butStop.Enabled = true;
-        }
 
         private void butStop_Click(object sender, EventArgs e)
         {
             this.Timer = false;
+            timer1.Stop();
             butStop.Enabled = false;
+            comboxTime.Text = "";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            butCalcola.PerformClick();
+        }
+
+        private void comboBoxTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            butStop.Enabled = true;
+            if(comboxTime.Text.Equals("10 minuti"))
+            {
+                timer1.Interval = 10000;//600000;
+            }
+            else if (comboxTime.Text.Equals("1 ora"))
+            {
+                timer1.Interval = 3600000;
+            }
+            else if (comboxTime.Text.Equals("4 ore"))
+            {
+                timer1.Interval = 14400000;
+            }
+            this.Timer = true;
         }
     }
 }
