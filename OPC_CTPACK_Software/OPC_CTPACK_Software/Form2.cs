@@ -54,6 +54,9 @@ namespace OPC_CTPACK_Software
 
         private void butCalcola_Click(object sender, EventArgs e)
         {
+            //Cancello i punti del grafico precedente
+            chartCreg.Series["CregAttuale"].Points.Clear();
+
             //Prima parte
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
             //Path di salvataggio
