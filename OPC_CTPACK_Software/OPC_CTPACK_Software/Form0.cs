@@ -15,12 +15,6 @@ namespace OPC_CTPACK_Software
     {
 
         Form1 FormFiglio;
-        double[] PosPlc;
-        double[] VelPlc;
-        double[] CorrPlc;
-        int[] Tempo;
-        int PpmNow;
-        double TempoCampionamento;
         Formato[] Formati;
 
         public Form0()
@@ -35,13 +29,6 @@ namespace OPC_CTPACK_Software
             for (int i = 0; i < this.Formati.Length; i++)
             {
                 comboBoxFormato.Items.Add(this.Formati[i].GetNome());
-            }
-
-            double TempoAttuale = 0;
-            for (int j = 1; j < this.PosPlc.Length; j++)
-            {
-                TempoAttuale = TempoAttuale + (TempoCampionamento * 1000);
-                Tempo[j] = Convert.ToInt32(TempoAttuale);
             }
         }
 
@@ -74,15 +61,26 @@ namespace OPC_CTPACK_Software
         private void butAnalisi_Click(object sender, EventArgs e)
         {
             // mi connetto all'OPC
-            // chiedo i dati specifici dell'asse al determinato formato (verrà eseguito a varie velocità) creando un file per ogni velocità
-            // metto i dati nelle variabili
 
-            //scrivo i dati su CSV
+            double[] PosPlc = new double[3000];
+            double[] VelPlc = new double[3000];
+            double[] CorrPlc = new double[3000];
+            int[] Tempo = new int[3000]; ;
+            int PpmNow = 0;
+            double TempoCampionamento = 0;
             string nomeF = "";
             string nomeM = "";
             int indice = 0;
+            
+            // mi creo la variabile tempo
+            double TempoAttuale = 0;
+            for (int j = 1; j < PosPlc.Length; j++)
+            {
+                TempoAttuale = TempoAttuale + (TempoCampionamento * 1000);
+                Tempo[j] = Convert.ToInt32(TempoAttuale);
+            }
 
-            for(int i=0; i==Formati.Length; i++)
+            for (int i=0; i==Formati.Length; i++)
             {
                 if(string.Equals(Formati[i].Nome,comboBoxFormato.SelectedItem))
                 {
@@ -92,15 +90,21 @@ namespace OPC_CTPACK_Software
                 }
             }
 
-            StreamWriter FileInfoAsse = new StreamWriter($"../Dati/Trend/{PpmNow}_{Formati[indice].Nome}.CSV");
-
-            FileInfoAsse.WriteLine($"Formato\t{nomeF}");
-            FileInfoAsse.WriteLine($"Motore\t{nomeM}");
-            FileInfoAsse.WriteLine($"TempoCampionamento\t{TempoCampionamento}");
-            FileInfoAsse.WriteLine("Time\tPosizione\tVelocità\tCorrente");
-            for (int j = 0; j == PosPlc.Length; j++)
+            for(int i=Formati[indice].PpmI; i == Formati[indice].PpmF; i=i+Formati[indice].Passo)
             {
-                FileInfoAsse.WriteLine($"{Tempo[j]}\t{PosPlc[j]}\t{VelPlc[j]}\t{CorrPlc[j]}");
+                // di al PLC di eseguire a velocità i
+                // mi salvo le variabili che arrivano dal PLC e creo il CSV alla velocità i
+
+                StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");
+
+                FileInfoAsse.WriteLine($"Formato\t{nomeF}");
+                FileInfoAsse.WriteLine($"Motore\t{nomeM}");
+                FileInfoAsse.WriteLine($"TempoCampionamento\t{TempoCampionamento}");
+                FileInfoAsse.WriteLine("Time\tPosizione\tVelocità\tCorrente");
+                for (int j = 0; j == PosPlc.Length; j++)
+                {
+                    FileInfoAsse.WriteLine($"{Tempo[j]}\t{PosPlc[j]}\t{VelPlc[j]}\t{CorrPlc[j]}");
+                }
             }
         }
     }
