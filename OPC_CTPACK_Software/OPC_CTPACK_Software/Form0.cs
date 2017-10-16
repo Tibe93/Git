@@ -14,6 +14,11 @@ namespace OPC_CTPACK_Software
     {
 
         Form1 FormFiglio;
+        double[] PosPlc;
+        double[] VelPlc;
+        double[] CorrPlc;
+        int PpmNow;
+        double TempoCampionamento;
         Formato[] Formati;
 
         public Form0()
