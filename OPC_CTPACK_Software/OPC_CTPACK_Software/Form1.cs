@@ -133,8 +133,11 @@ namespace OPC_CTPACK_Software
 
         private void textBoxTolleranza_TextChanged(object sender, EventArgs e)
         {
+            if(!(textBoxTolleranza.Text.Equals("Inserire un Intero")|| textBoxTolleranza.Text.Equals("")))
+            {
+                butCalcolo.Enabled = true;
+            }
             textBoxTolleranza.BackColor = Color.White;
-            butCalcolo.Enabled = true;
         }
 
         private void textBoxTolleranza_Leave(object sender, EventArgs e)
