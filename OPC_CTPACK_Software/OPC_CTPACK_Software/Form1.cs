@@ -48,6 +48,12 @@ namespace OPC_CTPACK_Software
 
         private void butCalcolo_Click(object sender, EventArgs e)
         {
+            //Cancello i punti del grafico precedente
+            foreach (var series in chartCreg.Series)
+            {
+                series.Points.Clear();
+            }
+
             chartCreg.Visible = true;
             int IndiceFormato;
             for (int i = 0; i < this.Formati.Length; i++)
@@ -81,6 +87,13 @@ namespace OPC_CTPACK_Software
 
             //Aggiorno FormFiglio
             this.FormFiglio = new Form2(this, this.CregInit);
+
+            butCalcolo.Enabled = false;
+            comboBoxFormato.BackColor = Color.LightGreen;
+            textBoxPath.Text = "Inserire Path Salvataggio .CSV";
+            textBoxTolleranza.Text = "Inserire un Intero";
+            textBoxPath.Enabled = false;
+            textBoxTolleranza.Enabled = false;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,14 +124,26 @@ namespace OPC_CTPACK_Software
         private void textBoxPath_TextChanged(object sender, EventArgs e)
         {
             textBoxPath.BackColor = Color.White;
-            textBoxTolleranza.Enabled = true;
-            textBoxTolleranza.BackColor = Color.LightGreen;
+            if(!textBoxPath.Text.Equals("Inserire Path Salvataggio .CSV"))
+            {
+                textBoxTolleranza.Enabled = true;
+                textBoxTolleranza.BackColor = Color.LightGreen;
+            }
         }
 
         private void textBoxTolleranza_TextChanged(object sender, EventArgs e)
         {
             textBoxTolleranza.BackColor = Color.White;
             butCalcolo.Enabled = true;
+        }
+
+        private void textBoxTolleranza_Leave(object sender, EventArgs e)
+        {
+            if (textBoxTolleranza.Text.Equals(""))
+            {
+                textBoxTolleranza.Text = "Inserire un Intero";
+                textBoxTolleranza.BackColor = Color.LightGreen;
+            }
         }
     }
 }
