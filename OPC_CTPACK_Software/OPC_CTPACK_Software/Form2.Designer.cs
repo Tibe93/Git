@@ -38,13 +38,13 @@
             this.butIndietro = new System.Windows.Forms.Button();
             this.butCalcola = new System.Windows.Forms.Button();
             this.butStorico = new System.Windows.Forms.Button();
-            this.textBoxTimer = new System.Windows.Forms.TextBox();
             this.textBoxCreg = new System.Windows.Forms.TextBox();
             this.labelTimer = new System.Windows.Forms.Label();
             this.labelCreg = new System.Windows.Forms.Label();
-            this.labelAllarme = new System.Windows.Forms.Label();
             this.pictureBoxAllarme = new System.Windows.Forms.PictureBox();
             this.chartCreg = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.butStop = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAllarme)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCreg)).BeginInit();
             this.SuspendLayout();
@@ -81,13 +81,6 @@
             this.butStorico.UseVisualStyleBackColor = true;
             this.butStorico.Click += new System.EventHandler(this.butStorico_Click);
             // 
-            // textBoxTimer
-            // 
-            this.textBoxTimer.Location = new System.Drawing.Point(219, 12);
-            this.textBoxTimer.Name = "textBoxTimer";
-            this.textBoxTimer.Size = new System.Drawing.Size(100, 22);
-            this.textBoxTimer.TabIndex = 12;
-            // 
             // textBoxCreg
             // 
             this.textBoxCreg.Enabled = false;
@@ -113,15 +106,6 @@
             this.labelCreg.Size = new System.Drawing.Size(38, 17);
             this.labelCreg.TabIndex = 15;
             this.labelCreg.Text = "Creg";
-            // 
-            // labelAllarme
-            // 
-            this.labelAllarme.AutoSize = true;
-            this.labelAllarme.Location = new System.Drawing.Point(325, 39);
-            this.labelAllarme.Name = "labelAllarme";
-            this.labelAllarme.Size = new System.Drawing.Size(55, 17);
-            this.labelAllarme.TabIndex = 16;
-            this.labelAllarme.Text = "Allarme";
             // 
             // pictureBoxAllarme
             // 
@@ -184,18 +168,42 @@
             this.chartCreg.TabIndex = 18;
             this.chartCreg.Text = "chart1";
             // 
+            // butStop
+            // 
+            this.butStop.Enabled = false;
+            this.butStop.Location = new System.Drawing.Point(325, 12);
+            this.butStop.Name = "butStop";
+            this.butStop.Size = new System.Drawing.Size(55, 70);
+            this.butStop.TabIndex = 19;
+            this.butStop.Text = "Stop";
+            this.butStop.UseVisualStyleBackColor = true;
+            this.butStop.Click += new System.EventHandler(this.butStop_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "10 minuti",
+            "1 ora",
+            "4 ore"});
+            this.comboBox1.Location = new System.Drawing.Point(219, 15);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 24);
+            this.comboBox1.TabIndex = 20;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 480);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.butStop);
             this.Controls.Add(this.chartCreg);
             this.Controls.Add(this.pictureBoxAllarme);
-            this.Controls.Add(this.labelAllarme);
             this.Controls.Add(this.labelCreg);
             this.Controls.Add(this.labelTimer);
             this.Controls.Add(this.textBoxCreg);
-            this.Controls.Add(this.textBoxTimer);
             this.Controls.Add(this.butStorico);
             this.Controls.Add(this.butCalcola);
             this.Controls.Add(this.butIndietro);
@@ -216,12 +224,12 @@
         private System.Windows.Forms.Button butIndietro;
         private System.Windows.Forms.Button butCalcola;
         private System.Windows.Forms.Button butStorico;
-        private System.Windows.Forms.TextBox textBoxTimer;
         private System.Windows.Forms.TextBox textBoxCreg;
         private System.Windows.Forms.Label labelTimer;
         private System.Windows.Forms.Label labelCreg;
-        private System.Windows.Forms.Label labelAllarme;
         private System.Windows.Forms.PictureBox pictureBoxAllarme;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCreg;
+        private System.Windows.Forms.Button butStop;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
