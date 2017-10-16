@@ -42,7 +42,7 @@ namespace OPC_CTPACK_Software
 
         public string GetNome()
         {
-            return $"Formato: {this.Nome}, Motore: {this.Motore.GetModel()}";
+            return $"{this.Nome}, Motore: {this.Motore.GetModel()}";
         }
     }
 }
