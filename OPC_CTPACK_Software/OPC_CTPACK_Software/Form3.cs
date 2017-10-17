@@ -39,6 +39,9 @@ namespace OPC_CTPACK_Software
             //this.WindowState = FormWindowState.Maximized;
             chartStorico.Visible = true;
 
+            chartStorico.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "dd/MM/yyyy HH:mm";
+            chartStorico.ChartAreas["ChartArea1"].AxisX2.LabelStyle.Format = "dd/MM/yyyy HH:mm";
+
             // Rimuovo il i punti del grafico precedente
             foreach (var series in chartStorico.Series)
             {
@@ -46,8 +49,7 @@ namespace OPC_CTPACK_Software
             }
 
             int NumeroCregMax = 100;
-            //DateTime[] Tempo = new DateTime[NumeroCregMax];
-            int[] Tempo = new int[NumeroCregMax];
+            DateTime[] Tempo = new DateTime[NumeroCregMax];
             double[] StoricoCreg = new double[NumeroCregMax];
             int Tolleranza;
             double CregTeo;
@@ -66,8 +68,7 @@ namespace OPC_CTPACK_Software
             {
                 x[0] = File.ReadLine();
                 x = x[0].ToString().Split('\t');
-                //Tempo[i] = Convert.ToDateTime(x[0]);
-                Tempo[i] = Convert.ToInt32(x[0]);
+                Tempo[i] = Convert.ToDateTime(x[0]);
                 StoricoCreg[i] = Convert.ToDouble(x[1]);
 
                 chartStorico.Series["GStorico"].Points.AddXY(Tempo[i], StoricoCreg[i]);
