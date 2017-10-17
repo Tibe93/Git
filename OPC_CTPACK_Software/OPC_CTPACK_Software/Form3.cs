@@ -57,28 +57,52 @@ namespace OPC_CTPACK_Software
             // Apro il file selezionato nella comboBox, cioè quello di qui voglio vedere lo storico dei creg, e lo stampo
             string Pathh = $"../Dati/{ comboBoxStorico.SelectedItem }";
             StreamReader File = new StreamReader(Pathh);
-            CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]); //leggo il creg teorico dal file
             Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
-            string a = File.ReadLine(); //spazio, quindi lo salto
-            a = File.ReadLine(); //legenda, quindi la salto
             string[] x = new string[10];
 
-            int i = 0;
-            while (!(File.EndOfStream))
+            if (comboBoxStorico.SelectedItem.ToString()[0].Equals("T"))
             {
-                x[0] = File.ReadLine();
-                x = x[0].ToString().Split('\t');
-                Tempo[i] = Convert.ToDateTime(x[0]);
-                StoricoCreg[i] = Convert.ToDouble(x[1]);
+                string a = File.ReadLine(); //spazio, quindi lo salto
+                a = File.ReadLine(); //legenda, quindi la salto
+                int i = 0;
+                while (!(File.EndOfStream))
+                {
+                    x[0] = File.ReadLine();
+                    x = x[0].ToString().Split('\t');
+                    Tempo[i] = Convert.ToDateTime(x[0]);
+                    StoricoCreg[i] = Convert.ToDouble(x[1]);
+                    CregTeo = Convert.ToDouble(x[2]);
 
-                chartStorico.Series["GStorico"].Points.AddXY(Tempo[i], StoricoCreg[i]);
-                chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], (CregTeo - (CregTeo * Tolleranza) / 100));
-                chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], (CregTeo + (CregTeo * Tolleranza) / 100));
+                    chartStorico.Series["GStorico"].Points.AddXY(Tempo[i], StoricoCreg[i]);
+                    chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], (CregTeo - (CregTeo * Tolleranza) / 100));
+                    chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], (CregTeo + (CregTeo * Tolleranza) / 100));
 
-                i++;
+                    i++;
+                }
+            }
+            else
+            {
+                CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]); //leggo il creg teorico dal file
+                string b = File.ReadLine(); //spazio, quindi lo salto
+                b = File.ReadLine(); //legenda, quindi la salto
+                int i = 0;
+                while (!(File.EndOfStream))
+                {
+                    x[0] = File.ReadLine();
+                    x = x[0].ToString().Split('\t');
+                    Tempo[i] = Convert.ToDateTime(x[0]);
+                    StoricoCreg[i] = Convert.ToDouble(x[1]);
+
+                    chartStorico.Series["GStorico"].Points.AddXY(Tempo[i], StoricoCreg[i]);
+                    chartStorico.Series["GLimitNeg"].Points.AddXY(Tempo[i], (CregTeo - (CregTeo * Tolleranza) / 100));
+                    chartStorico.Series["GLimitPos"].Points.AddXY(Tempo[i], (CregTeo + (CregTeo * Tolleranza) / 100));
+
+                    i++;
+                }
             }
             // Chiudo il File
             File.Close();
+
         }
 
         private void comboBoxStorico_SelectedIndexChanged(object sender, EventArgs e)
