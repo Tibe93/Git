@@ -62,7 +62,7 @@ namespace OPC_CTPACK_Software
             chartCreg.Visible = true;
 
             //ottengo l'indice dell'array del formato selezionato nella combobox
-            int IndiceFormato;
+            int IndiceFormato =0;
             for (int i = 0; i < this.Formati.Length; i++)
             {
                 if(Formati[i].GetNome().Equals(comboBoxFormato.SelectedItem))
@@ -73,7 +73,7 @@ namespace OPC_CTPACK_Software
             }
 
             //Setto il formato attuale
-            Formato FormatoA = this.Formati[0];
+            Formato FormatoA = this.Formati[IndiceFormato];
 
             //Calcolo il numero di Creg da calcolare
             int NumeroCreg = ((FormatoA.PpmF-FormatoA.PpmI)/FormatoA.Passo)+1;
