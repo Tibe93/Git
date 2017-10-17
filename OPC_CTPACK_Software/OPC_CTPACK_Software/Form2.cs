@@ -135,8 +135,8 @@ namespace OPC_CTPACK_Software
                 //Se non esiste lo creo e scrivo l'intestazione
                 Storico = new StreamWriter($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
 
-                Storico.WriteLine($"CregTeo\t{CregTeo}");
                 Storico.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
+                Storico.WriteLine($"CregTeo\t{CregTeo}");
                 Storico.WriteLine("");
                 Storico.WriteLine("DateTime\t\tCreg");
             }
