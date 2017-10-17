@@ -122,15 +122,15 @@ namespace OPC_CTPACK_Software
 
             //Scrivo il valore del CregAttuale sul file per lo storico
             StreamWriter Storico;
-            if (File.Exists($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt"))
+            if (File.Exists($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
             {
                 //Se il file esiste già lo apro in append
-                Storico = File.AppendText($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt");
+                Storico = File.AppendText($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
             }
             else
             {
                 //Se non esiste lo creo e scrivo l'intestazione
-                Storico = new StreamWriter($"../Dati/{CregAttuale.Formato.PpmA}_Storico_Creg.txt");
+                Storico = new StreamWriter($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
 
                 Storico.WriteLine($"CregTeo\t{CregTeo}");
                 Storico.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
