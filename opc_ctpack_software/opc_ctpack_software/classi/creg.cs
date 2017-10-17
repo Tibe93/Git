@@ -40,6 +40,8 @@ namespace OPC_CTPACK_Software
             string[] x = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
             double[] PotI = new double[Campioni];
             double[] Vel_2 = new double[Campioni];
+            
+            //Acquisisco il dati dal file .CSV e faccio i calcoli necessari
             for (int i = 0; i<Campioni; i++)
             {
                 x[0] = Csv.ReadLine();
@@ -55,11 +57,13 @@ namespace OPC_CTPACK_Software
             //Chiudo il .CSV
             Csv.Close();
 
+            //Calcolo ciò che mi serve
             double DurataPeriodo = this.Time[this.Time.Length-1];
             this.PotenzaMedia = (1/DurataPeriodo) * Functions.Integration(this.Time, PotI);
             this.Velocita2RMS = (1 / DurataPeriodo) * Functions.Integration(this.Time, Vel_2);
             this.CregAttuale = this.PotenzaMedia / this.Velocita2RMS;
 
+            //Calcolo la velocità media
             foreach(double v in this.VelConv)
             {
                 this.VelocitaMedia += v;
