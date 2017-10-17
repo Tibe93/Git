@@ -16,6 +16,7 @@ namespace OPC_CTPACK_Software
         [STAThread]
         static void Main()
         {
+            // Apro la Form0
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form0 Form_0 = new Form0();

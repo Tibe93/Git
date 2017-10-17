@@ -28,6 +28,7 @@ namespace OPC_CTPACK_Software
 
         public double[,] CalcoloAttriti(Creg[] CregTot)
         {
+            // Inizializzo le variabili
             double[,] VelocitaMediaTot = new double[CregTot.Length, 1];
             double[,] Velocita2RMSTot = new double[CregTot.Length, 1];
             double[,] PotenzaMediaTot = new double[CregTot.Length, 1];
@@ -35,6 +36,7 @@ namespace OPC_CTPACK_Software
             double[,] FiMotore = new double[2, CregTot.Length];
             double[,] Attriti = new double[2,1];
 
+            // Metto le variabili necessarie in un array
             for (int i=0; i < (CregTot.Length); i++)
             {
                 VelocitaMediaTot[i,0] = (CregTot[i].VelocitaMedia);
@@ -42,8 +44,12 @@ namespace OPC_CTPACK_Software
                 PotenzaMediaTot[i,0] = (CregTot[i].PotenzaMedia);
             }
 
+            // Visto che VelocitaMediaTot e Velocita2RMSTot sono delle matrici Nx1
+            // le concateno per fare una matrice Nx2 necessaria per il calcolo della pseudoinversa
             A = VelocitaMediaTot.Concatenate(Velocita2RMSTot);
+            // Calcolo la pseudoinversa tramite la funzione della libreria Accord.Math
             FiMotore = Matrix.PseudoInverse(A);
+            // Completo il calcolo di Bs e Bv che verranno inseriti nella matrice 2x1 Attriti
             Attriti = Functions.MultiplyMatrix(FiMotore, PotenzaMediaTot, 2, CregTot.Length, 1);
 
             return Attriti;

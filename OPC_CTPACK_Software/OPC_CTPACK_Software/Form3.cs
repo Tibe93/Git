@@ -22,6 +22,7 @@ namespace OPC_CTPACK_Software
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            // Inserisco i path di tutti i file presenti nella cartella Dati che finiscono per "*_Storico_Creg.txt", nella comboBox
             DirectoryInfo dir = new DirectoryInfo($"../Dati/");
             //comboBoxStorico.DataSource 
             ArrayList Item = new ArrayList();
@@ -34,10 +35,11 @@ namespace OPC_CTPACK_Software
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            // Operazioni sulla grafica
             //this.WindowState = FormWindowState.Maximized;
             chartStorico.Visible = true;
 
-            //rimuovo vecchio grafico
+            // Rimuovo il i punti del grafico precedente
             foreach (var series in chartStorico.Series)
             {
                 series.Points.Clear();
@@ -50,9 +52,10 @@ namespace OPC_CTPACK_Software
             int Tolleranza;
             double CregTeo;
 
+            // Apro il file selezionato nella comboBox, cioè quello di qui voglio vedere lo storico dei creg, e lo stampo
             string Pathh = $"../Dati/{ comboBoxStorico.SelectedItem }";
             StreamReader File = new StreamReader(Pathh);
-            CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]); // leggo il creg teorico dal file
+            CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]); //leggo il creg teorico dal file
             Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
             string a = File.ReadLine(); //spazio, quindi lo salto
             a = File.ReadLine(); //legenda, quindi la salto
@@ -73,13 +76,13 @@ namespace OPC_CTPACK_Software
 
                 i++;
             }
-
-            //Chiudo il File
+            // Chiudo il File
             File.Close();
         }
 
         private void comboBoxStorico_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Operazioni sulla grafica
             comboBoxStorico.BackColor = Color.White;
             buttonStart.Enabled = true;
         }

@@ -10,7 +10,7 @@ namespace OPC_CTPACK_Software
     public class Functions
     {
         public static double[,] MultiplyMatrix(double[,] A, double[,] B, int n, int m, int r)
-        {
+        {   // Funzione per la moltiplicazione tra matrici
             double[,] C = new double[n, r];
 
             for (int i = 0; i < n; i++)
@@ -28,6 +28,7 @@ namespace OPC_CTPACK_Software
 
         public static double Integration(double[] Time, double[] A)
         {
+            // Funzione integrale con metodo trapezoidale
             double Somma = 0;
             for (int i = 0; i < A.Length-1; i++)
             {
@@ -39,10 +40,10 @@ namespace OPC_CTPACK_Software
 
         public static Formato[] LetturaFormati()
         {
-
+            // Apro il file Formati.config e salvo i valori nelle variabili Formato e Motore
             string Pathh = $"../Dati/Formati.config";
             StreamReader File = new StreamReader(Pathh);
-            string M = File.ReadLine().Split('\t')[0]; //riga 1, lettura riga con numero motori
+            string M = File.ReadLine().Split('\t')[0]; //lettura numero motori
             int NMotori = Convert.ToInt32(M);
             Motore[] _Motore = new Motore[NMotori];
             string[] x1 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
@@ -54,7 +55,7 @@ namespace OPC_CTPACK_Software
                 _Motore[i] = new Motore(x1[0], x1[1], x1[2], x1[3], x1[4], x1[5], x1[6], x1[7], Convert.ToDouble(x1[8]), x1[9], x1[10], x1[11]); 
             }
 
-            string F = File.ReadLine().Split('\t')[0]; // lettura riga con numero formati
+            string F = File.ReadLine().Split('\t')[0]; //lettura numero formati
             int NFormati = Convert.ToInt32(F);
             Formato[] _Formati = new Formato[NFormati];
             string[] x2 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
@@ -77,7 +78,7 @@ namespace OPC_CTPACK_Software
                 _Formati[i] = new Formato(x2[0], _Motore[IndiceMotore], Convert.ToDouble(x2[2]), Convert.ToDouble(x2[3]), Convert.ToDouble(x2[4]), Convert.ToInt32(x2[5]), Convert.ToInt32(x2[6]), Convert.ToInt32(x2[7]), Convert.ToInt32(x2[8]));
             }
 
-            //Chiudo il File
+            // Chiudo il File
             File.Close();
 
             return _Formati;
