@@ -60,7 +60,7 @@ namespace OPC_CTPACK_Software
             Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
             string[] x = new string[10];
 
-            if (comboBoxStorico.SelectedItem.ToString()[0].Equals("T"))
+            if (comboBoxStorico.SelectedItem.ToString().Substring(0,3).Equals("TOT"))
             {
                 string a = File.ReadLine(); //spazio, quindi lo salto
                 a = File.ReadLine(); //legenda, quindi la salto
