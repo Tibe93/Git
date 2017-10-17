@@ -54,9 +54,10 @@
             // butIndietro
             // 
             this.butIndietro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.butIndietro.Location = new System.Drawing.Point(12, 445);
+            this.butIndietro.Location = new System.Drawing.Point(18, 695);
+            this.butIndietro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butIndietro.Name = "butIndietro";
-            this.butIndietro.Size = new System.Drawing.Size(75, 23);
+            this.butIndietro.Size = new System.Drawing.Size(112, 36);
             this.butIndietro.TabIndex = 9;
             this.butIndietro.Text = "< Indietro";
             this.butIndietro.UseVisualStyleBackColor = true;
@@ -64,9 +65,10 @@
             // 
             // butCalcola
             // 
-            this.butCalcola.Location = new System.Drawing.Point(12, 12);
+            this.butCalcola.Location = new System.Drawing.Point(18, 19);
+            this.butCalcola.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butCalcola.Name = "butCalcola";
-            this.butCalcola.Size = new System.Drawing.Size(144, 70);
+            this.butCalcola.Size = new System.Drawing.Size(216, 109);
             this.butCalcola.TabIndex = 10;
             this.butCalcola.Text = "Calcola";
             this.butCalcola.UseVisualStyleBackColor = true;
@@ -75,9 +77,10 @@
             // butStorico
             // 
             this.butStorico.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butStorico.Location = new System.Drawing.Point(420, 445);
+            this.butStorico.Location = new System.Drawing.Point(630, 695);
+            this.butStorico.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butStorico.Name = "butStorico";
-            this.butStorico.Size = new System.Drawing.Size(75, 23);
+            this.butStorico.Size = new System.Drawing.Size(112, 36);
             this.butStorico.TabIndex = 11;
             this.butStorico.Text = "Storico";
             this.butStorico.UseVisualStyleBackColor = true;
@@ -86,26 +89,29 @@
             // textBoxCreg
             // 
             this.textBoxCreg.Enabled = false;
-            this.textBoxCreg.Location = new System.Drawing.Point(219, 60);
+            this.textBoxCreg.Location = new System.Drawing.Point(328, 94);
+            this.textBoxCreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxCreg.Name = "textBoxCreg";
-            this.textBoxCreg.Size = new System.Drawing.Size(100, 22);
+            this.textBoxCreg.Size = new System.Drawing.Size(148, 31);
             this.textBoxCreg.TabIndex = 13;
             // 
             // labelTimer
             // 
             this.labelTimer.AutoSize = true;
-            this.labelTimer.Location = new System.Drawing.Point(162, 15);
+            this.labelTimer.Location = new System.Drawing.Point(243, 23);
+            this.labelTimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTimer.Name = "labelTimer";
-            this.labelTimer.Size = new System.Drawing.Size(44, 17);
+            this.labelTimer.Size = new System.Drawing.Size(66, 25);
             this.labelTimer.TabIndex = 14;
             this.labelTimer.Text = "Timer";
             // 
             // labelCreg
             // 
             this.labelCreg.AutoSize = true;
-            this.labelCreg.Location = new System.Drawing.Point(168, 61);
+            this.labelCreg.Location = new System.Drawing.Point(252, 95);
+            this.labelCreg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCreg.Name = "labelCreg";
-            this.labelCreg.Size = new System.Drawing.Size(38, 17);
+            this.labelCreg.Size = new System.Drawing.Size(58, 25);
             this.labelCreg.TabIndex = 15;
             this.labelCreg.Text = "Creg";
             // 
@@ -113,9 +119,10 @@
             // 
             this.pictureBoxAllarme.Enabled = false;
             this.pictureBoxAllarme.Image = global::OPC_CTPACK_Software.Properties.Resources.e;
-            this.pictureBoxAllarme.Location = new System.Drawing.Point(386, 12);
+            this.pictureBoxAllarme.Location = new System.Drawing.Point(579, 19);
+            this.pictureBoxAllarme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxAllarme.Name = "pictureBoxAllarme";
-            this.pictureBoxAllarme.Size = new System.Drawing.Size(112, 70);
+            this.pictureBoxAllarme.Size = new System.Drawing.Size(168, 109);
             this.pictureBoxAllarme.TabIndex = 17;
             this.pictureBoxAllarme.TabStop = false;
             // 
@@ -124,14 +131,15 @@
             this.chartCreg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chartCreg.BackColor = System.Drawing.SystemColors.Control;
+            this.chartCreg.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chartCreg.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.chartCreg.Legends.Add(legend1);
-            this.chartCreg.Location = new System.Drawing.Point(12, 88);
-            this.chartCreg.MaximumSize = new System.Drawing.Size(2483, 2271);
+            this.chartCreg.Location = new System.Drawing.Point(18, 138);
+            this.chartCreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chartCreg.MaximumSize = new System.Drawing.Size(3724, 3548);
             this.chartCreg.Name = "chartCreg";
             series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
             series1.BorderWidth = 3;
@@ -166,16 +174,17 @@
             this.chartCreg.Series.Add(series2);
             this.chartCreg.Series.Add(series3);
             this.chartCreg.Series.Add(series4);
-            this.chartCreg.Size = new System.Drawing.Size(483, 351);
+            this.chartCreg.Size = new System.Drawing.Size(724, 548);
             this.chartCreg.TabIndex = 18;
             this.chartCreg.Text = "chart1";
             // 
             // butStop
             // 
             this.butStop.Enabled = false;
-            this.butStop.Location = new System.Drawing.Point(325, 12);
+            this.butStop.Location = new System.Drawing.Point(488, 19);
+            this.butStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butStop.Name = "butStop";
-            this.butStop.Size = new System.Drawing.Size(55, 70);
+            this.butStop.Size = new System.Drawing.Size(82, 109);
             this.butStop.TabIndex = 19;
             this.butStop.Text = "Stop";
             this.butStop.UseVisualStyleBackColor = true;
@@ -188,9 +197,10 @@
             "10 minuti",
             "1 ora",
             "4 ore"});
-            this.comboxTime.Location = new System.Drawing.Point(219, 15);
+            this.comboxTime.Location = new System.Drawing.Point(328, 23);
+            this.comboxTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboxTime.Name = "comboxTime";
-            this.comboxTime.Size = new System.Drawing.Size(100, 24);
+            this.comboxTime.Size = new System.Drawing.Size(148, 33);
             this.comboxTime.TabIndex = 20;
             this.comboxTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxTime_SelectedIndexChanged);
             // 
@@ -200,9 +210,10 @@
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 480);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(760, 750);
             this.Controls.Add(this.comboxTime);
             this.Controls.Add(this.butStop);
             this.Controls.Add(this.chartCreg);
@@ -214,6 +225,7 @@
             this.Controls.Add(this.butCalcola);
             this.Controls.Add(this.butIndietro);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form2";
             this.Text = "Creg Attuale";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);

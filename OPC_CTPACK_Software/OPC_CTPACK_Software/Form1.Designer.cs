@@ -52,9 +52,10 @@
             // butCalcolo
             // 
             this.butCalcolo.Enabled = false;
-            this.butCalcolo.Location = new System.Drawing.Point(12, 12);
+            this.butCalcolo.Location = new System.Drawing.Point(18, 19);
+            this.butCalcolo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butCalcolo.Name = "butCalcolo";
-            this.butCalcolo.Size = new System.Drawing.Size(121, 54);
+            this.butCalcolo.Size = new System.Drawing.Size(182, 84);
             this.butCalcolo.TabIndex = 0;
             this.butCalcolo.Text = "Start Calcolo";
             this.butCalcolo.UseVisualStyleBackColor = true;
@@ -63,36 +64,40 @@
             // labelTolleranza
             // 
             this.labelTolleranza.AutoSize = true;
-            this.labelTolleranza.Location = new System.Drawing.Point(12, 78);
+            this.labelTolleranza.Location = new System.Drawing.Point(18, 122);
+            this.labelTolleranza.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTolleranza.Name = "labelTolleranza";
-            this.labelTolleranza.Size = new System.Drawing.Size(75, 17);
+            this.labelTolleranza.Size = new System.Drawing.Size(113, 25);
             this.labelTolleranza.TabIndex = 1;
             this.labelTolleranza.Text = "Tolleranza";
             // 
             // labelBs
             // 
             this.labelBs.AutoSize = true;
-            this.labelBs.Location = new System.Drawing.Point(207, 78);
+            this.labelBs.Location = new System.Drawing.Point(310, 122);
+            this.labelBs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBs.Name = "labelBs";
-            this.labelBs.Size = new System.Drawing.Size(24, 17);
+            this.labelBs.Size = new System.Drawing.Size(37, 25);
             this.labelBs.TabIndex = 2;
             this.labelBs.Text = "Bs";
             // 
             // labelBv
             // 
             this.labelBv.AutoSize = true;
-            this.labelBv.Location = new System.Drawing.Point(352, 78);
+            this.labelBv.Location = new System.Drawing.Point(528, 122);
+            this.labelBv.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBv.Name = "labelBv";
-            this.labelBv.Size = new System.Drawing.Size(24, 17);
+            this.labelBv.Size = new System.Drawing.Size(37, 25);
             this.labelBv.TabIndex = 3;
             this.labelBv.Text = "Bv";
             // 
             // textBoxTolleranza
             // 
             this.textBoxTolleranza.Enabled = false;
-            this.textBoxTolleranza.Location = new System.Drawing.Point(93, 75);
+            this.textBoxTolleranza.Location = new System.Drawing.Point(140, 117);
+            this.textBoxTolleranza.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxTolleranza.Name = "textBoxTolleranza";
-            this.textBoxTolleranza.Size = new System.Drawing.Size(112, 22);
+            this.textBoxTolleranza.Size = new System.Drawing.Size(166, 31);
             this.textBoxTolleranza.TabIndex = 4;
             this.textBoxTolleranza.Text = "Inserire un Intero";
             this.textBoxTolleranza.Click += new System.EventHandler(this.textBoxTolleranza_Click);
@@ -101,27 +106,30 @@
             // 
             // textBoxBs
             // 
-            this.textBoxBs.Location = new System.Drawing.Point(237, 75);
+            this.textBoxBs.Location = new System.Drawing.Point(356, 117);
+            this.textBoxBs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxBs.Name = "textBoxBs";
             this.textBoxBs.ReadOnly = true;
-            this.textBoxBs.Size = new System.Drawing.Size(115, 22);
+            this.textBoxBs.Size = new System.Drawing.Size(170, 31);
             this.textBoxBs.TabIndex = 5;
             // 
             // textBoxBv
             // 
-            this.textBoxBv.Location = new System.Drawing.Point(380, 75);
+            this.textBoxBv.Location = new System.Drawing.Point(570, 117);
+            this.textBoxBv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxBv.Name = "textBoxBv";
             this.textBoxBv.ReadOnly = true;
-            this.textBoxBv.Size = new System.Drawing.Size(115, 22);
+            this.textBoxBv.Size = new System.Drawing.Size(170, 31);
             this.textBoxBv.TabIndex = 6;
             // 
             // butAvanti
             // 
             this.butAvanti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAvanti.Enabled = false;
-            this.butAvanti.Location = new System.Drawing.Point(420, 445);
+            this.butAvanti.Location = new System.Drawing.Point(630, 695);
+            this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butAvanti.Name = "butAvanti";
-            this.butAvanti.Size = new System.Drawing.Size(75, 23);
+            this.butAvanti.Size = new System.Drawing.Size(112, 36);
             this.butAvanti.TabIndex = 7;
             this.butAvanti.Text = "Avanti >";
             this.butAvanti.UseVisualStyleBackColor = true;
@@ -130,9 +138,10 @@
             // butIndietro
             // 
             this.butIndietro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.butIndietro.Location = new System.Drawing.Point(12, 445);
+            this.butIndietro.Location = new System.Drawing.Point(18, 695);
+            this.butIndietro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butIndietro.Name = "butIndietro";
-            this.butIndietro.Size = new System.Drawing.Size(75, 23);
+            this.butIndietro.Size = new System.Drawing.Size(112, 36);
             this.butIndietro.TabIndex = 8;
             this.butIndietro.Text = "< Indietro";
             this.butIndietro.UseVisualStyleBackColor = true;
@@ -143,14 +152,15 @@
             this.chartCreg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chartCreg.BackColor = System.Drawing.SystemColors.Control;
+            this.chartCreg.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chartCreg.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
             legend1.Name = "Legend1";
             this.chartCreg.Legends.Add(legend1);
-            this.chartCreg.Location = new System.Drawing.Point(12, 103);
-            this.chartCreg.MaximumSize = new System.Drawing.Size(2483, 2256);
+            this.chartCreg.Location = new System.Drawing.Point(18, 161);
+            this.chartCreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chartCreg.MaximumSize = new System.Drawing.Size(3724, 3525);
             this.chartCreg.Name = "chartCreg";
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
@@ -159,7 +169,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Creg";
             this.chartCreg.Series.Add(series1);
-            this.chartCreg.Size = new System.Drawing.Size(483, 336);
+            this.chartCreg.Size = new System.Drawing.Size(724, 525);
             this.chartCreg.TabIndex = 9;
             this.chartCreg.Text = "chart1";
             this.chartCreg.Visible = false;
@@ -168,9 +178,10 @@
             // 
             this.comboBoxFormato.BackColor = System.Drawing.Color.LightGreen;
             this.comboBoxFormato.FormattingEnabled = true;
-            this.comboBoxFormato.Location = new System.Drawing.Point(136, 12);
+            this.comboBoxFormato.Location = new System.Drawing.Point(204, 19);
+            this.comboBoxFormato.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxFormato.Name = "comboBoxFormato";
-            this.comboBoxFormato.Size = new System.Drawing.Size(359, 24);
+            this.comboBoxFormato.Size = new System.Drawing.Size(536, 33);
             this.comboBoxFormato.TabIndex = 10;
             this.comboBoxFormato.Text = "Selezionare Cinematismo/Formato";
             this.comboBoxFormato.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormato_SelectedIndexChanged);
@@ -178,9 +189,10 @@
             // textBoxPath
             // 
             this.textBoxPath.Enabled = false;
-            this.textBoxPath.Location = new System.Drawing.Point(136, 44);
+            this.textBoxPath.Location = new System.Drawing.Point(204, 69);
+            this.textBoxPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(324, 22);
+            this.textBoxPath.Size = new System.Drawing.Size(484, 31);
             this.textBoxPath.TabIndex = 11;
             this.textBoxPath.Text = "Inserire Path Salvataggio .CSV";
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
@@ -188,9 +200,10 @@
             // butPath
             // 
             this.butPath.Enabled = false;
-            this.butPath.Location = new System.Drawing.Point(466, 44);
+            this.butPath.Location = new System.Drawing.Point(699, 69);
+            this.butPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(29, 22);
+            this.butPath.Size = new System.Drawing.Size(44, 34);
             this.butPath.TabIndex = 12;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
@@ -198,9 +211,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 480);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(760, 750);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.comboBoxFormato);
@@ -215,6 +229,7 @@
             this.Controls.Add(this.labelTolleranza);
             this.Controls.Add(this.butCalcolo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Creg Preliminare";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

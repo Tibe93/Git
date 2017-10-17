@@ -44,7 +44,7 @@
             this.chartStorico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chartStorico.BackColor = System.Drawing.SystemColors.Control;
+            this.chartStorico.BackColor = System.Drawing.Color.Transparent;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 5;
             chartArea1.Name = "ChartArea1";
             this.chartStorico.ChartAreas.Add(chartArea1);
@@ -105,6 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(760, 750);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.comboBoxStorico);
