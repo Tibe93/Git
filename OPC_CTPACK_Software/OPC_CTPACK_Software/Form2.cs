@@ -59,6 +59,7 @@ namespace OPC_CTPACK_Software
 
         private void butCalcola_Click(object sender, EventArgs e)
         {
+            //Se è necessario avvio il timer
             if(Timer && !timer1.Enabled)
             {
                 timer1.Start();
@@ -122,7 +123,7 @@ namespace OPC_CTPACK_Software
                 pictureBoxAllarme.Enabled = true;
             }
 
-            //Scrivo il valore del CregAttuale sul file per lo storico
+            //Scrivo il valore del CregAttuale sul file per lo storico con PPM
             StreamWriter Storico;
             if (File.Exists($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
             {
@@ -142,6 +143,26 @@ namespace OPC_CTPACK_Software
             //Scrivo il CregAttuale e chiudo il file
             Storico.WriteLine($"{DateTime.Now}\t{CregAttuale.CregAttuale}");
             Storico.Close();
+
+            //Scrivo il valore del CregAttuale sul file per lo storico Totale
+            StreamWriter StoricoTot;
+            if (File.Exists($"../Dati/TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
+            {
+                //Se il file esiste già lo apro in append
+                StoricoTot = File.AppendText($"../Dati/TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
+            }
+            else
+            {
+                //Se non esiste lo creo e scrivo l'intestazione
+                StoricoTot = new StreamWriter($"../Dati/TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
+
+                StoricoTot.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
+                StoricoTot.WriteLine("");
+                StoricoTot.WriteLine("DateTime\t\tCreg\t\t\tCregTeo\t\t\tPpm");
+            }
+            //Scrivo il CregAttuale e chiudo il file
+            StoricoTot.WriteLine($"{DateTime.Now}\t{CregAttuale.CregAttuale}\t{CregTeo}\t{CregAttuale.Formato.PpmA}");
+            StoricoTot.Close();
         }
 
         private void butStop_Click(object sender, EventArgs e)
