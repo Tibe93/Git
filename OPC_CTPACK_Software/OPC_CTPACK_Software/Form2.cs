@@ -59,7 +59,6 @@ namespace OPC_CTPACK_Software
 
         private void butCalcola_Click(object sender, EventArgs e)
         {
-            //gggg
             //Se è necessario avvio il timer
             if(Timer && !timer1.Enabled)
             {
