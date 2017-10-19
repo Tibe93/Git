@@ -59,6 +59,7 @@ namespace OPC_CTPACK_Software
 
         private void butCalcola_Click(object sender, EventArgs e)
         {
+            //gggg
             //Se è necessario avvio il timer
             if(Timer && !timer1.Enabled)
             {
@@ -74,7 +75,7 @@ namespace OPC_CTPACK_Software
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
             
             //Path di salvataggio
-            int PpmNow = 400; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
+            int PpmNow = 310; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
             
             //Ne creo una nuova istanza per non aver problemi visto che le classi vengono passate per riferimento
             Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
