@@ -101,7 +101,7 @@ namespace OPC_CTPACK_Software
             // Chiedo al PLC di far girare il motore del formato selezionato a diverse velocità
             // Parto da una velocità iniziale e aggiungendo il passo arrivo a quella finale
             // Per ognuna di queste velocità mi arriveranno i dati dal PLC con qui andrò a creare i diversi file
-            for(int i=Formati[indice].PpmI; i != Formati[indice].PpmF; i=i+Formati[indice].Passo)
+            for (int i=Formati[indice].PpmI; i != Formati[indice].PpmF; i=i+Formati[indice].Passo)
             {
                 // Dico al PLC di eseguire a velocità i
                 Functions.RsLinx_OPC_Client_Write("[Creg_OPC_Topic]Ppm_Start", i);
