@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Opc.Da;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -101,9 +102,20 @@ namespace OPC_CTPACK_Software
             // Chiedo al PLC di far girare il motore del formato selezionato a diverse velocità
             // Parto da una velocità iniziale e aggiungendo il passo arrivo a quella finale
             // Per ognuna di queste velocità mi arriveranno i dati dal PLC con qui andrò a creare i diversi file
-            for(int i=Formati[indice].PpmI; i == Formati[indice].PpmF; i=i+Formati[indice].Passo)
+            for(int i=Formati[indice].PpmI; i != Formati[indice].PpmF; i=i+Formati[indice].Passo)
             {
                 // Dico al PLC di eseguire a velocità i
+                for (int k = 0; k < 1000; k++)
+                {
+                    Functions.RsLinx_OPC_Client_Write($"[TEST_GADDA_1000]GADDA_ARRAY_1000[{k}]", k);
+                }
+
+                ItemValueResult[] Valore = new ItemValueResult[1000];
+                for(int j=0; j<1000; j++)
+                {
+                    Valore[j] = Functions.RsLinx_OPC_Client_Read($"[TEST_GADDA_1000]GADDA_ARRAY_1000[{j}]");
+                }
+
 
                 // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
                 StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");

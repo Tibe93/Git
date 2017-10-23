@@ -1,9 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using Opc;
+using Opc.Da;
+using System.Collections;
+using System.Threading;
 
 namespace OPC_CTPACK_Software
 {
@@ -30,9 +38,9 @@ namespace OPC_CTPACK_Software
         {
             // Funzione integrale con metodo trapezoidale
             double Somma = 0;
-            for (int i = 0; i < A.Length-1; i++)
+            for (int i = 0; i < A.Length - 1; i++)
             {
-                Somma += (A[i]+A[i+1])*((Time[i+1]-Time[i])/2);
+                Somma += (A[i] + A[i + 1]) * ((Time[i + 1] - Time[i]) / 2);
             }
 
             return Somma;
@@ -44,7 +52,7 @@ namespace OPC_CTPACK_Software
             string Pathh = $"../Dati/Formati.config";
             StreamReader File = new StreamReader(Pathh);
             string M = File.ReadLine().Split('\t')[0]; //lettura numero motori
-            int NMotori = Convert.ToInt32(M);
+            int NMotori = System.Convert.ToInt32(M);
             Motore[] _Motore = new Motore[NMotori];
             string[] x1 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
             string a = File.ReadLine(); //legenda, quindi la salto
@@ -52,11 +60,11 @@ namespace OPC_CTPACK_Software
             {
                 x1[0] = File.ReadLine();
                 x1 = x1[0].ToString().Split('\t');
-                _Motore[i] = new Motore(x1[0], x1[1], x1[2], x1[3], x1[4], x1[5], x1[6], x1[7], Convert.ToDouble(x1[8]), x1[9], x1[10], x1[11]); 
+                _Motore[i] = new Motore(x1[0], x1[1], x1[2], x1[3], x1[4], x1[5], x1[6], x1[7], System.Convert.ToDouble(x1[8]), x1[9], x1[10], x1[11]);
             }
 
             string F = File.ReadLine().Split('\t')[0]; //lettura numero formati
-            int NFormati = Convert.ToInt32(F);
+            int NFormati = System.Convert.ToInt32(F);
             Formato[] _Formati = new Formato[NFormati];
             string[] x2 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
             int IndiceMotore = 0;
@@ -64,7 +72,7 @@ namespace OPC_CTPACK_Software
 
             for (int i = 0; i < NFormati; i++)
             {
-                
+
                 x2[0] = File.ReadLine();
                 x2 = x2[0].ToString().Split('\t');
                 for (int j = 0; j < NMotori; j++)
@@ -75,13 +83,97 @@ namespace OPC_CTPACK_Software
                         break;
                     }
                 }
-                _Formati[i] = new Formato(x2[0], _Motore[IndiceMotore], Convert.ToDouble(x2[2]), Convert.ToDouble(x2[3]), Convert.ToDouble(x2[4]), Convert.ToInt32(x2[5]), Convert.ToInt32(x2[6]), Convert.ToInt32(x2[7]), Convert.ToInt32(x2[8]));
+                _Formati[i] = new Formato(x2[0], _Motore[IndiceMotore], System.Convert.ToDouble(x2[2]), System.Convert.ToDouble(x2[3]), System.Convert.ToDouble(x2[4]), System.Convert.ToInt32(x2[5]), System.Convert.ToInt32(x2[6]), System.Convert.ToInt32(x2[7]), System.Convert.ToInt32(x2[8]));
             }
 
             // Chiudo il File
             File.Close();
 
             return _Formati;
+        }
+
+        public static ItemValueResult RsLinx_OPC_Client_Read(string ItemName)
+        {
+            Opc.URL url;
+            Opc.Da.Server server;
+            OpcCom.Factory fact = new OpcCom.Factory();
+            Opc.Da.Subscription groupRead;
+            Opc.Da.SubscriptionState groupState;
+            Opc.Da.Item[] items = new Opc.Da.Item[1];
+            // 1st: Create a server object and connect to the RSLinx OPC Server
+            server = new Opc.Da.Server(fact, null);
+            server.Url = new Opc.URL("opcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}");
+
+            //2nd: Connect to the created server
+            server.Connect();
+
+            //3rd Create a group if items            
+            groupState = new Opc.Da.SubscriptionState();
+            groupState.Name = "Group";
+            groupState.UpdateRate = 1000;// this isthe time between every reads from OPC server
+            groupState.Active = true;//this must be true if you the group has to read value
+            groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
+
+
+            // add items to the group    (in Rockwell names are identified like [Name of PLC in the server]ItemName)
+            items[0] = new Opc.Da.Item();
+            items[0].ItemName = ItemName;
+
+            items = groupRead.AddItems(items);
+            return groupRead.Read(items)[0];
+        }
+
+        public static void RsLinx_OPC_Client_Write(string ItemName, int Value)
+        {
+            Opc.URL url;
+            Opc.Da.Server server;
+            OpcCom.Factory fact = new OpcCom.Factory();
+            Opc.Da.Subscription groupWrite;
+            Opc.Da.SubscriptionState groupStateWrite;
+            Opc.Da.Item[] items = new Opc.Da.Item[1];
+            // 1st: Create a server object and connect to the RSLinx OPC Server
+            server = new Opc.Da.Server(fact, null);
+            server.Url = new Opc.URL("opcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}");
+
+            //2nd: Connect to the created server
+            server.Connect();
+
+            // Create a write group            
+            groupStateWrite = new Opc.Da.SubscriptionState();
+            groupStateWrite.Name = "Group Write";
+            groupStateWrite.Active = false;//not needed to read if you want to write only
+            groupWrite = (Opc.Da.Subscription)server.CreateSubscription(groupStateWrite);
+
+            //Create the item to write (if the group doesn't have it, we need to insert it)
+            Opc.Da.Item[] itemToAdd = new Opc.Da.Item[1];
+            itemToAdd[0] = new Opc.Da.Item();
+            itemToAdd[0].ItemName = ItemName;
+
+            //create the item that contains the value to write
+            Opc.Da.ItemValue[] writeValues = new Opc.Da.ItemValue[1];
+            writeValues[0] = new Opc.Da.ItemValue(itemToAdd[0]);
+
+            //make a scan of group to see if it already contains the item
+            bool itemFound = false;
+            foreach (Opc.Da.Item item in groupWrite.Items)
+            {
+                if (item.ItemName == itemToAdd[0].ItemName)
+                {
+                    // if it find the item i set the new value
+                    writeValues[0].ServerHandle = item.ServerHandle;
+                    itemFound = true;
+                }
+            }
+            if (!itemFound)
+            {
+                //if it doesn't find it, we add it
+                groupWrite.AddItems(itemToAdd);
+                writeValues[0].ServerHandle = groupWrite.Items[groupWrite.Items.Length - 1].ServerHandle;
+            }
+            //set the value to write
+            writeValues[0].Value = Value;
+            //write
+            groupWrite.Write(writeValues);
         }
     }
 }
