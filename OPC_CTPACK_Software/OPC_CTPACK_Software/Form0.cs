@@ -74,8 +74,7 @@ namespace OPC_CTPACK_Software
             double[] VelPlc = new double[3000];
             double[] CorrPlc = new double[3000];
             int[] Tempo = new int[3000]; ;
-            int PpmNow = 0;
-            double TempoCampionamento = 0;
+            double TempoCampionamento = 0.004;
             string nomeF = "";
             string nomeM = "";
             int indice = 0;
@@ -89,9 +88,9 @@ namespace OPC_CTPACK_Software
             }
 
             // Seleziono il formato dell'array creato precedentemente che ha lo stesso nome dell'elemento selezionato nella comboBox
-            for (int i=0; i==Formati.Length; i++)
+            for (int i=0; i !=Formati.Length; i++)
             {
-                if(string.Equals(Formati[i].Nome,comboBoxFormato.SelectedItem))
+                if(string.Equals(Formati[i].Nome,comboBoxFormato.SelectedItem.ToString().Split(',')[0]))
                 {
                     nomeF = Formati[i].Nome;
                     nomeM = Formati[i].Motore.GetModel();
@@ -105,15 +104,13 @@ namespace OPC_CTPACK_Software
             for(int i=Formati[indice].PpmI; i != Formati[indice].PpmF; i=i+Formati[indice].Passo)
             {
                 // Dico al PLC di eseguire a velocità i
-                for (int k = 0; k < 1000; k++)
-                {
-                    Functions.RsLinx_OPC_Client_Write($"[TEST_GADDA_1000]GADDA_ARRAY_1000[{k}]", k);
-                }
+                Functions.RsLinx_OPC_Client_Write("[Creg_OPC_Topic]Ppm_Start", i);
 
-                ItemValueResult[] Valore = new ItemValueResult[1000];
-                for(int j=0; j<1000; j++)
+                for(int j=0; j<1250; j++)
                 {
-                    Valore[j] = Functions.RsLinx_OPC_Client_Read($"[TEST_GADDA_1000]GADDA_ARRAY_1000[{j}]");
+                    PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[Creg_OPC_Topic]Velocita_{i}[{j}]").Value;
+                    VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[Creg_OPC_Topic]Posizione_{i}[{j}]").Value;
+                    CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[Creg_OPC_Topic]Corrente_{i}[{j}]").Value;
                 }
 
 
@@ -124,10 +121,12 @@ namespace OPC_CTPACK_Software
                 FileInfoAsse.WriteLine($"Motore\t{nomeM}");
                 FileInfoAsse.WriteLine($"TempoCampionamento\t{TempoCampionamento}");
                 FileInfoAsse.WriteLine("Time\tPosizione\tVelocità\tCorrente");
-                for (int j = 0; j == PosPlc.Length; j++)
+                for (int k = 0; k != PosPlc.Length; k++)
                 {
-                    FileInfoAsse.WriteLine($"{Tempo[j]}\t{PosPlc[j]}\t{VelPlc[j]}\t{CorrPlc[j]}");
+                    FileInfoAsse.WriteLine($"{Tempo[k]}\t{PosPlc[k]}\t{VelPlc[k]}\t{CorrPlc[k]}");
                 }
+
+                FileInfoAsse.Close();
             }
         }
     }
