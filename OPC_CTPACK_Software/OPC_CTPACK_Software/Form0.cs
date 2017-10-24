@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -110,7 +111,18 @@ namespace OPC_CTPACK_Software
                 // Dico al PLC di eseguire a velocità i
                 Functions.RsLinx_OPC_Client_Write($"[{TopicName}]Ppm_Start", i);
 
-                for(int j=0; j<1250; j++)
+                // Controllo quando Ppm_Start và a zero, quindi quando il plc ha finito l'analisi alla velocità i
+                while (true)
+                {
+                    //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
+                    if ((int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Start").Value == 0)
+                    {
+                        break;
+                    }
+                    Thread.Sleep(500);
+                }
+
+                for (int j=0; j<1250; j++)
                 {
                     PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{i}[{j}]").Value;
                     VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{i}[{j}]").Value;
