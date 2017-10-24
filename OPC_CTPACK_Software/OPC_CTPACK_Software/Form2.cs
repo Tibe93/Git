@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
+using Opc.Da;
 
 namespace OPC_CTPACK_Software
 {
@@ -93,15 +94,28 @@ namespace OPC_CTPACK_Software
             //Ne creo una nuova istanza per non aver problemi visto che le classi vengono passate per riferimento
             Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
 
+            float[] Temp;
+            int LengthArray = 120;
 
-            for (int i = 0; i < PosNow.Length; i++)
+            for (int i = 0; i < PosNow.Length/LengthArray; i++)
             {
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Posizione_{PpmNow}[{i * LengthArray}]", LengthArray)[0].Value;
+                Temp.CopyTo(PosNow,i* LengthArray);
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Velocita_{PpmNow}[{i * LengthArray}]", LengthArray)[0].Value;
+                Temp.CopyTo(VelNow, i * LengthArray);
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Corrente_{PpmNow}[{i * LengthArray}]", LengthArray)[0].Value;
+                Temp.CopyTo(CorNow, i * LengthArray);
+                /* Se vuoi leggerne una alla volta
                 PosNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{PpmNow}[{i}]").Value;
                 VelNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{PpmNow}[{i}]").Value;
                 CorNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{PpmNow}[{i}]").Value;
-                Tempo[i] = (int) (i * (TempoCampionamento * 1000));
+                */
             }
 
+            for (int i = 0; i < Tempo.Length; i++)
+            {
+                Tempo[i] = (int)(i * (TempoCampionamento * 1000));
+            }
             // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
             StreamWriter FileInfoAsse = new StreamWriter($"../Dati/Trend/prova/{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
             

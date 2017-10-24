@@ -173,5 +173,35 @@ namespace OPC_CTPACK_Software
             //write
             groupWrite.Write(writeValues);
         }
+
+        public static ItemValueResult[] RsLinx_OPC_Client_Read_Array(string ItemName, int Length)
+        {
+            Opc.Da.Server server;
+            OpcCom.Factory fact = new OpcCom.Factory();
+            Opc.Da.Subscription groupRead;
+            Opc.Da.SubscriptionState groupState;
+            Opc.Da.Item[] items = new Opc.Da.Item[1];
+            // 1st: Create a server object and connect to the RSLinx OPC Server
+            server = new Opc.Da.Server(fact, null);
+            server.Url = new Opc.URL("opcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}");
+
+            //2nd: Connect to the created server
+            server.Connect();
+
+            //3rd Create a group if items            
+            groupState = new Opc.Da.SubscriptionState();
+            groupState.Name = "Group";
+            groupState.UpdateRate = 1000;// this isthe time between every reads from OPC server
+            groupState.Active = true;//this must be true if you the group has to read value
+            groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
+
+
+            // add items to the group    (in Rockwell names are identified like [Name of PLC in the server]ItemName)
+            items[0] = new Opc.Da.Item();
+            items[0].ItemName = $"{ItemName},L{Length}";
+
+            items = groupRead.AddItems(items);
+            return groupRead.Read(items);
+        }
     }
 }
