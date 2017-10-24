@@ -122,12 +122,22 @@ namespace OPC_CTPACK_Software
                     Thread.Sleep(500);
                 }
 
-                for (int j=0; j<1250; j++)
+                float[] Temp;
+                int LengthArray = 120;
+                for (int j = 0; j < PosPlc.Length / LengthArray; j++)
                 {
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Posizione_{i}[{j * LengthArray}]", LengthArray)[0].Value;
+                    Temp.CopyTo(PosPlc, j * LengthArray);
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Velocita_{i}[{j * LengthArray}]", LengthArray)[0].Value;
+                    Temp.CopyTo(VelPlc, j * LengthArray);
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Corrente_{i}[{j * LengthArray}]", LengthArray)[0].Value;
+                    Temp.CopyTo(CorrPlc, j * LengthArray);
+                    /*
                     PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{i}[{j}]").Value;
                     VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{i}[{j}]").Value;
                     CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{i}[{j}]").Value;
-                    progresso += (double)100/15000;
+                    */
+                    progresso += (double)100/120;
                     progressBar1.Value = (int)progresso;
                 }
 
