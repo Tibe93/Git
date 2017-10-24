@@ -70,13 +70,15 @@ namespace OPC_CTPACK_Software
             // mi connetto all'OPC
 
             // Inizializzo le variabili necessarie
-            double[] PosPlc = new double[3000];
-            double[] VelPlc = new double[3000];
-            double[] CorrPlc = new double[3000];
-            int[] Tempo = new int[3000]; ;
+            // 1250 è il numero di campioni che abbiamo deciso di salvare visto che corrispondono a circa 5 secondi
+            double[] PosPlc = new double[1250];
+            double[] VelPlc = new double[1250];
+            double[] CorrPlc = new double[1250];
+            int[] Tempo = new int[1250]; ;
             double TempoCampionamento = 0.004;
             string nomeF = "";
             string nomeM = "";
+            string TopicName = "Creg_OPC_Topic";
             int indice = 0;
             
             // Mi creo la variabile Tempo che verrà inserita nel File
@@ -88,7 +90,7 @@ namespace OPC_CTPACK_Software
             }
 
             // Seleziono il formato dell'array creato precedentemente che ha lo stesso nome dell'elemento selezionato nella comboBox
-            for (int i=0; i !=Formati.Length; i++)
+            for (int i=0; i < Formati.Length; i++)
             {
                 if(string.Equals(Formati[i].Nome,comboBoxFormato.SelectedItem.ToString().Split(',')[0]))
                 {
@@ -101,18 +103,21 @@ namespace OPC_CTPACK_Software
             // Chiedo al PLC di far girare il motore del formato selezionato a diverse velocità
             // Parto da una velocità iniziale e aggiungendo il passo arrivo a quella finale
             // Per ognuna di queste velocità mi arriveranno i dati dal PLC con qui andrò a creare i diversi file
-            for (int i=Formati[indice].PpmI; i != Formati[indice].PpmF; i=i+Formati[indice].Passo)
+            double progresso = 0.0;
+            progressBar1.Value = 0;
+            for (int i=Formati[indice].PpmI; i <= Formati[indice].PpmF; i=i+Formati[indice].Passo)
             {
                 // Dico al PLC di eseguire a velocità i
-                Functions.RsLinx_OPC_Client_Write("[Creg_OPC_Topic]Ppm_Start", i);
+                Functions.RsLinx_OPC_Client_Write($"[{TopicName}]Ppm_Start", i);
 
                 for(int j=0; j<1250; j++)
                 {
-                    PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[Creg_OPC_Topic]Velocita_{i}[{j}]").Value;
-                    VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[Creg_OPC_Topic]Posizione_{i}[{j}]").Value;
-                    CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[Creg_OPC_Topic]Corrente_{i}[{j}]").Value;
+                    PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{i}[{j}]").Value;
+                    VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{i}[{j}]").Value;
+                    CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{i}[{j}]").Value;
+                    progresso += (double)100/15000;
+                    progressBar1.Value = (int)progresso;
                 }
-
 
                 // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
                 StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");
@@ -128,6 +133,7 @@ namespace OPC_CTPACK_Software
 
                 FileInfoAsse.Close();
             }
+            progressBar1.Value = 100;
         }
     }
 }

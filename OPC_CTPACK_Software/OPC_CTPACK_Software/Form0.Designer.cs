@@ -35,6 +35,7 @@
             this.butPath = new System.Windows.Forms.Button();
             this.butAvanti = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // butAnalisi
@@ -83,7 +84,7 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.Location = new System.Drawing.Point(650, 116);
+            this.butAvanti.Location = new System.Drawing.Point(650, 174);
             this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butAvanti.Name = "butAvanti";
             this.butAvanti.Size = new System.Drawing.Size(112, 36);
@@ -92,20 +93,30 @@
             this.butAvanti.UseVisualStyleBackColor = true;
             this.butAvanti.Click += new System.EventHandler(this.butAvanti_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(210, 116);
+            this.progressBar1.MaximumSize = new System.Drawing.Size(550, 34);
+            this.progressBar1.MinimumSize = new System.Drawing.Size(550, 34);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(550, 34);
+            this.progressBar1.TabIndex = 9;
+            // 
             // Form0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(766, 130);
+            this.ClientSize = new System.Drawing.Size(790, 238);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
             this.Controls.Add(this.comboBoxFormato);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.butAnalisi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(792, 201);
-            this.MinimumSize = new System.Drawing.Size(792, 201);
+            this.MaximumSize = new System.Drawing.Size(816, 307);
+            this.MinimumSize = new System.Drawing.Size(816, 307);
             this.Name = "Form0";
             this.Text = "OPC";
             this.Load += new System.EventHandler(this.Form0_Load);
@@ -122,5 +133,6 @@
         private System.Windows.Forms.Button butPath;
         private System.Windows.Forms.Button butAvanti;
         public System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
