@@ -68,20 +68,59 @@ namespace OPC_CTPACK_Software
             //Cancello i punti del grafico precedente
             chartCreg.Series["CregAttuale"].Points.Clear();
 
-            ///////////////TODO: prima parte con l'opc
-
             //Prima parte
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
-            
-            //Path di salvataggio
-            int PpmNow = 310; //Dato che prendo dalla macchina, mi dice a quanti ppm sta andando
-            
+            string TopicName = "Creg_OPC_Topic";//Setto il nome del Topic OPC
+            double[] PosNow = new double[1250];
+            double[] VelNow = new double[1250];
+            double[] CorNow = new double[1250];
+            int[] Tempo = new int[1250];
+            double TempoCampionamento = 0.004;
+
+            //Leggo la velocità a cui sta andando la macchina
+            int PpmNow = (int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Run").Value;
+            Functions.RsLinx_OPC_Client_Write($"[{TopicName}]Ppm_Start", PpmNow);
+            while(true)
+            {
+                //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
+                if((int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Start").Value == 0)
+                {
+                    break;
+                }
+                Thread.Sleep(500);
+            }
+
             //Ne creo una nuova istanza per non aver problemi visto che le classi vengono passate per riferimento
             Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
 
+
+            for (int i = 0; i < PosNow.Length; i++)
+            {
+                PosNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{PpmNow}[{i}]").Value;
+                VelNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{PpmNow}[{i}]").Value;
+                CorNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{PpmNow}[{i}]").Value;
+                Tempo[i] = (int) (i * (TempoCampionamento * 1000));
+            }
+
+            // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
+            StreamWriter FileInfoAsse = new StreamWriter($"../Dati/Trend/prova/{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
+            
+
+            FileInfoAsse.WriteLine($"Formato\t{FormatoAttuale.Nome}");
+            FileInfoAsse.WriteLine($"Motore\t{FormatoAttuale.Motore.GetModel()}");
+            FileInfoAsse.WriteLine($"TempoCampionamento\t{TempoCampionamento}");
+            FileInfoAsse.WriteLine("Time\tPosizione\tVelocità\tCorrente");
+
+            for (int k = 0; k < PosNow.Length; k++)
+            {
+                FileInfoAsse.WriteLine($"{Tempo[k]}\t{PosNow[k]}\t{VelNow[k]}\t{CorNow[k]}");
+            }
+
+            FileInfoAsse.Close();
+
             //Seconda parte
             //Apro il CSV appena salvato, calcolo il Creg e lo grafico
-            Creg CregAttuale = new Creg(FormatoAttuale, "../Dati/Trend", this.CregInit.CregTot[0].Periodi);
+            Creg CregAttuale = new Creg(FormatoAttuale, "../Dati/Trend/prova", this.CregInit.CregTot[0].Periodi);
 
             //Disegno il punto del CregAttuale sul grafico
             chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);

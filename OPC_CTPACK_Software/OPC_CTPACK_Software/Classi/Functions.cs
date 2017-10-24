@@ -94,7 +94,6 @@ namespace OPC_CTPACK_Software
 
         public static ItemValueResult RsLinx_OPC_Client_Read(string ItemName)
         {
-            Opc.URL url;
             Opc.Da.Server server;
             OpcCom.Factory fact = new OpcCom.Factory();
             Opc.Da.Subscription groupRead;
@@ -125,7 +124,6 @@ namespace OPC_CTPACK_Software
 
         public static void RsLinx_OPC_Client_Write(string ItemName, int Value)
         {
-            Opc.URL url;
             Opc.Da.Server server;
             OpcCom.Factory fact = new OpcCom.Factory();
             Opc.Da.Subscription groupWrite;
