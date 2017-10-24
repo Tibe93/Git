@@ -35,8 +35,10 @@ namespace OPC_CTPACK_Software
             string Pathh = $"{Path}/{Formato.PpmA}_{Formato.Nome}.CSV"; //Fossalta_Temperature.CSV";
             StreamReader Csv = new StreamReader(Pathh);
             string a = Csv.ReadLine(); //riga 1
-            string b = Csv.ReadLine(); //riga 2, i dati iniziano alla riga 3
-            
+            string b = Csv.ReadLine(); //riga 2
+            string c = Csv.ReadLine(); //riga 3
+            string d = Csv.ReadLine(); //riga 4, i dati iniziano alla riga 5
+
             string[] x = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
             double[] PotI = new double[Campioni];
             double[] Vel_2 = new double[Campioni];
