@@ -114,14 +114,14 @@ namespace OPC_CTPACK_Software
                 // Controllo quando Ppm_Start và a zero, quindi quando il plc ha finito l'analisi alla velocità i
                 while (true)
                 {
-                    //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
+                    // Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
                     if ((int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Start").Value == 0)
                     {
                         break;
                     }
                     Thread.Sleep(500);
                 }
-
+                // Leggo i dati di posizione, velocità, corrente dall'OPC in array da 120 elementi l'uno 
                 float[] Temp;
                 int LengthArray = 120;
                 for (int j = 0; j < PosPlc.Length / LengthArray; j++)
@@ -141,7 +141,7 @@ namespace OPC_CTPACK_Software
                     progressBar1.Value = (int)progresso;
                 }
 
-                // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
+                // Creo il .CSV con le informazioni alla velocità i lette dal PLC tramite OPC
                 StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");
 
                 FileInfoAsse.WriteLine($"Formato\t{nomeF}");
@@ -155,7 +155,8 @@ namespace OPC_CTPACK_Software
 
                 FileInfoAsse.Close();
             }
-            progressBar1.Value = 100;
+            progressBar1.Value = progressBar1.Maximum;
+            MessageBox.Show("CREAZIONE FILE .CSV COMPLETATA!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
