@@ -132,7 +132,7 @@ namespace OPC_CTPACK_Software
                     Temp.CopyTo(VelPlc, j * LengthArray);
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Corrente_{i}[{j * LengthArray}]", LengthArray)[0].Value;
                     Temp.CopyTo(CorrPlc, j * LengthArray);
-                    /*
+                    /* Se vuoi leggerne uno alla volta
                     PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{i}[{j}]").Value;
                     VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{i}[{j}]").Value;
                     CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{i}[{j}]").Value;
