@@ -101,7 +101,7 @@
             this.labelTimer.Location = new System.Drawing.Point(243, 23);
             this.labelTimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTimer.Name = "labelTimer";
-            this.labelTimer.Size = new System.Drawing.Size(66, 25);
+            this.labelTimer.Size = new System.Drawing.Size(67, 26);
             this.labelTimer.TabIndex = 14;
             this.labelTimer.Text = "Timer";
             // 
@@ -111,7 +111,7 @@
             this.labelCreg.Location = new System.Drawing.Point(252, 95);
             this.labelCreg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCreg.Name = "labelCreg";
-            this.labelCreg.Size = new System.Drawing.Size(58, 25);
+            this.labelCreg.Size = new System.Drawing.Size(59, 26);
             this.labelCreg.TabIndex = 15;
             this.labelCreg.Text = "Creg";
             // 
