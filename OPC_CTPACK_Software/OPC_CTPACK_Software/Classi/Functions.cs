@@ -33,7 +33,7 @@ namespace OPC_CTPACK_Software
             }
             return C;
         }
-
+        
         public static double Integration(double[] Time, double[] A)
         {
             // Funzione integrale con metodo trapezoidale
@@ -274,6 +274,73 @@ namespace OPC_CTPACK_Software
                 float[] Err = { (float)-1, (float)-1 };
                 Errore[0].Value = Err;
                 return Errore;
+            }
+        }
+
+        public static void RsLinx_OPC_Client_Write_Array(string ItemName, int Lenght, float[] Value)
+        {
+            try
+            {
+                //Creo un istanza di OPC.server
+                Opc.Da.Server server;
+                //Parametro necessario alla connect
+                OpcCom.Factory fact = new OpcCom.Factory();
+                //Creo un istanza di Sottoscrizione
+                Opc.Da.Subscription groupWrite;
+                //Creo un istanza di SubscriptionState, utile per controllare lo stato della sottoscrizione
+                Opc.Da.SubscriptionState groupStateWrite;
+                //Creo un array di OPC.Da.Item
+                Opc.Da.Item[] items = new Opc.Da.Item[1];
+                //Setto factory e url del server, come url utilizzo quello del RSLinx OPC Server
+                server = new Opc.Da.Server(fact, null);
+                server.Url = new Opc.URL(Global.Url);
+
+                //Connetto il server
+                server.Connect();
+
+                //Istanzio la sottoscrizione                    
+                groupStateWrite = new Opc.Da.SubscriptionState();
+                groupStateWrite.Name = "Group Write";
+                //Questo valore deve essere true se voglio aver la possibilità di leggere, se devo solo scrivere lo metto false
+                groupStateWrite.Active = false;
+                //Creo il gruppo sul server
+                groupWrite = (Opc.Da.Subscription)server.CreateSubscription(groupStateWrite);
+
+                //Creo l'Item da scrivere (se il gruppo non lo possiede, lo devo inserire)
+                Opc.Da.Item[] itemToAdd = new Opc.Da.Item[1];
+                itemToAdd[0] = new Opc.Da.Item();
+                itemToAdd[0].ItemName = $"{ItemName},L{Lenght}";
+
+                //Creo l'istanza di ItemValue che possiede il mio Item e il valore che voglio assegnargli
+                Opc.Da.ItemValue[] writeValues = new Opc.Da.ItemValue[1];
+                writeValues[0] = new Opc.Da.ItemValue(itemToAdd[0]);
+
+                //Controllo se l'oggetto esiste nel gruppo
+                bool itemFound = false;
+                foreach (Opc.Da.Item item in groupWrite.Items)
+                {
+                    if (item.ItemName == itemToAdd[0].ItemName)
+                    {
+                        //Se lo trovo gli setto il nuovo valore
+                        writeValues[0].ServerHandle = item.ServerHandle;
+                        itemFound = true;
+                    }
+                }
+                if (!itemFound)
+                {
+                    //Se non ho trovato l'oggetto nel gruppo lo aggiungo..
+                    groupWrite.AddItems(itemToAdd);
+                    writeValues[0].ServerHandle = groupWrite.Items[groupWrite.Items.Length - 1].ServerHandle;
+                }
+                //...gli setto il valore
+                writeValues[0].Value = Value;
+                //e lo scrivo
+                groupWrite.Write(writeValues);
+            }
+            catch (Exception ex)
+            {
+                //Se viene lanciata un'eccezione la mostro
+                MessageBox.Show(ex.Message);
             }
         }
     }
