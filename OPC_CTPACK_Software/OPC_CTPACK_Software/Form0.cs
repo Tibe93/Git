@@ -72,10 +72,10 @@ namespace OPC_CTPACK_Software
 
             // Inizializzo le variabili necessarie
             // 1250 è il numero di campioni che abbiamo deciso di salvare visto che corrispondono a circa 5 secondi
-            double[] PosPlc = new double[1250];
-            double[] VelPlc = new double[1250];
-            double[] CorrPlc = new double[1250];
-            int[] Tempo = new int[1250]; ;
+            double[] PosPlc = new double[1200];
+            double[] VelPlc = new double[1200];
+            double[] CorrPlc = new double[1200];
+            int[] Tempo = new int[1200]; ;
             double TempoCampionamento = 0.004;
             string nomeF = "";
             string nomeM = "";

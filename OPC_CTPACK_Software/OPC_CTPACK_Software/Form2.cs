@@ -72,10 +72,10 @@ namespace OPC_CTPACK_Software
             //Prima parte
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
             string TopicName = "Creg_OPC_Topic";//Setto il nome del Topic OPC
-            double[] PosNow = new double[1250];
-            double[] VelNow = new double[1250];
-            double[] CorNow = new double[1250];
-            int[] Tempo = new int[1250];
+            double[] PosNow = new double[1200];
+            double[] VelNow = new double[1200];
+            double[] CorNow = new double[1200];
+            int[] Tempo = new int[1200];
             double TempoCampionamento = 0.004;
 
             //Leggo la velocità a cui sta andando la macchina
