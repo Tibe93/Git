@@ -32,7 +32,6 @@ namespace OPC_CTPACK_Software
             this.Coppia = new double[Campioni];
             this.Time = new double[Campioni];
 
-            //dovrei usare il Path che mi da il form, ma per adesso uso questo
             string Pathh = $"{Path}/{Formato.PpmA}_{Formato.Nome}.CSV";
             if (!File.Exists(Pathh))
             {
