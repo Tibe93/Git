@@ -72,21 +72,19 @@ namespace OPC_CTPACK_Software
 
             // Inizializzo le variabili necessarie
             // 1250 è il numero di campioni che abbiamo deciso di salvare visto che corrispondono a circa 5 secondi
-            double[] PosPlc = new double[1200];
-            double[] VelPlc = new double[1200];
-            double[] CorrPlc = new double[1200];
-            int[] Tempo = new int[1200]; ;
-            double TempoCampionamento = 0.004;
+            double[] PosPlc = new double[Global.NumeroCampioni];
+            double[] VelPlc = new double[Global.NumeroCampioni];
+            double[] CorrPlc = new double[Global.NumeroCampioni];
+            int[] Tempo = new int[Global.NumeroCampioni]; ;
             string nomeF = "";
             string nomeM = "";
-            string TopicName = "Creg_OPC_Topic";
             int indice = 0;
             
             // Mi creo la variabile Tempo che verrà inserita nel File
             double TempoAttuale = 0;
             for (int j = 1; j < PosPlc.Length; j++)
             {
-                TempoAttuale = TempoAttuale + (TempoCampionamento * 1000);
+                TempoAttuale = TempoAttuale + (Global.TempoCampionamento * 1000);
                 Tempo[j] = Convert.ToInt32(TempoAttuale);
             }
 
@@ -109,13 +107,13 @@ namespace OPC_CTPACK_Software
             for (int i=Formati[indice].PpmI; i <= Formati[indice].PpmF; i=i+Formati[indice].Passo)
             {
                 // Dico al PLC di eseguire a velocità i
-                Functions.RsLinx_OPC_Client_Write($"[{TopicName}]Ppm_Start", i);
+                Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", i);
 
                 // Controllo quando Ppm_Start và a zero, quindi quando il plc ha finito l'analisi alla velocità i
                 while (true)
                 {
                     // Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
-                    if ((int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Start").Value == 0)
+                    if ((int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value == 0)
                     {
                         break;
                     }
@@ -123,21 +121,20 @@ namespace OPC_CTPACK_Software
                 }
                 // Leggo i dati di posizione, velocità, corrente dall'OPC in array da 120 elementi l'uno 
                 float[] Temp;
-                int LengthArray = 120;
-                for (int j = 0; j < PosPlc.Length / LengthArray; j++)
+                for (int j = 0; j < PosPlc.Length / Global.LengthArray; j++)
                 {
-                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Posizione_{i}[{j * LengthArray}]", LengthArray)[0].Value;
-                    Temp.CopyTo(PosPlc, j * LengthArray);
-                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Velocita_{i}[{j * LengthArray}]", LengthArray)[0].Value;
-                    Temp.CopyTo(VelPlc, j * LengthArray);
-                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Corrente_{i}[{j * LengthArray}]", LengthArray)[0].Value;
-                    Temp.CopyTo(CorrPlc, j * LengthArray);
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    Temp.CopyTo(PosPlc, j * Global.LengthArray);
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    Temp.CopyTo(VelPlc, j * Global.LengthArray);
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    Temp.CopyTo(CorrPlc, j * Global.LengthArray);
                     /* Se vuoi leggerne uno alla volta
                     PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{i}[{j}]").Value;
                     VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{i}[{j}]").Value;
                     CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{i}[{j}]").Value;
                     */
-                    progresso += (double)100/120;
+                    progresso += (double)progressBar1.Maximum/ Global.LengthArray;
                     progressBar1.Value = (int)progresso;
                 }
 
@@ -146,7 +143,7 @@ namespace OPC_CTPACK_Software
 
                 FileInfoAsse.WriteLine($"Formato\t{nomeF}");
                 FileInfoAsse.WriteLine($"Motore\t{nomeM}");
-                FileInfoAsse.WriteLine($"TempoCampionamento\t{TempoCampionamento}");
+                FileInfoAsse.WriteLine($"TempoCampionamento\t{Global.TempoCampionamento}");
                 FileInfoAsse.WriteLine("Time\tPosizione\tVelocità\tCorrente");
                 for (int k = 0; k != PosPlc.Length; k++)
                 {

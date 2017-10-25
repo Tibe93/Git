@@ -25,7 +25,7 @@ namespace OPC_CTPACK_Software
         {
             this.Formato = new Formato(Formato.Nome, Formato.Motore, Formato.Kp, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
             this.Periodi = Periodi;
-            int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/0.004);
+            int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/Global.TempoCampionamento);
             this.PosConv = new double[Campioni];
             this.VelConv = new double[Campioni];
             this.Coppia = new double[Campioni];
