@@ -33,7 +33,7 @@ namespace OPC_CTPACK_Software
             }
             return C;
         }
-
+        
         public static double Integration(double[] Time, double[] A)
         {
             // Funzione integrale con metodo trapezoidale
