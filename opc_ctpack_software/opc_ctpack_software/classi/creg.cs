@@ -36,7 +36,6 @@ namespace OPC_CTPACK_Software
             if (!File.Exists(Pathh))
             {
                 MessageBox.Show("ERRORE: Il file non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
             }
             StreamReader Csv = new StreamReader(Pathh);
             string a = Csv.ReadLine(); //riga 1
