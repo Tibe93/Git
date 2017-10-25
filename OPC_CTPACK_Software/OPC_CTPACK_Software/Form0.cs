@@ -163,7 +163,7 @@ namespace OPC_CTPACK_Software
                 FileInfoAsse.Close();
             }
             progressBar1.Value = progressBar1.Maximum;
-            MessageBox.Show("CREAZIONE FILE .CSV COMPLETATA!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Creazione file .CSV completata!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

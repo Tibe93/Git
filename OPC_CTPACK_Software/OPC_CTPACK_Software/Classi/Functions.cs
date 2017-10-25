@@ -128,7 +128,7 @@ namespace OPC_CTPACK_Software
                 ItemValueResult Ritorno = groupRead.Read(items)[0];
                 if(!Ritorno.ResultID.Name.Name.Equals("S_OK"))
                 {
-                    throw new System.Exception();
+                    throw new System.Exception("Errore lettura OPC Tag");
                 }
                 return groupRead.Read(items)[0];
             }
@@ -232,7 +232,7 @@ namespace OPC_CTPACK_Software
                 ItemValueResult[] Ritorno = groupRead.Read(items);
                 if (!Ritorno[0].ResultID.Name.Name.Equals("S_OK"))
                 {
-                    throw new System.Exception();
+                    throw new System.Exception("Errore lettura OPC Tag");
                 }
                 return groupRead.Read(items);
             }
