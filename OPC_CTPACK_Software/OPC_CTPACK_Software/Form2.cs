@@ -78,11 +78,20 @@ namespace OPC_CTPACK_Software
 
             //Leggo la velocità a cui sta andando la macchina
             int PpmNow = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Run").Value;
+            if(PpmNow == -1)
+            {
+                return;
+            }
             Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", PpmNow);
             while(true)
             {
+                int Controllo = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
+                if (Controllo == -1)
+                {
+                    return;
+                }
                 //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
-                if((int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value == 0)
+                if (Controllo == 0)
                 {
                     break;
                 }
@@ -97,10 +106,22 @@ namespace OPC_CTPACK_Software
             for (int i = 0; i < PosNow.Length/ Global.LengthArray; i++)
             {
                 Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                if (Temp[0] == -1)
+                {
+                    return;
+                }
                 Temp.CopyTo(PosNow,i * Global.LengthArray);
                 Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                if (Temp[0] == -1)
+                {
+                    return;
+                }
                 Temp.CopyTo(VelNow, i * Global.LengthArray);
                 Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                if (Temp[0] == -1)
+                {
+                    return;
+                }
                 Temp.CopyTo(CorNow, i * Global.LengthArray);
             }
 
@@ -109,7 +130,7 @@ namespace OPC_CTPACK_Software
                 Tempo[i] = (int)(i * (Global.TempoCampionamento * 1000));
             }
             // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
-            StreamWriter FileInfoAsse = new StreamWriter($"{Global.PathTrend}{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV"); // CONTROLLO SCRITTURA
+            StreamWriter FileInfoAsse = new StreamWriter($"{Global.PathTrend}{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
 
             FileInfoAsse.WriteLine($"Formato\t{FormatoAttuale.Nome}");
             FileInfoAsse.WriteLine($"Motore\t{FormatoAttuale.Motore.GetModel()}");
@@ -177,7 +198,7 @@ namespace OPC_CTPACK_Software
             else
             {
                 //Se non esiste lo creo e scrivo l'intestazione
-                Storico = new StreamWriter($"{Global.PathStorico}{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt"); // CONTROLLO SCRITTURA
+                Storico = new StreamWriter($"{Global.PathStorico}{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
 
                 Storico.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
                 Storico.WriteLine($"CregTeo\t{CregTeo}");
@@ -198,7 +219,7 @@ namespace OPC_CTPACK_Software
             else
             {
                 //Se non esiste lo creo e scrivo l'intestazione
-                StoricoTot = new StreamWriter($"{Global.PathStorico}TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt"); // CONTROLLO SCRITTURA
+                StoricoTot = new StreamWriter($"{Global.PathStorico}TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
 
                 StoricoTot.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
                 StoricoTot.WriteLine("");

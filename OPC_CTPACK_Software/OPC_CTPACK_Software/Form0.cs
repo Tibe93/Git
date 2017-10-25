@@ -110,8 +110,13 @@ namespace OPC_CTPACK_Software
                 // Controllo quando Ppm_Start và a zero, quindi quando il plc ha finito l'analisi alla velocità i
                 while (true)
                 {
-                    // Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
-                    if ((int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value == 0)
+                    int Controllo = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
+                    if (Controllo == -1)
+                    {
+                        return;
+                    }
+                    //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
+                    if (Controllo == 0)
                     {
                         break;
                     }
@@ -122,22 +127,29 @@ namespace OPC_CTPACK_Software
                 for (int j = 0; j < PosPlc.Length / Global.LengthArray; j++)
                 {
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    if(Temp[0] == -1)
+                    {
+                        return;
+                    }
                     Temp.CopyTo(PosPlc, j * Global.LengthArray);
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    if (Temp[0] == -1)
+                    {
+                        return;
+                    }
                     Temp.CopyTo(VelPlc, j * Global.LengthArray);
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    if (Temp[0] == -1)
+                    {
+                        return;
+                    }
                     Temp.CopyTo(CorrPlc, j * Global.LengthArray);
-                    /* Se vuoi leggerne uno alla volta
-                    PosPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{i}[{j}]").Value;
-                    VelPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{i}[{j}]").Value;
-                    CorrPlc[j] = (float) Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{i}[{j}]").Value;
-                    */
                     progresso += (double)progressBar1.Maximum/ Global.LengthArray;
                     progressBar1.Value = (int)progresso;
                 }
 
                 // Creo il .CSV con le informazioni alla velocità i lette dal PLC tramite OPC
-                StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");  // CONTROLLO SCRITTURA
+                StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");
 
                 FileInfoAsse.WriteLine($"Formato\t{nomeF}");
                 FileInfoAsse.WriteLine($"Motore\t{nomeM}");
