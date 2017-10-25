@@ -50,7 +50,7 @@ namespace OPC_CTPACK_Software
         {
             // Apro il file Formati.config e salvo i valori nelle variabili Formato e Motore
             string Pathh = $"{Global.Path}Formati.config";
-            StreamReader File = new StreamReader(Pathh);
+            StreamReader File = new StreamReader(Pathh); // CONTROLLO LETTURA
             string M = File.ReadLine().Split('\t')[0]; //lettura numero motori
             int NMotori = System.Convert.ToInt32(M);
             Motore[] _Motore = new Motore[NMotori];
@@ -104,7 +104,7 @@ namespace OPC_CTPACK_Software
             server.Url = new Opc.URL(Global.Url);
 
             //2nd: Connect to the created server
-            server.Connect();
+            server.Connect(); // CONTROLLO CONNECT OPC
 
             //3rd Create a group if items            
             groupState = new Opc.Da.SubscriptionState();
@@ -114,7 +114,7 @@ namespace OPC_CTPACK_Software
             groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
 
 
-            // add items to the group    (in Rockwell names are identified like [Name of PLC in the server]ItemName)
+            // add items to the group (in Rockwell names are identified like [Name of PLC in the server]ItemName)
             items[0] = new Opc.Da.Item();
             items[0].ItemName = ItemName;
 
@@ -134,7 +134,7 @@ namespace OPC_CTPACK_Software
             server.Url = new Opc.URL(Global.Url);
 
             //2nd: Connect to the created server
-            server.Connect();
+            server.Connect(); // CONTROLLO CONNECT OPC
 
             // Create a write group            
             groupStateWrite = new Opc.Da.SubscriptionState();
@@ -186,7 +186,7 @@ namespace OPC_CTPACK_Software
             server.Url = new Opc.URL(Global.Url);
 
             //2nd: Connect to the created server
-            server.Connect();
+            server.Connect(); // CONTROLLO CONNECT OPC
 
             //3rd Create a group if items            
             groupState = new Opc.Da.SubscriptionState();

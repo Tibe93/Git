@@ -33,7 +33,7 @@ namespace OPC_CTPACK_Software
 
             //dovrei usare il Path che mi da il form, ma per adesso uso questo
             string Pathh = $"{Path}/{Formato.PpmA}_{Formato.Nome}.CSV";
-            StreamReader Csv = new StreamReader(Pathh);
+            StreamReader Csv = new StreamReader(Pathh); // CONTROLLO LETTURA
             string a = Csv.ReadLine(); //riga 1
             string b = Csv.ReadLine(); //riga 2
             string c = Csv.ReadLine(); //riga 3

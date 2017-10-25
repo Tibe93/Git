@@ -68,8 +68,6 @@ namespace OPC_CTPACK_Software
 
         private void butAnalisi_Click(object sender, EventArgs e)
         {
-            // mi connetto all'OPC
-
             // Inizializzo le variabili necessarie
             // 1250 è il numero di campioni che abbiamo deciso di salvare visto che corrispondono a circa 5 secondi
             double[] PosPlc = new double[Global.NumeroCampioni];
@@ -101,7 +99,7 @@ namespace OPC_CTPACK_Software
 
             // Chiedo al PLC di far girare il motore del formato selezionato a diverse velocità
             // Parto da una velocità iniziale e aggiungendo il passo arrivo a quella finale
-            // Per ognuna di queste velocità mi arriveranno i dati dal PLC con qui andrò a creare i diversi file
+            // Per ognuna di queste velocità mi arriveranno i dati dal PLC con cui andrò a creare i diversi file
             double progresso = 0.0;
             progressBar1.Value = 0;
             for (int i=Formati[indice].PpmI; i <= Formati[indice].PpmF; i=i+Formati[indice].Passo)
@@ -139,7 +137,7 @@ namespace OPC_CTPACK_Software
                 }
 
                 // Creo il .CSV con le informazioni alla velocità i lette dal PLC tramite OPC
-                StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");
+                StreamWriter FileInfoAsse = new StreamWriter($"{textBoxPath.Text}/{i}_{Formati[indice].Nome}.CSV");  // CONTROLLO SCRITTURA
 
                 FileInfoAsse.WriteLine($"Formato\t{nomeF}");
                 FileInfoAsse.WriteLine($"Motore\t{nomeM}");

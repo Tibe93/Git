@@ -31,9 +31,7 @@ namespace OPC_CTPACK_Software
             {
                 //Aggiungo i formati alla combobox
                 comboBoxFormato.Items.Add(this.Formati[i].GetNome());
-            }
-            
-            
+            } 
         }
 
         private void butIndietro_Click(object sender, EventArgs e)
@@ -61,7 +59,7 @@ namespace OPC_CTPACK_Software
             //Rendo visibile il grafico 
             chartCreg.Visible = true;
 
-            //ottengo l'indice dell'array del formato selezionato nella combobox
+            //Ottengo l'indice dell'array del formato selezionato nella combobox
             int IndiceFormato =0;
             for (int i = 0; i < this.Formati.Length; i++)
             {

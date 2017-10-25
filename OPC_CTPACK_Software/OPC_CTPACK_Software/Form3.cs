@@ -56,7 +56,7 @@ namespace OPC_CTPACK_Software
 
             // Apro il file selezionato nella comboBox, cioè quello di qui voglio vedere lo storico dei creg, e lo stampo
             string Pathh = $"{Global.PathStorico}{ comboBoxStorico.SelectedItem }";
-            StreamReader File = new StreamReader(Pathh);
+            StreamReader File = new StreamReader(Pathh); // CONTROLLO LETTURA
             Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
             string[] x = new string[10];
             // A seconda del file selezionato nella comboBox differenzio i file alle diverse velocità da quello TOT(totale)
