@@ -196,7 +196,7 @@ namespace OPC_CTPACK_Software
             groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
 
 
-            // add items to the group    (in Rockwell names are identified like [Name of PLC in the server]ItemName)
+            // add items to the group (in Rockwell names are identified like [Name of PLC in the server]ItemName)
             items[0] = new Opc.Da.Item();
             items[0].ItemName = $"{ItemName},L{Length}";
 
