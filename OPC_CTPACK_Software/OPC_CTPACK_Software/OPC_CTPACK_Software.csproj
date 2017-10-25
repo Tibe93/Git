@@ -82,6 +82,7 @@
     <Compile Include="Classi\Functions.cs" />
     <Compile Include="Classi\Motore.cs" />
     <Compile Include="Classi\Start_Creg.cs" />
+    <Compile Include="Classi\Costanti.cs" />
     <Compile Include="Form0.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -49,7 +49,7 @@ namespace OPC_CTPACK_Software
         public static Formato[] LetturaFormati()
         {
             // Apro il file Formati.config e salvo i valori nelle variabili Formato e Motore
-            string Pathh = $"../Dati/Formati.config";
+            string Pathh = $"{Global.Path}/Formati.config";
             StreamReader File = new StreamReader(Pathh);
             string M = File.ReadLine().Split('\t')[0]; //lettura numero motori
             int NMotori = System.Convert.ToInt32(M);
@@ -101,7 +101,7 @@ namespace OPC_CTPACK_Software
             Opc.Da.Item[] items = new Opc.Da.Item[1];
             // 1st: Create a server object and connect to the RSLinx OPC Server
             server = new Opc.Da.Server(fact, null);
-            server.Url = new Opc.URL("opcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}");
+            server.Url = new Opc.URL(Global.Url);
 
             //2nd: Connect to the created server
             server.Connect();
@@ -109,7 +109,7 @@ namespace OPC_CTPACK_Software
             //3rd Create a group if items            
             groupState = new Opc.Da.SubscriptionState();
             groupState.Name = "Group";
-            groupState.UpdateRate = 1000;// this isthe time between every reads from OPC server
+            groupState.UpdateRate = Global.UpdateRate;// this isthe time between every reads from OPC server
             groupState.Active = true;//this must be true if you the group has to read value
             groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
 
@@ -131,7 +131,7 @@ namespace OPC_CTPACK_Software
             Opc.Da.Item[] items = new Opc.Da.Item[1];
             // 1st: Create a server object and connect to the RSLinx OPC Server
             server = new Opc.Da.Server(fact, null);
-            server.Url = new Opc.URL("opcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}");
+            server.Url = new Opc.URL(Global.Url);
 
             //2nd: Connect to the created server
             server.Connect();
@@ -183,7 +183,7 @@ namespace OPC_CTPACK_Software
             Opc.Da.Item[] items = new Opc.Da.Item[1];
             // 1st: Create a server object and connect to the RSLinx OPC Server
             server = new Opc.Da.Server(fact, null);
-            server.Url = new Opc.URL("opcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}");
+            server.Url = new Opc.URL(Global.Url);
 
             //2nd: Connect to the created server
             server.Connect();
@@ -191,7 +191,7 @@ namespace OPC_CTPACK_Software
             //3rd Create a group if items            
             groupState = new Opc.Da.SubscriptionState();
             groupState.Name = "Group";
-            groupState.UpdateRate = 1000;// this isthe time between every reads from OPC server
+            groupState.UpdateRate = Global.UpdateRate;// this isthe time between every reads from OPC server
             groupState.Active = true;//this must be true if you the group has to read value
             groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
 
