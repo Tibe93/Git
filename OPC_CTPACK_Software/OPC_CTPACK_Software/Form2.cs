@@ -78,18 +78,24 @@ namespace OPC_CTPACK_Software
 
             //Leggo la velocità a cui sta andando la macchina
             int PpmNow = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Run").Value;
+
+            //Controllo che la lettura sia andata a buon fine
             if(PpmNow == -1)
             {
                 return;
             }
+
             Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", PpmNow);
             while(true)
             {
                 int Controllo = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
+                
+                //Controllo che la lettura sia andata a buon fine
                 if (Controllo == -1)
                 {
                     return;
                 }
+
                 //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
                 if (Controllo == 0)
                 {
@@ -106,18 +112,26 @@ namespace OPC_CTPACK_Software
             for (int i = 0; i < PosNow.Length/ Global.LengthArray; i++)
             {
                 Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                
+                //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
                 {
                     return;
                 }
                 Temp.CopyTo(PosNow,i * Global.LengthArray);
+
                 Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+
+                //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
                 {
                     return;
                 }
                 Temp.CopyTo(VelNow, i * Global.LengthArray);
+
                 Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+
+                //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
                 {
                     return;
@@ -127,8 +141,10 @@ namespace OPC_CTPACK_Software
 
             for (int i = 0; i < Tempo.Length; i++)
             {
+                //Creo l'array Tempo
                 Tempo[i] = (int)(i * (Global.TempoCampionamento * 1000));
             }
+
             // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
             StreamWriter FileInfoAsse = new StreamWriter($"{Global.PathTrend}{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
 
@@ -142,6 +158,7 @@ namespace OPC_CTPACK_Software
                 FileInfoAsse.WriteLine($"{Tempo[k]}\t{PosNow[k]}\t{VelNow[k]}\t{CorNow[k]}");
             }
 
+            //Chiudo il File
             FileInfoAsse.Close();
 
             //Seconda parte

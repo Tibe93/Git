@@ -69,7 +69,6 @@ namespace OPC_CTPACK_Software
         private void butAnalisi_Click(object sender, EventArgs e)
         {
             // Inizializzo le variabili necessarie
-            // 1250 è il numero di campioni che abbiamo deciso di salvare visto che corrispondono a circa 5 secondi
             double[] PosPlc = new double[Global.NumeroCampioni];
             double[] VelPlc = new double[Global.NumeroCampioni];
             double[] CorrPlc = new double[Global.NumeroCampioni];
@@ -111,6 +110,7 @@ namespace OPC_CTPACK_Software
                 while (true)
                 {
                     int Controllo = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
+                    //Controllo che la lettura si andata a buon fine
                     if (Controllo == -1)
                     {
                         return;
@@ -127,23 +127,32 @@ namespace OPC_CTPACK_Software
                 for (int j = 0; j < PosPlc.Length / Global.LengthArray; j++)
                 {
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
-                    if(Temp[0] == -1)
+                    
+                    //Controllo che la lettura si andata a buon fine
+                    if (Temp[0] == -1)
                     {
                         return;
                     }
                     Temp.CopyTo(PosPlc, j * Global.LengthArray);
+
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    
+                    //Controllo che la lettura si andata a buon fine
                     if (Temp[0] == -1)
                     {
                         return;
                     }
                     Temp.CopyTo(VelPlc, j * Global.LengthArray);
+
                     Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    
+                    //Controllo che la lettura si andata a buon fine
                     if (Temp[0] == -1)
                     {
                         return;
                     }
                     Temp.CopyTo(CorrPlc, j * Global.LengthArray);
+
                     progresso += (double)progressBar1.Maximum/ Global.LengthArray;
                     progressBar1.Value = (int)progresso;
                 }
@@ -160,6 +169,7 @@ namespace OPC_CTPACK_Software
                     FileInfoAsse.WriteLine($"{Tempo[k]}\t{PosPlc[k]}\t{VelPlc[k]}\t{CorrPlc[k]}");
                 }
 
+                //Chiudo il file
                 FileInfoAsse.Close();
             }
             progressBar1.Value = progressBar1.Maximum;

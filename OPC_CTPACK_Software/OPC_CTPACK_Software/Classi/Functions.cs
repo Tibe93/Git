@@ -49,35 +49,36 @@ namespace OPC_CTPACK_Software
         public static Formato[] LetturaFormati()
         {
             // Apro il file Formati.config e salvo i valori nelle variabili Formato e Motore
-            if (!System.IO.File.Exists(Global.PathConfig))
+            if (!File.Exists(Global.PathConfig))
             {
                 MessageBox.Show("ERRORE: Il file non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-            StreamReader File = new StreamReader(Global.PathConfig);
-            string M = File.ReadLine().Split('\t')[0]; //lettura numero motori
+            StreamReader FileConfig = new StreamReader(Global.PathConfig);
+            string M = FileConfig.ReadLine().Split('\t')[0]; //lettura numero motori
             int NMotori = System.Convert.ToInt32(M);
             Motore[] _Motore = new Motore[NMotori];
             string[] x1 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
-            string a = File.ReadLine(); //legenda, quindi la salto
+            string a = FileConfig.ReadLine(); //legenda, quindi la salto
+            //Leggo i dati di ogni motore e lo inizializzo
             for (int i = 0; i < NMotori; i++)
             {
-                x1[0] = File.ReadLine();
+                x1[0] = FileConfig.ReadLine();
                 x1 = x1[0].ToString().Split('\t');
                 _Motore[i] = new Motore(x1[0], x1[1], x1[2], x1[3], x1[4], x1[5], x1[6], x1[7], System.Convert.ToDouble(x1[8]), x1[9], x1[10], x1[11]);
             }
 
-            string F = File.ReadLine().Split('\t')[0]; //lettura numero formati
+            string F = FileConfig.ReadLine().Split('\t')[0]; //lettura numero formati
             int NFormati = System.Convert.ToInt32(F);
             Formato[] _Formati = new Formato[NFormati];
             string[] x2 = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
             int IndiceMotore = 0;
-            a = File.ReadLine(); //legenda, quindi la salto
+            a = FileConfig.ReadLine(); //legenda, quindi la salto
 
             for (int i = 0; i < NFormati; i++)
             {
 
-                x2[0] = File.ReadLine();
+                x2[0] = FileConfig.ReadLine();
                 x2 = x2[0].ToString().Split('\t');
                 for (int j = 0; j < NMotori; j++)
                 {
@@ -91,7 +92,7 @@ namespace OPC_CTPACK_Software
             }
 
             // Chiudo il File
-            File.Close();
+            FileConfig.Close();
 
             return _Formati;
         }
@@ -100,32 +101,41 @@ namespace OPC_CTPACK_Software
         {
             try
             {
+                //Creo un istanza di OPC.server
                 Opc.Da.Server server;
+                //Parametro necessario alla connect
                 OpcCom.Factory fact = new OpcCom.Factory();
+                //Creo un istanza di Sottoscrizione
                 Opc.Da.Subscription groupRead;
+                //Creo un istanza di SubscriptionState, utile per controllare lo stato della sottoscrizione
                 Opc.Da.SubscriptionState groupState;
+                //Creo un array di OPC.Da.Item
                 Opc.Da.Item[] items = new Opc.Da.Item[1];
-                // 1st: Create a server object and connect to the RSLinx OPC Server
+                //Setto factory e url del server, come url utilizzo quello del RSLinx OPC Server
                 server = new Opc.Da.Server(fact, null);
                 server.Url = new Opc.URL(Global.Url);
 
-                //2nd: Connect to the created server
+                //Connetto il server
                 server.Connect();
 
-                //3rd Create a group if items            
+                //Istanzio la sottoscrizione           
                 groupState = new Opc.Da.SubscriptionState();
                 groupState.Name = "Group";
-                groupState.UpdateRate = Global.UpdateRate;// this isthe time between every reads from OPC server
-                groupState.Active = true;//this must be true if you the group has to read value
+                groupState.UpdateRate = Global.UpdateRate;//Setto il tempo di Refresh del gruppo
+                groupState.Active = true;//Questo valore deve essere true se voglio aver la possibilità di leggere
+                //Creo il gruppo sul server
                 groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
 
-
-                // add items to the group (in Rockwell names are identified like [Name of PLC in the server]ItemName)
+                //Istanzio l'Item
                 items[0] = new Opc.Da.Item();
+                //Gli do il nome (Rockwell utilizza questa formzattazione dei nomi [NomeTopicOPC]NomeTag es. [MyOPCTopic]Posizione)
                 items[0].ItemName = ItemName;
 
+                //Aggiungo l'oggetto al gruppo
                 items = groupRead.AddItems(items);
+                //Leggo il valore dell'item aggiunto
                 ItemValueResult Ritorno = groupRead.Read(items)[0];
+                //Controllo che la lettura sia andata a buon fine, se non è così lancio un'eccezione
                 if(!Ritorno.ResultID.Name.Name.Equals("S_OK"))
                 {
                     throw new System.Exception("Errore lettura OPC Tag");
@@ -134,6 +144,7 @@ namespace OPC_CTPACK_Software
             }
             catch (Exception ex)
             {
+                //Se viene lanciata un'eccezione ritorno un ItemValueResult con valore -1 e mostro un Messagebox con l'errore
                 MessageBox.Show(ex.Message);
                 ItemValueResult Errore = new ItemValueResult();
                 Errore.Value = -1;
@@ -145,57 +156,65 @@ namespace OPC_CTPACK_Software
         {
             try
             {
+                //Creo un istanza di OPC.server
                 Opc.Da.Server server;
+                //Parametro necessario alla connect
                 OpcCom.Factory fact = new OpcCom.Factory();
+                //Creo un istanza di Sottoscrizione
                 Opc.Da.Subscription groupWrite;
+                //Creo un istanza di SubscriptionState, utile per controllare lo stato della sottoscrizione
                 Opc.Da.SubscriptionState groupStateWrite;
+                //Creo un array di OPC.Da.Item
                 Opc.Da.Item[] items = new Opc.Da.Item[1];
-                // 1st: Create a server object and connect to the RSLinx OPC Server
+                //Setto factory e url del server, come url utilizzo quello del RSLinx OPC Server
                 server = new Opc.Da.Server(fact, null);
                 server.Url = new Opc.URL(Global.Url);
 
-                //2nd: Connect to the created server
+                //Connetto il server
                 server.Connect();
 
-                // Create a write group            
+                //Istanzio la sottoscrizione                    
                 groupStateWrite = new Opc.Da.SubscriptionState();
                 groupStateWrite.Name = "Group Write";
-                groupStateWrite.Active = false;//not needed to read if you want to write only
+                //Questo valore deve essere true se voglio aver la possibilità di leggere, se devo solo scrivere lo metto false
+                groupStateWrite.Active = false;
+                //Creo il gruppo sul server
                 groupWrite = (Opc.Da.Subscription)server.CreateSubscription(groupStateWrite);
 
-                //Create the item to write (if the group doesn't have it, we need to insert it)
+                //Creo l'Item da scrivere (se il gruppo non lo possiede, lo devo inserire)
                 Opc.Da.Item[] itemToAdd = new Opc.Da.Item[1];
                 itemToAdd[0] = new Opc.Da.Item();
                 itemToAdd[0].ItemName = ItemName;
 
-                //create the item that contains the value to write
+                //Creo l'istanza di ItemValue che possiede il mio Item e il valore che voglio assegnargli
                 Opc.Da.ItemValue[] writeValues = new Opc.Da.ItemValue[1];
                 writeValues[0] = new Opc.Da.ItemValue(itemToAdd[0]);
 
-                //make a scan of group to see if it already contains the item
+                //Controllo se l'oggetto esiste nel gruppo
                 bool itemFound = false;
                 foreach (Opc.Da.Item item in groupWrite.Items)
                 {
                     if (item.ItemName == itemToAdd[0].ItemName)
                     {
-                        // if it find the item i set the new value
+                        //Se lo trovo gli setto il nuovo valore
                         writeValues[0].ServerHandle = item.ServerHandle;
                         itemFound = true;
                     }
                 }
                 if (!itemFound)
                 {
-                    //if it doesn't find it, we add it
+                    //Se non ho trovato l'oggetto nel gruppo lo aggiungo..
                     groupWrite.AddItems(itemToAdd);
                     writeValues[0].ServerHandle = groupWrite.Items[groupWrite.Items.Length - 1].ServerHandle;
                 }
-                //set the value to write
+                //...gli setto il valore
                 writeValues[0].Value = Value;
-                //write
+                //e lo scrivo
                 groupWrite.Write(writeValues);
             }
             catch (Exception ex)
             {
+                //Se viene lanciata un'eccezione la mostro
                 MessageBox.Show(ex.Message);
             }
         }
@@ -204,32 +223,42 @@ namespace OPC_CTPACK_Software
         {
             try
             {
+                //Creo un istanza di OPC.server
                 Opc.Da.Server server;
+                //Parametro necessario alla connect
                 OpcCom.Factory fact = new OpcCom.Factory();
+                //Creo un istanza di Sottoscrizione
                 Opc.Da.Subscription groupRead;
+                //Creo un istanza di SubscriptionState, utile per controllare lo stato della sottoscrizione
                 Opc.Da.SubscriptionState groupState;
+                //Creo un array di OPC.Da.Item
                 Opc.Da.Item[] items = new Opc.Da.Item[1];
-                // 1st: Create a server object and connect to the RSLinx OPC Server
+                //Setto factory e url del server, come url utilizzo quello del RSLinx OPC Server
                 server = new Opc.Da.Server(fact, null);
                 server.Url = new Opc.URL(Global.Url);
 
-                //2nd: Connect to the created server
+                //Connetto il server
                 server.Connect();
 
-                //3rd Create a group if items            
+                //Istanzio la sottoscrizione           
                 groupState = new Opc.Da.SubscriptionState();
                 groupState.Name = "Group";
-                groupState.UpdateRate = Global.UpdateRate;// this isthe time between every reads from OPC server
-                groupState.Active = true;//this must be true if you the group has to read value
+                groupState.UpdateRate = Global.UpdateRate;//Setto il tempo di Refresh del gruppo
+                groupState.Active = true;//Questo valore deve essere true se voglio aver la possibilità di leggere
+                //Creo il gruppo sul server
                 groupRead = (Opc.Da.Subscription)server.CreateSubscription(groupState);
-
-
-                // add items to the group (in Rockwell names are identified like [Name of PLC in the server]ItemName)
+                //Istanzio l'Item
                 items[0] = new Opc.Da.Item();
+                //Gli do il nome (Rockwell utilizza questa formzattazione dei nomi per gli array
+                //[NomeTopicOPC]NomeTag,LDimensioneArray es. [MyOPCTopic]Posizione,L50)
                 items[0].ItemName = $"{ItemName},L{Length}";
 
+                //Aggiungo l'oggetto al gruppo
                 items = groupRead.AddItems(items);
+                //Leggo il valore dell'item aggiunto
                 ItemValueResult[] Ritorno = groupRead.Read(items);
+
+                //Controllo che la lettura dell'array sia andata a buon fine, se non è così lancio un'eccezione
                 if (!Ritorno[0].ResultID.Name.Name.Equals("S_OK"))
                 {
                     throw new System.Exception("Errore lettura OPC Tag");
@@ -238,6 +267,7 @@ namespace OPC_CTPACK_Software
             }
             catch (Exception ex)
             {
+                //Se viene lanciata un'eccezione ritorno un array di ItemValueResult con il primo che ha valore -1 e mostro un Messagebox con l'errore
                 MessageBox.Show(ex.Message);
                 ItemValueResult[] Errore = new ItemValueResult[1];
                 Errore[0] = new ItemValueResult();

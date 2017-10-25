@@ -56,24 +56,26 @@ namespace OPC_CTPACK_Software
 
             // Apro il file selezionato nella comboBox, cioè quello di qui voglio vedere lo storico dei creg, e lo stampo
             string Pathh = $"{Global.PathStorico}{ comboBoxStorico.SelectedItem }";
-            if (!System.IO.File.Exists(Pathh))
+            
+            //Controllo che il file esista, se non esiste mostro un errore
+            if (!File.Exists(Pathh))
             {
                 MessageBox.Show("ERRORE: Il file non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-            StreamReader File = new StreamReader(Pathh);
-            Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
+            StreamReader StoricoFile = new StreamReader(Pathh);
+            Tolleranza = Convert.ToInt32(StoricoFile.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
             string[] x = new string[10];
             // A seconda del file selezionato nella comboBox differenzio i file alle diverse velocità da quello TOT(totale)
             // che mostra lo storico completo anche al variare della velocità
             if (comboBoxStorico.SelectedItem.ToString().Substring(0,3).Equals("TOT"))
             {
-                string a = File.ReadLine(); //spazio, quindi lo salto
-                a = File.ReadLine(); //legenda, quindi la salto
+                string a = StoricoFile.ReadLine(); //spazio, quindi lo salto
+                a = StoricoFile.ReadLine(); //legenda, quindi la salto
                 int i = 0;
-                while (!(File.EndOfStream))
+                while (!(StoricoFile.EndOfStream))
                 {
-                    x[0] = File.ReadLine();
+                    x[0] = StoricoFile.ReadLine();
                     x = x[0].ToString().Split('\t');
                     Tempo[i] = Convert.ToDateTime(x[0]);
                     StoricoCreg[i] = Convert.ToDouble(x[1]);
@@ -88,13 +90,13 @@ namespace OPC_CTPACK_Software
             }
             else
             {
-                CregTeo = Convert.ToDouble(File.ReadLine().Split('\t')[1]); //leggo il creg teorico dal file
-                string b = File.ReadLine(); //spazio, quindi lo salto
-                b = File.ReadLine(); //legenda, quindi la salto
+                CregTeo = Convert.ToDouble(StoricoFile.ReadLine().Split('\t')[1]); //leggo il creg teorico dal file
+                string b = StoricoFile.ReadLine(); //spazio, quindi lo salto
+                b = StoricoFile.ReadLine(); //legenda, quindi la salto
                 int i = 0;
-                while (!(File.EndOfStream))
+                while (!(StoricoFile.EndOfStream))
                 {
-                    x[0] = File.ReadLine();
+                    x[0] = StoricoFile.ReadLine();
                     x = x[0].ToString().Split('\t');
                     Tempo[i] = Convert.ToDateTime(x[0]);
                     StoricoCreg[i] = Convert.ToDouble(x[1]);
@@ -107,7 +109,7 @@ namespace OPC_CTPACK_Software
                 }
             }
             // Chiudo il File
-            File.Close();
+            StoricoFile.Close();
 
         }
 
