@@ -78,12 +78,11 @@ namespace OPC_CTPACK_Software
             //Calcolo il numero di Creg da calcolare
             int NumeroCreg = ((FormatoA.PpmF-FormatoA.PpmI)/FormatoA.Passo)+1;
             Creg[] CregTot = new Creg[NumeroCreg];
-            int NumeroPeriodi = 4; //Possiamo arrivare fino a 5 se la velocità non scende sotto i 70 ppm
             //Istanzio i vari Creg e li inizializzo
             for(int i = 0; i< NumeroCreg; i++)
             {
                 FormatoA.PpmA = FormatoA.PpmI + (FormatoA.Passo * i);
-                CregTot[i] = new Creg( FormatoA, textBoxPath.Text, NumeroPeriodi);
+                CregTot[i] = new Creg( FormatoA, textBoxPath.Text, Global.NumPeriodi);
                 chartCreg.Series["Creg"].Points.AddXY(FormatoA.PpmA, CregTot[i].CregAttuale);
             }
 

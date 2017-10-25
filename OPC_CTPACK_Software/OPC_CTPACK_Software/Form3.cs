@@ -23,7 +23,7 @@ namespace OPC_CTPACK_Software
         private void Form3_Load(object sender, EventArgs e)
         {
             // Inserisco i path di tutti i file presenti nella cartella Dati che finiscono per "*_Storico_Creg.txt", nella comboBox
-            DirectoryInfo dir = new DirectoryInfo($"../Dati/");
+            DirectoryInfo dir = new DirectoryInfo(Global.PathStorico);
             //comboBoxStorico.DataSource 
             ArrayList Item = new ArrayList();
             Item.AddRange(dir.GetFileSystemInfos("*_Storico_Creg.txt"));
@@ -55,7 +55,7 @@ namespace OPC_CTPACK_Software
             double CregTeo;
 
             // Apro il file selezionato nella comboBox, cioè quello di qui voglio vedere lo storico dei creg, e lo stampo
-            string Pathh = $"../Dati/{ comboBoxStorico.SelectedItem }";
+            string Pathh = $"{Global.PathStorico}{ comboBoxStorico.SelectedItem }";
             StreamReader File = new StreamReader(Pathh);
             Tolleranza = Convert.ToInt32(File.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file
             string[] x = new string[10];

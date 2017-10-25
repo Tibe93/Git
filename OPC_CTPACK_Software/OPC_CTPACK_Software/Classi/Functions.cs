@@ -49,7 +49,7 @@ namespace OPC_CTPACK_Software
         public static Formato[] LetturaFormati()
         {
             // Apro il file Formati.config e salvo i valori nelle variabili Formato e Motore
-            string Pathh = $"{Global.Path}/Formati.config";
+            string Pathh = $"{Global.Path}Formati.config";
             StreamReader File = new StreamReader(Pathh);
             string M = File.ReadLine().Split('\t')[0]; //lettura numero motori
             int NMotori = System.Convert.ToInt32(M);

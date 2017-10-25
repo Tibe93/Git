@@ -71,20 +71,18 @@ namespace OPC_CTPACK_Software
 
             //Prima parte
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
-            string TopicName = "Creg_OPC_Topic";//Setto il nome del Topic OPC
-            double[] PosNow = new double[1200];
-            double[] VelNow = new double[1200];
-            double[] CorNow = new double[1200];
-            int[] Tempo = new int[1200];
-            double TempoCampionamento = 0.004;
+            double[] PosNow = new double[Global.NumeroCampioni];
+            double[] VelNow = new double[Global.NumeroCampioni];
+            double[] CorNow = new double[Global.NumeroCampioni];
+            int[] Tempo = new int[Global.NumeroCampioni];
 
             //Leggo la velocità a cui sta andando la macchina
-            int PpmNow = (int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Run").Value;
-            Functions.RsLinx_OPC_Client_Write($"[{TopicName}]Ppm_Start", PpmNow);
+            int PpmNow = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Run").Value;
+            Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", PpmNow);
             while(true)
             {
                 //Attendo che il plc finisca di fare i campionamenti, quando finisce mette Ppm_Start a 0
-                if((int)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Ppm_Start").Value == 0)
+                if((int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value == 0)
                 {
                     break;
                 }
@@ -95,34 +93,28 @@ namespace OPC_CTPACK_Software
             Formato FormatoAttuale = new Formato(this.CregInit.CregTot[0].Formato.Nome, this.CregInit.CregTot[0].Formato.Motore, this.CregInit.CregTot[0].Formato.Kp, this.CregInit.CregTot[0].Formato.Kv, this.CregInit.CregTot[0].Formato.Kt, PpmNow, this.CregInit.CregTot[0].Formato.PpmI, this.CregInit.CregTot[0].Formato.PpmF, this.CregInit.CregTot[0].Formato.Passo);
 
             float[] Temp;
-            int LengthArray = 120;
 
-            for (int i = 0; i < PosNow.Length/LengthArray; i++)
+            for (int i = 0; i < PosNow.Length/ Global.LengthArray; i++)
             {
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Posizione_{PpmNow}[{i * LengthArray}]", LengthArray)[0].Value;
-                Temp.CopyTo(PosNow,i* LengthArray);
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Velocita_{PpmNow}[{i * LengthArray}]", LengthArray)[0].Value;
-                Temp.CopyTo(VelNow, i * LengthArray);
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{TopicName}]Corrente_{PpmNow}[{i * LengthArray}]", LengthArray)[0].Value;
-                Temp.CopyTo(CorNow, i * LengthArray);
-                /* Se vuoi leggerne una alla volta
-                PosNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Posizione_{PpmNow}[{i}]").Value;
-                VelNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Velocita_{PpmNow}[{i}]").Value;
-                CorNow[i] = (float)Functions.RsLinx_OPC_Client_Read($"[{TopicName}]Corrente_{PpmNow}[{i}]").Value;
-                */
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp.CopyTo(PosNow,i* Global.LengthArray);
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp.CopyTo(VelNow, i * Global.LengthArray);
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp.CopyTo(CorNow, i * Global.LengthArray);
             }
 
             for (int i = 0; i < Tempo.Length; i++)
             {
-                Tempo[i] = (int)(i * (TempoCampionamento * 1000));
+                Tempo[i] = (int)(i * (Global.TempoCampionamento * 1000));
             }
             // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
-            StreamWriter FileInfoAsse = new StreamWriter($"../Dati/Trend/prova/{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
+            StreamWriter FileInfoAsse = new StreamWriter($"{Global.PathTrend}{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
             
 
             FileInfoAsse.WriteLine($"Formato\t{FormatoAttuale.Nome}");
             FileInfoAsse.WriteLine($"Motore\t{FormatoAttuale.Motore.GetModel()}");
-            FileInfoAsse.WriteLine($"TempoCampionamento\t{TempoCampionamento}");
+            FileInfoAsse.WriteLine($"TempoCampionamento\t{Global.TempoCampionamento}");
             FileInfoAsse.WriteLine("Time\tPosizione\tVelocità\tCorrente");
 
             for (int k = 0; k < PosNow.Length; k++)
@@ -134,7 +126,7 @@ namespace OPC_CTPACK_Software
 
             //Seconda parte
             //Apro il CSV appena salvato, calcolo il Creg e lo grafico
-            Creg CregAttuale = new Creg(FormatoAttuale, "../Dati/Trend/prova", this.CregInit.CregTot[0].Periodi);
+            Creg CregAttuale = new Creg(FormatoAttuale, Global.PathTrend, this.CregInit.CregTot[0].Periodi);
 
             //Disegno il punto del CregAttuale sul grafico
             chartCreg.Series["CregAttuale"].Points.AddXY(CregAttuale.Formato.PpmA, CregAttuale.CregAttuale);
@@ -178,15 +170,15 @@ namespace OPC_CTPACK_Software
 
             //Scrivo il valore del CregAttuale sul file per lo storico con PPM
             StreamWriter Storico;
-            if (File.Exists($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
+            if (File.Exists($"{Global.PathStorico}{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
             {
                 //Se il file esiste già lo apro in append
-                Storico = File.AppendText($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
+                Storico = File.AppendText($"{Global.PathStorico}{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
             }
             else
             {
                 //Se non esiste lo creo e scrivo l'intestazione
-                Storico = new StreamWriter($"../Dati/{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
+                Storico = new StreamWriter($"{Global.PathStorico}{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
 
                 Storico.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
                 Storico.WriteLine($"CregTeo\t{CregTeo}");
@@ -199,15 +191,15 @@ namespace OPC_CTPACK_Software
 
             //Scrivo il valore del CregAttuale sul file per lo storico Totale
             StreamWriter StoricoTot;
-            if (File.Exists($"../Dati/TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
+            if (File.Exists($"{Global.PathStorico}TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
             {
                 //Se il file esiste già lo apro in append
-                StoricoTot = File.AppendText($"../Dati/TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
+                StoricoTot = File.AppendText($"{Global.PathStorico}TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
             }
             else
             {
                 //Se non esiste lo creo e scrivo l'intestazione
-                StoricoTot = new StreamWriter($"../Dati/TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
+                StoricoTot = new StreamWriter($"{Global.PathStorico}TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt");
 
                 StoricoTot.WriteLine($"Tolleranza\t{this.CregInit.OffsetPos}");
                 StoricoTot.WriteLine("");
