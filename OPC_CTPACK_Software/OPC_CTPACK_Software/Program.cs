@@ -68,6 +68,7 @@ namespace OPC_CTPACK_Software
 
             Form0 Form_0 = new Form0();
             Application.Run(Form_0);
+            Environment.Exit(0);
         }
     }
 }

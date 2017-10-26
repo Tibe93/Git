@@ -61,7 +61,7 @@ namespace OPC_CTPACK_Software
             if (!File.Exists(Pathh))
             {
                 MessageBox.Show("ERRORE: Il file non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                Environment.Exit(1);
             }
             StreamReader StoricoFile = new StreamReader(Pathh);
             Tolleranza = Convert.ToInt32(StoricoFile.ReadLine().Split('\t')[1]); //leggo la tolleranza dal file

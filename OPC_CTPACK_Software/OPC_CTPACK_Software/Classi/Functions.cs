@@ -52,7 +52,7 @@ namespace OPC_CTPACK_Software
             if (!File.Exists(Global.PathConfig))
             {
                 MessageBox.Show("ERRORE: Il file non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                Environment.Exit(1);
             }
             StreamReader FileConfig = new StreamReader(Global.PathConfig);
             string M = FileConfig.ReadLine().Split('\t')[0]; //lettura numero motori
