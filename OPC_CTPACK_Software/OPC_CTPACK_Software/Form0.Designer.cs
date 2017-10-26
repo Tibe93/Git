@@ -41,10 +41,9 @@
             // butAnalisi
             // 
             this.butAnalisi.Enabled = false;
-            this.butAnalisi.Location = new System.Drawing.Point(11, 11);
-            this.butAnalisi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butAnalisi.Location = new System.Drawing.Point(16, 17);
             this.butAnalisi.Name = "butAnalisi";
-            this.butAnalisi.Size = new System.Drawing.Size(124, 52);
+            this.butAnalisi.Size = new System.Drawing.Size(186, 81);
             this.butAnalisi.TabIndex = 0;
             this.butAnalisi.Text = "Start Analisi";
             this.butAnalisi.UseVisualStyleBackColor = true;
@@ -53,9 +52,10 @@
             // textBoxPath
             // 
             this.textBoxPath.Enabled = false;
-            this.textBoxPath.Location = new System.Drawing.Point(140, 41);
+            this.textBoxPath.Location = new System.Drawing.Point(210, 64);
+            this.textBoxPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(327, 22);
+            this.textBoxPath.Size = new System.Drawing.Size(488, 31);
             this.textBoxPath.TabIndex = 1;
             this.textBoxPath.Text = "Inserire dove salvare il file .CSV";
             this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
@@ -64,10 +64,9 @@
             // 
             this.comboBoxFormato.BackColor = System.Drawing.Color.LightGreen;
             this.comboBoxFormato.FormattingEnabled = true;
-            this.comboBoxFormato.Location = new System.Drawing.Point(139, 11);
-            this.comboBoxFormato.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxFormato.Location = new System.Drawing.Point(208, 17);
             this.comboBoxFormato.Name = "comboBoxFormato";
-            this.comboBoxFormato.Size = new System.Drawing.Size(369, 24);
+            this.comboBoxFormato.Size = new System.Drawing.Size(552, 33);
             this.comboBoxFormato.TabIndex = 2;
             this.comboBoxFormato.Text = "Selezionare Cinematismo/Formato";
             this.comboBoxFormato.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormato_SelectedIndexChanged);
@@ -75,10 +74,9 @@
             // butPath
             // 
             this.butPath.Enabled = false;
-            this.butPath.Location = new System.Drawing.Point(473, 41);
-            this.butPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.butPath.Location = new System.Drawing.Point(710, 64);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(35, 22);
+            this.butPath.Size = new System.Drawing.Size(52, 34);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
@@ -86,9 +84,11 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.Location = new System.Drawing.Point(432, 73);
+            this.butAvanti.AutoSize = true;
+            this.butAvanti.Location = new System.Drawing.Point(648, 114);
+            this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butAvanti.Name = "butAvanti";
-            this.butAvanti.Size = new System.Drawing.Size(75, 23);
+            this.butAvanti.Size = new System.Drawing.Size(112, 36);
             this.butAvanti.TabIndex = 8;
             this.butAvanti.Text = "Avanti >";
             this.butAvanti.UseVisualStyleBackColor = true;
@@ -96,19 +96,18 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(11, 73);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBar1.Location = new System.Drawing.Point(16, 114);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(417, 22);
+            this.progressBar1.Size = new System.Drawing.Size(626, 34);
             this.progressBar1.TabIndex = 9;
             // 
             // Form0
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(521, 106);
+            this.ClientSize = new System.Drawing.Size(770, 128);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.butAvanti);
             this.Controls.Add(this.butPath);
@@ -116,9 +115,8 @@
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.butAnalisi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MaximumSize = new System.Drawing.Size(539, 151);
-            this.MinimumSize = new System.Drawing.Size(539, 151);
+            this.MaximumSize = new System.Drawing.Size(796, 197);
+            this.MinimumSize = new System.Drawing.Size(796, 197);
             this.Name = "Form0";
             this.Text = "OPC";
             this.Load += new System.EventHandler(this.Form0_Load);
