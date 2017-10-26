@@ -67,7 +67,7 @@
             this.labelTolleranza.Location = new System.Drawing.Point(18, 122);
             this.labelTolleranza.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTolleranza.Name = "labelTolleranza";
-            this.labelTolleranza.Size = new System.Drawing.Size(113, 25);
+            this.labelTolleranza.Size = new System.Drawing.Size(112, 26);
             this.labelTolleranza.TabIndex = 1;
             this.labelTolleranza.Text = "Tolleranza";
             // 
@@ -77,7 +77,7 @@
             this.labelBs.Location = new System.Drawing.Point(310, 122);
             this.labelBs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBs.Name = "labelBs";
-            this.labelBs.Size = new System.Drawing.Size(37, 25);
+            this.labelBs.Size = new System.Drawing.Size(38, 26);
             this.labelBs.TabIndex = 2;
             this.labelBs.Text = "Bs";
             // 
@@ -87,7 +87,7 @@
             this.labelBv.Location = new System.Drawing.Point(528, 122);
             this.labelBv.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBv.Name = "labelBv";
-            this.labelBv.Size = new System.Drawing.Size(37, 25);
+            this.labelBv.Size = new System.Drawing.Size(38, 26);
             this.labelBv.TabIndex = 3;
             this.labelBv.Text = "Bv";
             // 
@@ -213,6 +213,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(760, 750);
             this.Controls.Add(this.butPath);

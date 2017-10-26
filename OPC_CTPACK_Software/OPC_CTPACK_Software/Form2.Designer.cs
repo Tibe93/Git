@@ -89,6 +89,7 @@
             // textBoxCreg
             // 
             this.textBoxCreg.Enabled = false;
+            this.textBoxCreg.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.916231F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCreg.Location = new System.Drawing.Point(328, 94);
             this.textBoxCreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxCreg.Name = "textBoxCreg";
@@ -122,7 +123,8 @@
             this.pictureBoxAllarme.Location = new System.Drawing.Point(579, 19);
             this.pictureBoxAllarme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxAllarme.Name = "pictureBoxAllarme";
-            this.pictureBoxAllarme.Size = new System.Drawing.Size(168, 109);
+            this.pictureBoxAllarme.Size = new System.Drawing.Size(112, 70);
+            this.pictureBoxAllarme.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxAllarme.TabIndex = 17;
             this.pictureBoxAllarme.TabStop = false;
             // 
@@ -212,6 +214,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(760, 750);
             this.Controls.Add(this.comboxTime);

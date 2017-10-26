@@ -29,6 +29,7 @@ namespace OPC_CTPACK_Software
 
         private void Form2_Load(object sender, EventArgs e)
         {
+
             //Aggiungo i punti al grafico
             for (int i = 0; i < this.CregInit.CregTot.Length; i++)
             {
