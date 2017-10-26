@@ -17,7 +17,7 @@ namespace OPC_CTPACK_Software
         [STAThread]
         static void Main()
         {
-            // Apro la Form0
+            //Apro la Form0
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -54,6 +54,7 @@ namespace OPC_CTPACK_Software
                 Directory.CreateDirectory(Global.StandardPath);
                 Directory.CreateDirectory(Global.PathTrend);
                 Directory.CreateDirectory(Global.PathStorico);
+                
                 //Creo anche il File Formati.config con un motore e due formati standard
                 StreamWriter FormatiConfig = new StreamWriter(Global.PathConfig);
                 FormatiConfig.WriteLine("1\tMotori");
@@ -68,7 +69,6 @@ namespace OPC_CTPACK_Software
 
             Form0 Form_0 = new Form0();
             Application.Run(Form_0);
-            Environment.Exit(0);
         }
     }
 }
