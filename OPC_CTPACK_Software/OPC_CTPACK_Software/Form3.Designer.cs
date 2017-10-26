@@ -92,7 +92,6 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.AutoSize = true;
             this.buttonStart.Enabled = false;
             this.buttonStart.Location = new System.Drawing.Point(636, 17);
             this.buttonStart.Name = "buttonStart";
@@ -118,7 +117,6 @@
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartStorico)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

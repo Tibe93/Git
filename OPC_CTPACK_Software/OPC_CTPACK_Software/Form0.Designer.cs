@@ -84,7 +84,6 @@
             // 
             // butAvanti
             // 
-            this.butAvanti.AutoSize = true;
             this.butAvanti.Location = new System.Drawing.Point(648, 114);
             this.butAvanti.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.butAvanti.Name = "butAvanti";
