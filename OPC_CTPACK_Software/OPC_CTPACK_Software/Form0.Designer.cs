@@ -78,7 +78,7 @@
             this.butPath.Location = new System.Drawing.Point(473, 41);
             this.butPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(35, 24);
+            this.butPath.Size = new System.Drawing.Size(35, 22);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
