@@ -73,10 +73,11 @@
             // 
             // butPath
             // 
+            this.butPath.AutoSize = true;
             this.butPath.Enabled = false;
             this.butPath.Location = new System.Drawing.Point(710, 64);
             this.butPath.Name = "butPath";
-            this.butPath.Size = new System.Drawing.Size(52, 34);
+            this.butPath.Size = new System.Drawing.Size(52, 36);
             this.butPath.TabIndex = 3;
             this.butPath.Text = "...";
             this.butPath.UseVisualStyleBackColor = true;
