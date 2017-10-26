@@ -21,6 +21,7 @@ namespace OPC_CTPACK_Software
         {
             InitializeComponent();
             this.FormPadre = FormPadre;
+            
             //Prendi le info dal file di configurazione dei Formati e li istanzio
             this.Formati = Functions.LetturaFormati();
         }
@@ -61,6 +62,7 @@ namespace OPC_CTPACK_Software
 
             //Ottengo l'indice dell'array del formato selezionato nella combobox
             int IndiceFormato =0;
+
             for (int i = 0; i < this.Formati.Length; i++)
             {
                 if(Formati[i].GetNome().Equals(comboBoxFormato.SelectedItem))
@@ -76,6 +78,7 @@ namespace OPC_CTPACK_Software
             //Calcolo il numero di Creg da calcolare
             int NumeroCreg = ((FormatoA.PpmF-FormatoA.PpmI)/FormatoA.Passo)+1;
             Creg[] CregTot = new Creg[NumeroCreg];
+
             //Istanzio i vari Creg e li inizializzo
             for(int i = 0; i< NumeroCreg; i++)
             {
@@ -143,6 +146,7 @@ namespace OPC_CTPACK_Software
         {
             //Operazioni sulla grafica
             textBoxPath.BackColor = Color.White;
+
             if(!textBoxPath.Text.Equals("Inserire Path Salvataggio .CSV"))
             {
                 textBoxTolleranza.Enabled = true;
@@ -157,6 +161,7 @@ namespace OPC_CTPACK_Software
             {
                 butCalcolo.Enabled = true;
             }
+
             textBoxTolleranza.BackColor = Color.White;
         }
 

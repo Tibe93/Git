@@ -18,7 +18,7 @@ namespace OPC_CTPACK_Software
         Form1 FormPadre;
         Form3 FormFiglio;
         Start_Creg CregInit;
-        bool Timer = false;//Variabile che mi fa capire se devo far partire o no il timer
+        bool Timer = false; //Variabile che mi fa capire se devo far partire o no il timer
 
         public Form2(Form1 FormPadre,Start_Creg CregInit)
         {
@@ -69,7 +69,8 @@ namespace OPC_CTPACK_Software
             //Cancello i punti del grafico precedente
             chartCreg.Series["CregAttuale"].Points.Clear();
 
-            //Prima parte
+            //Prima parte//
+
             //Attraverso l'OPC mi interefaccio col PLC, tiro giu i dati e li salvo su CSV
             double[] PosNow = new double[Global.NumeroCampioni];
             double[] VelNow = new double[Global.NumeroCampioni];
@@ -85,7 +86,9 @@ namespace OPC_CTPACK_Software
                 return;
             }
 
+            //Setto Ppm_Start al valore appena letto di Ppm_Run per far capire al PLC che deve partire col campionamento
             Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", PpmNow);
+
             while(true)
             {
                 int Controllo = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
@@ -145,7 +148,7 @@ namespace OPC_CTPACK_Software
                 Tempo[i] = (int)(i * (Global.TempoCampionamento * 1000));
             }
 
-            // Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
+            //Mi salvo le variabili che arrivano dal PLC e creo il .CSV con le informazioni alla velocità i
             StreamWriter FileInfoAsse = new StreamWriter($"{Global.PathTrend}{FormatoAttuale.PpmA}_{FormatoAttuale.Nome}.CSV");
 
             FileInfoAsse.WriteLine($"Formato\t{FormatoAttuale.Nome}");
@@ -161,7 +164,8 @@ namespace OPC_CTPACK_Software
             //Chiudo il File
             FileInfoAsse.Close();
 
-            //Seconda parte
+            //Seconda parte//
+
             //Apro il CSV appena salvato, calcolo il Creg e lo grafico
             Creg CregAttuale = new Creg(FormatoAttuale, Global.PathTrend, this.CregInit.CregTot[0].Periodi);
 
@@ -174,6 +178,7 @@ namespace OPC_CTPACK_Software
 
             //Ottengo il valore di CregTeo relativo ai Ppm attuali necessario per il confronto
             double CregTeo = 0;
+
             if (CregAttuale.Formato.PpmA == CregInit.CregTot[0].Formato.PpmA)
             {
                 CregTeo = CregInit.CregTot[0].CregAttuale;
@@ -200,6 +205,7 @@ namespace OPC_CTPACK_Software
             {
                 pictureBoxAllarme.Enabled = true;
             }
+
             if (CregAttuale.CregAttuale <= (CregTeo + (CregTeo * CregInit.OffsetNeg) / 100))
             {
                 pictureBoxAllarme.Enabled = true;
@@ -207,6 +213,7 @@ namespace OPC_CTPACK_Software
 
             //Scrivo il valore del CregAttuale sul file per lo storico con PPM
             StreamWriter Storico;
+
             if (File.Exists($"{Global.PathStorico}{CregAttuale.Formato.PpmA}_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
             {
                 //Se il file esiste già lo apro in append
@@ -222,12 +229,14 @@ namespace OPC_CTPACK_Software
                 Storico.WriteLine("");
                 Storico.WriteLine("DateTime\t\tCreg");
             }
+
             //Scrivo il CregAttuale e chiudo il file
             Storico.WriteLine($"{DateTime.Now}\t{CregAttuale.CregAttuale}");
             Storico.Close();
 
             //Scrivo il valore del CregAttuale sul file per lo storico Totale
             StreamWriter StoricoTot;
+
             if (File.Exists($"{Global.PathStorico}TOT_{CregAttuale.Formato.Nome}_Storico_Creg.txt"))
             {
                 //Se il file esiste già lo apro in append
@@ -242,6 +251,7 @@ namespace OPC_CTPACK_Software
                 StoricoTot.WriteLine("");
                 StoricoTot.WriteLine("DateTime\t\tCreg\t\t\tCregTeo\t\t\tPpm");
             }
+
             //Scrivo il CregAttuale e chiudo il file
             StoricoTot.WriteLine($"{DateTime.Now}\t{CregAttuale.CregAttuale}\t{CregTeo}\t{CregAttuale.Formato.PpmA}");
             StoricoTot.Close();
@@ -252,6 +262,7 @@ namespace OPC_CTPACK_Software
             //Stoppo il timer
             this.Timer = false;
             timer1.Stop();
+
             //Operazioni sulla grafica
             butStop.Enabled = false;
             comboxTime.Text = "";
@@ -267,6 +278,7 @@ namespace OPC_CTPACK_Software
         {
             //Setto gli intervalli del timer in base a quelli selezionati
             butStop.Enabled = true;
+
             if(comboxTime.Text.Equals("10 minuti"))
             {
                 timer1.Interval = 600000;

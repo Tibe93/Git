@@ -32,7 +32,7 @@ namespace OPC_CTPACK_Software
         }
 
         public override string ToString()
-        {
+        {   //Override della funzione ToString
             return  $"Formato: {this.Nome}\n" +
                     $"Motore: {this.Motore.GetModel()}\n" +
                     $"Kp = {this.Kp}\n" +
@@ -41,7 +41,7 @@ namespace OPC_CTPACK_Software
         }
 
         public string GetNome()
-        {
+        {   //Funzione che restituisce Nome e Modello del motore del Formato
             return $"{this.Nome}, Motore: {this.Motore.GetModel()}";
         }
     }

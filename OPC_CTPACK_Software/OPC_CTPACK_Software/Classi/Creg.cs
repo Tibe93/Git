@@ -24,6 +24,7 @@ namespace OPC_CTPACK_Software
 
         public Creg(Formato Formato, string Path, int Periodi)
         {
+            //Costruttore del formato, ne creo un'altra istanza in modo da non passarlo per riferimento
             this.Formato = new Formato(Formato.Nome, Formato.Motore, Formato.Kp, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
             this.Periodi = Periodi;
             int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/Global.TempoCampionamento);
@@ -31,24 +32,25 @@ namespace OPC_CTPACK_Software
             this.VelConv = new double[Campioni];
             this.Coppia = new double[Campioni];
             this.Time = new double[Campioni];
-
             string Pathh = $"{Path}/{Formato.PpmA}_{Formato.Nome}.CSV";
+
+            //Controllo che esista il file
             if (!File.Exists(Pathh))
             {
                 MessageBox.Show("ERRORE: Il file non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                int openForms = Application.OpenForms.Count;
-                for (int i = 0; i < openForms; i++)
-                {
-                    Application.OpenForms[i].Close();
-                }
+                Environment.Exit(1);                
             }
-            StreamReader Csv = new StreamReader(Pathh);
-            string a = Csv.ReadLine(); //riga 1
-            string b = Csv.ReadLine(); //riga 2
-            string c = Csv.ReadLine(); //riga 3
-            string d = Csv.ReadLine(); //riga 4, i dati iniziano alla riga 5
 
-            string[] x = new string[20];//sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
+            //Apro il .CSV
+            StreamReader Csv = new StreamReader(Pathh);
+            
+            //Leggo l'intestazione
+            string a = Csv.ReadLine(); //Riga 1
+            string b = Csv.ReadLine(); //Riga 2
+            string c = Csv.ReadLine(); //Riga 3
+            string d = Csv.ReadLine(); //Riga 4, i dati iniziano alla riga 5
+
+            string[] x = new string[20]; //Sicuramente il file non ha più di 20 tab in una riga, la x mi serve per lo split infatti
             double[] PotI = new double[Campioni];
             double[] Vel_2 = new double[Campioni];
             
@@ -61,6 +63,7 @@ namespace OPC_CTPACK_Software
                 this.PosConv[i] = this.Formato.Kp * (double.Parse(x[1].Trim('"').Replace('.',',')));
                 this.VelConv[i] = this.Formato.Kv * (double.Parse(x[2].Trim('"').Replace('.', ',')));
                 this.Coppia[i] = this.Formato.Kt * (double.Parse(x[3].Trim('"').Replace('.', ',')));
+
                 PotI[i] = this.Coppia[i] * this.VelConv[i];
                 Vel_2[i] = this.VelConv[i] * this.VelConv[i];
             }
@@ -80,7 +83,6 @@ namespace OPC_CTPACK_Software
                 this.VelocitaMedia += v;
             }
             this.VelocitaMedia = this.VelocitaMedia / this.VelConv.Length;
-
         }
     }
 }
