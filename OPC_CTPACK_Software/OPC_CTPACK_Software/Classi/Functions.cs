@@ -172,7 +172,7 @@ namespace OPC_CTPACK_Software
             }
         }
 
-        public static void RsLinx_OPC_Client_Write(string ItemName, int Value)
+        public static void RsLinx_OPC_Client_Write(string ItemName, object Value)
         {
             try
             {

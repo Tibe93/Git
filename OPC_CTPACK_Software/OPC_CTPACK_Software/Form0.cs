@@ -134,7 +134,7 @@ namespace OPC_CTPACK_Software
 
                 for (int j = 0; j < PosPlc.Length / Global.LengthArray; j++)
                 {
-                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
                     
                     //Controllo che la lettura si andata a buon fine
                     if (Temp[0] == -1)
@@ -143,7 +143,7 @@ namespace OPC_CTPACK_Software
                     }
                     Temp.CopyTo(PosPlc, j * Global.LengthArray);
 
-                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
                     
                     //Controllo che la lettura si andata a buon fine
                     if (Temp[0] == -1)
@@ -152,7 +152,7 @@ namespace OPC_CTPACK_Software
                     }
                     Temp.CopyTo(VelPlc, j * Global.LengthArray);
 
-                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{i}[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                    Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente[{j * Global.LengthArray}]", Global.LengthArray)[0].Value;
                     
                     //Controllo che la lettura si andata a buon fine
                     if (Temp[0] == -1)

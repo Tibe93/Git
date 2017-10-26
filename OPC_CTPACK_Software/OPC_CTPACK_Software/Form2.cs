@@ -66,6 +66,10 @@ namespace OPC_CTPACK_Software
                 timer1.Start();
             }
 
+            //Setto a false l'allarme, poi controllo se attivarlo o no
+            pictureBoxAllarme.Image = OPC_CTPACK_Software.Properties.Resources.e;
+            pictureBoxAllarme.Enabled = false;
+
             //Cancello i punti del grafico precedente
             chartCreg.Series["CregAttuale"].Points.Clear();
 
@@ -114,7 +118,7 @@ namespace OPC_CTPACK_Software
 
             for (int i = 0; i < PosNow.Length/ Global.LengthArray; i++)
             {
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
                 
                 //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
@@ -123,7 +127,7 @@ namespace OPC_CTPACK_Software
                 }
                 Temp.CopyTo(PosNow,i * Global.LengthArray);
 
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
 
                 //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
@@ -132,7 +136,7 @@ namespace OPC_CTPACK_Software
                 }
                 Temp.CopyTo(VelNow, i * Global.LengthArray);
 
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente_{PpmNow}[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
 
                 //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
@@ -174,7 +178,9 @@ namespace OPC_CTPACK_Software
 
             //Visualizzo il valore di CregAttuale
             textBoxCreg.Text = CregAttuale.CregAttuale.ToString();
-            pictureBoxAllarme.Enabled = false;
+
+            //Scrivo il valore calcolato di Creg sull'array
+            Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Creg_Attuale", (float) CregAttuale.CregAttuale);
 
             //Ottengo il valore di CregTeo relativo ai Ppm attuali necessario per il confronto
             double CregTeo = 0;
