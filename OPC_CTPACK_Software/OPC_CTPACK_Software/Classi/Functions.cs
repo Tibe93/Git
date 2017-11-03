@@ -99,7 +99,7 @@ namespace OPC_CTPACK_Software
                     }
                 }
 
-                _Formati[i] = new Formato(x2[0], _Motore[IndiceMotore], System.Convert.ToDouble(x2[2]), System.Convert.ToDouble(x2[3]), System.Convert.ToDouble(x2[4]), System.Convert.ToInt32(x2[5]), System.Convert.ToInt32(x2[6]), System.Convert.ToInt32(x2[7]), System.Convert.ToInt32(x2[8]));
+                _Formati[i] = new Formato(x2[0], _Motore[IndiceMotore], System.Convert.ToDouble(x2[2]), System.Convert.ToDouble(x2[3]), System.Convert.ToInt32(x2[4]), System.Convert.ToInt32(x2[5]), System.Convert.ToInt32(x2[6]), System.Convert.ToInt32(x2[7]));
             }
 
             // Chiudo il File
