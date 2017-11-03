@@ -11,18 +11,16 @@ namespace OPC_CTPACK_Software
         public string Nome;
         public Motore Motore;
         public int PpmA;
-        public double Kp;
         public double Kv;
         public double Kt;
         public int PpmI;
         public int PpmF;
         public int Passo;
 
-        public Formato(string Nome, Motore Motore, double Kp, double Kv, double Kt, int PpmA, int PpmI, int PpmF, int Passo)
+        public Formato(string Nome, Motore Motore, double Kv, double Kt, int PpmA, int PpmI, int PpmF, int Passo)
         {
             this.Nome = Nome;
             this.Motore = Motore;
-            this.Kp = Kp;
             this.Kv = Kv;
             this.Kt = Kt;
             this.PpmA = PpmA;
@@ -35,7 +33,6 @@ namespace OPC_CTPACK_Software
         {   //Override della funzione ToString
             return  $"Formato: {this.Nome}\n" +
                     $"Motore: {this.Motore.GetModel()}\n" +
-                    $"Kp = {this.Kp}\n" +
                     $"Kv = {this.Kv}\n" +
                     $"Kc = {this.Kt}";
         }

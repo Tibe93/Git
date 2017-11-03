@@ -25,7 +25,7 @@ namespace OPC_CTPACK_Software
         public Creg(Formato Formato, string Path, int Periodi)
         {
             //Costruttore del formato, ne creo un'altra istanza in modo da non passarlo per riferimento
-            this.Formato = new Formato(Formato.Nome, Formato.Motore, Formato.Kp, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
+            this.Formato = new Formato(Formato.Nome, Formato.Motore, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
             this.Periodi = Periodi;
             string Pathh = $"{Path}/{Formato.PpmA}_{Formato.Nome}.CSV";
 
@@ -112,7 +112,7 @@ namespace OPC_CTPACK_Software
                 x[0] = Csv.ReadLine();
                 x = x[0].ToString().Split('\t');
                 this.Time[i] = (double.Parse(x[0]));
-                this.PosConv[i] = this.Formato.Kp * (double.Parse(x[1]));
+                this.PosConv[i] = double.Parse(x[1]);
                 this.VelConv[i] = this.Formato.Kv * (double.Parse(x[2]));
                 this.Coppia[i] = this.Formato.Kt * (double.Parse(x[3])); // usavamo questo quando i CSV erano formattati da Logix5000 .Trim('"').Replace('.', ',')));
 

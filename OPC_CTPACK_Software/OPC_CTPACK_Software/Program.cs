@@ -42,9 +42,9 @@ namespace OPC_CTPACK_Software
                     FormatiConfig.WriteLine("MotorModel RPower  RVoltage    RSpeed  RCurrent    RTorque PCount  PeakCur TorqueK VoltageK");
                     FormatiConfig.WriteLine("VPL-B1153F\t2,3\t480\t5000\t6,28\t6,55\t8\t23,33\t1,189\t71.82815\t2,09\t0,01104");
                     FormatiConfig.WriteLine("2\tFormati");
-                    FormatiConfig.WriteLine("Nome	Motore		Kp	Kv	Kt	PpmA	PpmI	PpmF	Passo");
-                    FormatiConfig.WriteLine("Catena\tVPL-B1153F\t1\t0,1\t0,075\t200\t70\t400\t30");
-                    FormatiConfig.WriteLine("Masse\tVPL-B1153F\t1\t0,087\t0,075\t200\t70\t400\t30");
+                    FormatiConfig.WriteLine("Nome	Motore		Kv	Kt	PpmA	PpmI	PpmF	Passo");
+                    FormatiConfig.WriteLine("Catena\tVPL-B1153F\t0,1\t0,075\t200\t70\t400\t30");
+                    FormatiConfig.WriteLine("Masse\tVPL-B1153F\t0,087\t0,075\t200\t70\t400\t30");
                     FormatiConfig.Close();
                 }
             }
@@ -61,9 +61,9 @@ namespace OPC_CTPACK_Software
                 FormatiConfig.WriteLine("MotorModel RPower  RVoltage    RSpeed  RCurrent    RTorque PCount  PeakCur TorqueK VoltageK");
                 FormatiConfig.WriteLine("VPL-B1153F\t2,3\t480\t5000\t6,28\t6,55\t8\t23,33\t1,189\t71.82815\t2,09\t0,01104");
                 FormatiConfig.WriteLine("2\tFormati");
-                FormatiConfig.WriteLine("Nome	Motore		Kp	Kv	Kt	PpmA	PpmI	PpmF	Passo");
-                FormatiConfig.WriteLine("Catena\tVPL-B1153F\t1\t0,1\t0,075\t200\t70\t400\t30");
-                FormatiConfig.WriteLine("Masse\tVPL-B1153F\t1\t0,087\t0,075\t200\t70\t400\t30");
+                FormatiConfig.WriteLine("Nome	Motore		Kv	Kt	PpmA	PpmI	PpmF	Passo");
+                FormatiConfig.WriteLine("Catena\tVPL-B1153F\t0,1\t0,075\t200\t70\t400\t30");
+                FormatiConfig.WriteLine("Masse\tVPL-B1153F\t0,087\t0,075\t200\t70\t400\t30");
                 FormatiConfig.Close();
             }
 
