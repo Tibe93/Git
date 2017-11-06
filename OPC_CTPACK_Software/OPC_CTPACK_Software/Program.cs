@@ -26,8 +26,19 @@ namespace OPC_CTPACK_Software
             }
             else
             {
-                MessageBox.Show("ERRORE: Il file di configurazione non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(1);
+                StreamWriter CostantiConfig = new StreamWriter(Global.PathCostanti);
+                CostantiConfig.WriteLine("//Costanti numeriche");
+                CostantiConfig.WriteLine("TempoCampionamento\t0,004\t//Tempo minimo di campionamento del Plc");
+                CostantiConfig.WriteLine("NumPeriodi\t3\t//Numero di periodi che vado ad analizzare (Max 5 periodi se non si scende sotto i 70ppm)");
+                CostantiConfig.WriteLine("UpdateRate\t1000\t//Tempo di aggiornamento dei gruppi dell'OPC");
+                CostantiConfig.WriteLine("NumeroCampioni\t1200\t//Numero massimo di campioni che vado ad analizzare nelle variabili acquisite");
+                CostantiConfig.WriteLine("LengthArray\t120\t//Massima dimensione degli array che posso scambiare con il Plc tramite OPC");
+                CostantiConfig.WriteLine("");
+                CostantiConfig.WriteLine("//Costanti letterali");
+                CostantiConfig.WriteLine("Url\topcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}\t//URL del Server OPC di RSLinx ");
+                CostantiConfig.WriteLine("TopicName\tCreg_OPC_Topic\t//Nome del Topic");
+                CostantiConfig.Close();
+                MessageBox.Show("Attenzione: Creato file di configurazione standard!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             //Apro la Form0
@@ -52,10 +63,10 @@ namespace OPC_CTPACK_Software
                     //Se il File Formati.config non esiste lo creo e aggiungo un motore e due formati standard
                     StreamWriter FormatiConfig = new StreamWriter(Global.PathConfig);
                     FormatiConfig.WriteLine("1\tMotori");
-                    FormatiConfig.WriteLine("MotorModel RPower  RVoltage    RSpeed  RCurrent    RTorque PCount  PeakCur TorqueK VoltageK");
+                    FormatiConfig.WriteLine("MotorModel\tRPower\tRVoltage\tRSpeed\tRCurrent\tRTorque\tPCount\tPeakCur\tTorqueK\tVoltageK\tR\tInductance");
                     FormatiConfig.WriteLine("VPL-B1153F\t2,3\t480\t5000\t6,28\t6,55\t8\t23,33\t1,189\t71.82815\t2,09\t0,01104");
                     FormatiConfig.WriteLine("2\tFormati");
-                    FormatiConfig.WriteLine("Nome	Motore		Kv	Kt	PpmA	PpmI	PpmF	Passo");
+                    FormatiConfig.WriteLine("Nome\tMotore\tKv\tKt\tPpmA\tPpmI\tPpmF\tPasso");
                     FormatiConfig.WriteLine("Catena\tVPL-B1153F\t0,1\t0,075\t200\t70\t400\t30");
                     FormatiConfig.WriteLine("Masse\tVPL-B1153F\t0,087\t0,075\t200\t70\t400\t30");
                     FormatiConfig.Close();
@@ -71,10 +82,10 @@ namespace OPC_CTPACK_Software
                 //Creo anche il File Formati.config con un motore e due formati standard
                 StreamWriter FormatiConfig = new StreamWriter(Global.PathConfig);
                 FormatiConfig.WriteLine("1\tMotori");
-                FormatiConfig.WriteLine("MotorModel RPower  RVoltage    RSpeed  RCurrent    RTorque PCount  PeakCur TorqueK VoltageK");
+                FormatiConfig.WriteLine("MotorModel\tRPower\tRVoltage\tRSpeed\tRCurrent\tRTorque\tPCount\tPeakCur\tTorqueK\tVoltageK\tR\tInductance");
                 FormatiConfig.WriteLine("VPL-B1153F\t2,3\t480\t5000\t6,28\t6,55\t8\t23,33\t1,189\t71.82815\t2,09\t0,01104");
                 FormatiConfig.WriteLine("2\tFormati");
-                FormatiConfig.WriteLine("Nome	Motore		Kv	Kt	PpmA	PpmI	PpmF	Passo");
+                FormatiConfig.WriteLine("Nome\tMotore\tKv\tKt\tPpmA\tPpmI\tPpmF\tPasso");
                 FormatiConfig.WriteLine("Catena\tVPL-B1153F\t0,1\t0,075\t200\t70\t400\t30");
                 FormatiConfig.WriteLine("Masse\tVPL-B1153F\t0,087\t0,075\t200\t70\t400\t30");
                 FormatiConfig.Close();
