@@ -23,7 +23,7 @@ namespace OPC_CTPACK_Software
             this.FormPadre = FormPadre;
             
             //Prendi le info dal file di configurazione dei Formati e li istanzio
-            this.Formati = Functions.LetturaFormati();
+            this.Formati = Com_Functions.LetturaFormati();
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -83,7 +83,7 @@ namespace OPC_CTPACK_Software
             int[] Tempo = new int[Global.NumeroCampioni];
 
             //Leggo la velocità a cui sta andando la macchina
-            int PpmNow = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Run").Value;
+            int PpmNow = (int)Com_Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Run").Value;
 
             //Controllo che la lettura sia andata a buon fine
             if(PpmNow == -1)
@@ -92,11 +92,11 @@ namespace OPC_CTPACK_Software
             }
 
             //Setto Ppm_Start al valore appena letto di Ppm_Run per far capire al PLC che deve partire col campionamento
-            Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", PpmNow);
+            Com_Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Ppm_Start", PpmNow);
 
             while(true)
             {
-                int Controllo = (int)Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
+                int Controllo = (int)Com_Functions.RsLinx_OPC_Client_Read($"[{Global.TopicName}]Ppm_Start").Value;
                 
                 //Controllo che la lettura sia andata a buon fine
                 if (Controllo == -1)
@@ -119,7 +119,7 @@ namespace OPC_CTPACK_Software
 
             for (int i = 0; i < PosNow.Length/ Global.LengthArray; i++)
             {
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp = (float[])Com_Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Posizione[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
                 
                 //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
@@ -128,7 +128,7 @@ namespace OPC_CTPACK_Software
                 }
                 Temp.CopyTo(PosNow,i * Global.LengthArray);
 
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp = (float[])Com_Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Velocita[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
 
                 //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
@@ -137,7 +137,7 @@ namespace OPC_CTPACK_Software
                 }
                 Temp.CopyTo(VelNow, i * Global.LengthArray);
 
-                Temp = (float[])Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
+                Temp = (float[])Com_Functions.RsLinx_OPC_Client_Read_Array($"[{Global.TopicName}]Corrente[{i * Global.LengthArray}]", Global.LengthArray)[0].Value;
 
                 //Controllo che la lettura sia andata a buon fine
                 if (Temp[0] == -1)
@@ -181,7 +181,7 @@ namespace OPC_CTPACK_Software
             textBoxCreg.Text = CregAttuale.CregAttuale.ToString();
 
             //Scrivo il valore calcolato di Creg sull'array
-            Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Creg_Attuale", (float) CregAttuale.CregAttuale);
+            Com_Functions.RsLinx_OPC_Client_Write($"[{Global.TopicName}]Creg_Attuale", (float) CregAttuale.CregAttuale);
 
             //Ottengo il valore di CregTeo relativo ai Ppm attuali necessario per il confronto
             double CregTeo = 0;

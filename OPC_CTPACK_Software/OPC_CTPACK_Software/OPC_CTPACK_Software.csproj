@@ -79,7 +79,8 @@
   <ItemGroup>
     <Compile Include="Classi\Creg.cs" />
     <Compile Include="Classi\Formato.cs" />
-    <Compile Include="Classi\Functions.cs" />
+    <Compile Include="Classi\Com_Functions.cs" />
+    <Compile Include="Classi\Math_Functions.cs" />
     <Compile Include="Classi\Motore.cs" />
     <Compile Include="Classi\Start_Creg.cs" />
     <Compile Include="Classi\Costanti.cs" />

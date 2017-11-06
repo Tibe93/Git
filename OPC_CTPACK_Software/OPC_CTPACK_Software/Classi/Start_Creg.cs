@@ -52,7 +52,7 @@ namespace OPC_CTPACK_Software
             FiMotore = Matrix.PseudoInverse(A);
             
             //Completo il calcolo di Bs e Bv che verranno inseriti nella matrice 2x1 Attriti
-            Attriti = Functions.MultiplyMatrix(FiMotore, PotenzaMediaTot, 2, CregTot.Length, 1);
+            Attriti = Math_Functions.MultiplyMatrix(FiMotore, PotenzaMediaTot, 2, CregTot.Length, 1);
 
             return Attriti;
         }  
