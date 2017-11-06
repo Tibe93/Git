@@ -18,29 +18,6 @@ namespace OPC_CTPACK_Software
         static void Main()
         {
 
-            //Controllo che il file di configurazione esista
-            if (File.Exists(Global.PathCostanti))
-            {
-                //Inizializzo le costanti
-                Global.CostantiConfig();
-            }
-            else
-            {
-                StreamWriter CostantiConfig = new StreamWriter(Global.PathCostanti);
-                CostantiConfig.WriteLine("//Costanti numeriche");
-                CostantiConfig.WriteLine("TempoCampionamento\t0,004\t//Tempo minimo di campionamento del Plc");
-                CostantiConfig.WriteLine("NumPeriodi\t3\t//Numero di periodi che vado ad analizzare (Max 5 periodi se non si scende sotto i 70ppm)");
-                CostantiConfig.WriteLine("UpdateRate\t1000\t//Tempo di aggiornamento dei gruppi dell'OPC");
-                CostantiConfig.WriteLine("NumeroCampioni\t1200\t//Numero massimo di campioni che vado ad analizzare nelle variabili acquisite");
-                CostantiConfig.WriteLine("LengthArray\t120\t//Massima dimensione degli array che posso scambiare con il Plc tramite OPC");
-                CostantiConfig.WriteLine("");
-                CostantiConfig.WriteLine("//Costanti letterali");
-                CostantiConfig.WriteLine("Url\topcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}\t//URL del Server OPC di RSLinx ");
-                CostantiConfig.WriteLine("TopicName\tCreg_OPC_Topic\t//Nome del Topic");
-                CostantiConfig.Close();
-                MessageBox.Show("Attenzione: Creato file di configurazione standard!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
             //Apro la Form0
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -48,17 +25,42 @@ namespace OPC_CTPACK_Software
             if(Directory.Exists(Global.StandardPath))
             {
                 //Se la cartella esiste controllo se esistono Formati.config e Sottocartelle
-                if(!Directory.Exists(Global.PathTrend))
+                if (!Directory.Exists(Global.PathTrend))
                 {
                     //Se la cartella Trend_Attuali non esiste la creo
                     Directory.CreateDirectory(Global.PathTrend);
                 }
+
                 if (!Directory.Exists(Global.PathStorico))
                 {
                     //Se la cartella Storico non esiste la creo
                     Directory.CreateDirectory(Global.PathStorico);
                 }
-                if(!File.Exists(Global.PathConfig))
+
+                //Controllo che il file di configurazione esista
+                if (File.Exists(Global.PathCostanti))
+                {
+                    //Inizializzo le costanti
+                    Global.CostantiConfig();
+                }
+                else
+                {
+                    StreamWriter CostantiConfig = new StreamWriter(Global.PathCostanti);
+                    CostantiConfig.WriteLine("//Costanti numeriche");
+                    CostantiConfig.WriteLine("TempoCampionamento\t0,004\t//Tempo minimo di campionamento del Plc");
+                    CostantiConfig.WriteLine("NumPeriodi\t3\t//Numero di periodi che vado ad analizzare (Max 5 periodi se non si scende sotto i 70ppm)");
+                    CostantiConfig.WriteLine("UpdateRate\t1000\t//Tempo di aggiornamento dei gruppi dell'OPC");
+                    CostantiConfig.WriteLine("NumeroCampioni\t1200\t//Numero massimo di campioni che vado ad analizzare nelle variabili acquisite");
+                    CostantiConfig.WriteLine("LengthArray\t120\t//Massima dimensione degli array che posso scambiare con il Plc tramite OPC");
+                    CostantiConfig.WriteLine("");
+                    CostantiConfig.WriteLine("//Costanti letterali");
+                    CostantiConfig.WriteLine("Url\topcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}\t//URL del Server OPC di RSLinx ");
+                    CostantiConfig.WriteLine("TopicName\tCreg_OPC_Topic\t//Nome del Topic");
+                    CostantiConfig.Close();
+                    MessageBox.Show("Attenzione: Creato file di configurazione standard!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (!File.Exists(Global.PathConfig))
                 {
                     //Se il File Formati.config non esiste lo creo e aggiungo un motore e due formati standard
                     StreamWriter FormatiConfig = new StreamWriter(Global.PathConfig);
@@ -78,7 +80,22 @@ namespace OPC_CTPACK_Software
                 Directory.CreateDirectory(Global.StandardPath);
                 Directory.CreateDirectory(Global.PathTrend);
                 Directory.CreateDirectory(Global.PathStorico);
-                
+
+                //Creo anche il File Costanti.config in modo standard
+                StreamWriter CostantiConfig = new StreamWriter(Global.PathCostanti);
+                CostantiConfig.WriteLine("//Costanti numeriche");
+                CostantiConfig.WriteLine("TempoCampionamento\t0,004\t//Tempo minimo di campionamento del Plc");
+                CostantiConfig.WriteLine("NumPeriodi\t3\t//Numero di periodi che vado ad analizzare (Max 5 periodi se non si scende sotto i 70ppm)");
+                CostantiConfig.WriteLine("UpdateRate\t1000\t//Tempo di aggiornamento dei gruppi dell'OPC");
+                CostantiConfig.WriteLine("NumeroCampioni\t1200\t//Numero massimo di campioni che vado ad analizzare nelle variabili acquisite");
+                CostantiConfig.WriteLine("LengthArray\t120\t//Massima dimensione degli array che posso scambiare con il Plc tramite OPC");
+                CostantiConfig.WriteLine("");
+                CostantiConfig.WriteLine("//Costanti letterali");
+                CostantiConfig.WriteLine("Url\topcda://localhost/RSLinx OPC Server/{A05BB6D6-2F8A-11D1-9BB0-080009D01446}\t//URL del Server OPC di RSLinx ");
+                CostantiConfig.WriteLine("TopicName\tCreg_OPC_Topic\t//Nome del Topic");
+                CostantiConfig.Close();
+                MessageBox.Show("Attenzione: Creato file di configurazione standard!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 //Creo anche il File Formati.config con un motore e due formati standard
                 StreamWriter FormatiConfig = new StreamWriter(Global.PathConfig);
                 FormatiConfig.WriteLine("1\tMotori");
