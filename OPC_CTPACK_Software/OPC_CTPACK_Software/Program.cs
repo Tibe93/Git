@@ -17,6 +17,19 @@ namespace OPC_CTPACK_Software
         [STAThread]
         static void Main()
         {
+
+            //Controllo che il file di configurazione esista
+            if (File.Exists(Global.PathCostanti))
+            {
+                //Inizializzo le costanti
+                Global.CostantiConfig();
+            }
+            else
+            {
+                MessageBox.Show("ERRORE: Il file di configurazione non esiste", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
+            }
+
             //Apro la Form0
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
