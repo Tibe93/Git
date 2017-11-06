@@ -28,7 +28,7 @@ namespace OPC_CTPACK_Software
             this.Formato = new Formato(Formato.Nome, Formato.Motore, Formato.Kv, Formato.Kt, Formato.PpmA, Formato.PpmI, Formato.PpmF, Formato.Passo);
             this.Periodi = Periodi;
             string Pathh = $"{Path}/{Formato.PpmA}_{Formato.Nome}.CSV";
-
+            
             //Vecchio metodo per il conto dei campioni necessari, abbastanza preciso ma deprecato
             //int Campioni = Convert.ToInt32(this.Periodi*(60.0 / this.Formato.PpmA)/Global.TempoCampionamento);
             
