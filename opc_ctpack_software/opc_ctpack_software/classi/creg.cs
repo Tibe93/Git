@@ -125,8 +125,8 @@ namespace OPC_CTPACK_Software
 
             //Calcolo ciò che mi serve
             double DurataPeriodo = this.Time[this.Time.Length-1];
-            this.PotenzaMedia = (1/DurataPeriodo) * Functions.Integration(this.Time, PotI);
-            this.Velocita2RMS = (1 / DurataPeriodo) * Functions.Integration(this.Time, Vel_2);
+            this.PotenzaMedia = (1/DurataPeriodo) * Math_Functions.Integration(this.Time, PotI);
+            this.Velocita2RMS = (1 / DurataPeriodo) * Math_Functions.Integration(this.Time, Vel_2);
             this.CregAttuale = this.PotenzaMedia / this.Velocita2RMS;
 
             //Calcolo la velocità media
